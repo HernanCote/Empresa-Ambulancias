@@ -9,7 +9,7 @@ import java.util.GregorianCalendar;
 import co.edu.javeriana.ambulancias.presentacion.Utils;
 
 /**
- * @author v-heco
+ * @author v-heco y Juan Pablo Peñaloza
  *
  */
 public class Ambulancia 
