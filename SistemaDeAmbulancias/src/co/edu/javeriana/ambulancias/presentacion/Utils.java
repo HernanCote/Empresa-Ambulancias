@@ -10,8 +10,6 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
-import org.omg.PortableInterceptor.USER_EXCEPTION;
-
 import co.edu.javeriana.ambulancias.negocio.EmpresaAmbulancias;
 import co.edu.javeriana.ambulancias.persistencia.ManejoArchivos;
 
@@ -23,14 +21,14 @@ public class Utils
 {
 	public static String formatoHora(GregorianCalendar hora)
 	{
-		SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm a");
-		return formatoHora.format(hora);
+		SimpleDateFormat formatoHora = new SimpleDateFormat("h:mm a");
+		return formatoHora.format(hora.getTime());
 	}
 	
 	public static String formatoMes(GregorianCalendar hora)
 	{
 		SimpleDateFormat formatoHora = new SimpleDateFormat("MMM-dd HH:mm");
-		return formatoHora.format(hora);
+		return formatoHora.format(hora.getTime());
 	}
 	
 	public static String printMenu(String nombre)
@@ -95,6 +93,52 @@ public class Utils
 		if(nombreArchivo != null)
 		{
 			ManejoArchivos.leerAmbulancias(nombreArchivo, empresaAmbulancias);
+		}
+	}
+	
+	public static void  registrarPosicion(EmpresaAmbulancias empresaAmbulancias)
+	{
+		boolean isExito = false;
+		
+		if(!empresaAmbulancias.getAmbulancias().isEmpty())
+		{
+			System.out.println("--Registrar Posicion de ambulancia indique: codigo calle carrera");
+			InputStreamReader inputStreamReader = new InputStreamReader(System.in);
+			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+			int codigo = -1, calle = -1, carrera = -1;
+			try 
+			{
+				codigo = Integer.parseInt(bufferedReader.readLine());
+				calle = Integer.parseInt(bufferedReader.readLine());
+				carrera = Integer.parseInt(bufferedReader.readLine());
+			} 
+			catch (NumberFormatException | IOException e) 
+			{
+				System.out.println("Por favor ingrese datos válidos.");
+			}
+			
+			GregorianCalendar horaPosicion = new GregorianCalendar();
+			
+			isExito = empresaAmbulancias.registrarPosicionAmbulancia(codigo, horaPosicion, calle, carrera);
+			
+			if(isExito)
+			{
+				System.out.println("-------------------------------------------------------------");
+				System.out.println("La posición de la ambulancia ha sido actualizada exitosamente");
+				System.out.println("-------------------------------------------------------------");
+			}
+			else
+			{
+				System.out.println("-------------------------------------------------------------------");
+				System.out.println("El código de la ambulancia no está registrado en el sistema existe.");
+				System.out.println("-------------------------------------------------------------------");
+			}
+		}
+		else
+		{
+			System.out.println("--------------------------------------------");
+			System.out.println("No hay ambulancias registradas en el sistema");
+			System.out.println("--------------------------------------------");
 		}
 	}
 }

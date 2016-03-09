@@ -33,7 +33,8 @@ public class TestAmbulancia
 				case "2":	
 					Utils.agregarAmbulancias(empresaAmbulancias);
 					break;
-				case "3":					
+				case "3":
+					Utils.registrarPosicion(empresaAmbulancias);
 					break;
 				case "4":					
 					break;

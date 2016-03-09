@@ -4,8 +4,7 @@
 package co.edu.javeriana.ambulancias.negocio;
 
 import java.util.ArrayList;
-
-import co.edu.javeriana.ambulancias.presentacion.Utils;
+import java.util.GregorianCalendar;
 
 /**
  * @author v-heco
@@ -106,9 +105,25 @@ public class EmpresaAmbulancias
 		}
 		else
 		{
-			System.out.println("---------------------------------");
-			System.out.println(" No hay ambulancias en el sitema");
-			System.out.println("---------------------------------");
+			System.out.println("--------------------------------------------");
+			System.out.println(" No hay ambulancias registradas en el sitema");
+			System.out.println("--------------------------------------------");
 		}
+	}
+	
+	public boolean registrarPosicionAmbulancia(int codigo, GregorianCalendar horaPosicion
+												,int posicionCalle, int posicionCarrera)
+	{
+		for(Ambulancia ambulancia : ambulanciasList)
+		{
+			if(ambulancia.getCodigo() == codigo)
+			{
+				ambulancia.setHoraPosicion(horaPosicion);
+				ambulancia.setPosicionCalle(posicionCalle);
+				ambulancia.setPosicionCarrera(posicionCarrera);
+				return true;
+			}
+		}
+		return false;
 	}
 }

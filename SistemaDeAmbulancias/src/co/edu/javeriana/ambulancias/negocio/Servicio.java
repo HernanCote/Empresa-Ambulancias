@@ -33,12 +33,6 @@ public class Servicio
 		this.setAmbulancia(null);
 	}
 	
-	public static long getCONSECUTIVO() {
-		return CONSECUTIVO;
-	}
-	public static void setCONSECUTIVO(long cONSECUTIVO) {
-		CONSECUTIVO = cONSECUTIVO;
-	}
 	public IPS getIps() {
 		return ips;
 	}
