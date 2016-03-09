@@ -3,8 +3,6 @@
  */
 package co.edu.javeriana.ambulancias.presentacion;
 
-import java.util.Scanner;
-
 import co.edu.javeriana.ambulancias.negocio.EmpresaAmbulancias;
 
 /**
