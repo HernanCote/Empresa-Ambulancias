@@ -41,7 +41,8 @@ public class TestAmbulancia
 				case "5":
 					empresaAmbulancias.reporteDeAmbulancias();
 					break;
-				case "6":					
+				case "6":
+					Utils.asignarUnServicio(empresaAmbulancias);
 					break;
 				case "7":					
 					break;

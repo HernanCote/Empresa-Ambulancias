@@ -8,10 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/dev
 import co.edu.javeriana.ambulancias.negocio.EmpresaAmbulancias;
 
 /**

@@ -131,7 +131,27 @@ public class EmpresaAmbulancias
 	 * adds it to the arrayList of this class.
 	 * @param serv
 	 */
-	public void agregarServicio (Servicio serv) {
+	public void agregarServicio (Servicio serv) 
+	{
 		serviciosList.add(serv);
+	}
+	
+	public String asignarUnServicio(int codigo)
+	{
+		String message = null;
+		for(Servicio servicio : serviciosList)
+		{
+			if(servicio.getCodigo() == codigo)
+			{
+				
+			}
+			else
+			{
+				System.out.println("------------------------------");
+				System.out.println("El código ingresado no existe.");
+				System.out.println("------------------------------");
+			}
+		}
+		return message;
 	}
 }

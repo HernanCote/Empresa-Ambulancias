@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
+import co.edu.javeriana.ambulancias.negocio.Ambulancia;
 import co.edu.javeriana.ambulancias.negocio.Direccion;
 import co.edu.javeriana.ambulancias.negocio.EmpresaAmbulancias;
 import co.edu.javeriana.ambulancias.negocio.Servicio;
@@ -171,7 +172,7 @@ public class Utils  {
 			tipoServ = br.readLine(); 
 			System.out.print("Telefono: ");
 			telefono = br.readLine();
-			System.out.print("Tipo DirecciÃ³n: ");
+			System.out.print("Tipo Dirección: ");
 			tipoDireccion = br.readLine();
 			if (tipoDireccion.equals("CARRERA")) {
 				System.out.print("Carrera: ");
@@ -189,7 +190,7 @@ public class Utils  {
 				numero = Integer.parseInt(br.readLine());
 			}
 		} catch (Exception e) {
-			System.out.println("Error En La CreaciÃ³n Del Servicio");
+			System.out.println("Error En La Creación Del Servicio");
 		}
 		
 		Direccion tempDir = new Direccion (tipoDireccion, calle, carrera, numero);
@@ -200,6 +201,59 @@ public class Utils  {
 		System.out.println("El nuevo Servicio tiene codigo: " + tempServ.getCodigo());
 		
 		
+	}
+	
+	public static String asignarUnServicio(EmpresaAmbulancias empresaAmbulancias)
+	{
+		if(empresaAmbulancias.getServicios().isEmpty())
+		{
+			System.out.println("--------------------------------------------------------------------------");
+			System.out.println("No hay servicios registrados en el sistema, ingrese uno antes de continuar");
+			System.out.println("--------------------------------------------------------------------------");
+			
+		}
+		if(empresaAmbulancias.getAmbulancias().isEmpty())
+		{
+			System.out.println("----------------------------------------------------------------------------");
+			System.out.println("No hay ambulancias registradas en el sistema, ingrese una antes de continuar");
+			System.out.println("----------------------------------------------------------------------------");
+			
+		}
+		if(empresaAmbulancias.getIps().isEmpty())
+		{
+			System.out.println("--------------------------------------------------------------------");
+			System.out.println("No hay IPS registradas en el sistema, ingrese una antes de continuar");
+			System.out.println("--------------------------------------------------------------------");
+			
+		}
+		if((!empresaAmbulancias.getIps().isEmpty()) && (!empresaAmbulancias.getAmbulancias().isEmpty())
+													&& (!empresaAmbulancias.getServicios().isEmpty()))
+		{				
+			System.out.println("----------------------------------------------");
+			System.out.println("Asignar un servicio a una IPS y una ambulancia");
+			System.out.println("----------------------------------------------");
+			System.out.println("Se muestran los servicios del sistema sin asignar");
+			
+			System.out.println("--------------------------------------------"
+					+ "----------------------------------------");
+			System.out.format("%4s%17s%10s%15s%13s%12s%n", "Código","horaSolicitud",
+					"paciente", "tipoServicio", "telefono", "dirección");
+			System.out.println("--------------------------------------------"
+					+ "----------------------------------------");
+			for(Servicio servicio : empresaAmbulancias.getServicios())
+			{
+				servicio.printSelfNotAsigned();
+			}
+			
+			System.out.print("Ingrese el código del servicio que desea asignar: ");
+			@SuppressWarnings("resource")
+			Scanner scanner = new Scanner(System.in);
+			int codigo = Integer.parseInt(scanner.nextLine());
+			String message = empresaAmbulancias.asignarUnServicio(codigo);
+			
+			return message;
+		}
+		return null;
 	}
 	
 }
