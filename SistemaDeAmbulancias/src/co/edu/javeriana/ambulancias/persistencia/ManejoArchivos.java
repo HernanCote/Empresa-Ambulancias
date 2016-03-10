@@ -8,9 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 
-import co.edu.javeriana.ambulancias.negocio.Ambulancia;
 import co.edu.javeriana.ambulancias.negocio.EmpresaAmbulancias;
 
 /**
@@ -20,6 +18,7 @@ import co.edu.javeriana.ambulancias.negocio.EmpresaAmbulancias;
 public class ManejoArchivos 
 {
 	private static String path = System.getProperty("user.dir") + File.separator;
+	private static BufferedReader bReader;
 	  
 	  public static boolean leerIPS(String fileName, EmpresaAmbulancias empresaAmbulancias)
 	  {	  
@@ -29,7 +28,7 @@ public class ManejoArchivos
 	    {
 	      try
 	      {
-	        BufferedReader bReader = new BufferedReader(new FileReader(dir));
+	        bReader = new BufferedReader(new FileReader(dir));
 	        String fileRead = null;
 	        if (bReader.ready())
 	        {
@@ -80,7 +79,7 @@ public class ManejoArchivos
 	    {
 	      try
 	      {
-	        BufferedReader bReader = new BufferedReader(new FileReader(dir));
+	        bReader = new BufferedReader(new FileReader(dir));
 	        String fileRead = null;
 	        if (bReader.ready())
 	        {
@@ -119,4 +118,6 @@ public class ManejoArchivos
 	    System.out.println("El archivo " + fileName + " no existe.");
 	    return archivoLeido;
 	  }
+	  
+	
 }

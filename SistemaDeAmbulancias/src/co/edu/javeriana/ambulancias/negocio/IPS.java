@@ -5,8 +5,6 @@ package co.edu.javeriana.ambulancias.negocio;
 
 import java.util.ArrayList;
 
-import co.edu.javeriana.ambulancias.presentacion.Utils;
-
 /**
  * @author v-heco
  *
