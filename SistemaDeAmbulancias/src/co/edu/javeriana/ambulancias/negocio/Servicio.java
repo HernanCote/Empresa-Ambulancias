@@ -18,8 +18,7 @@ public class Servicio
 	private Direccion direccion;
 	
 	
-	public Servicio(String paciente,String tipoServicio, String telefono
-					,Direccion direccion)
+	public Servicio(String paciente,String tipoServicio, String telefono,Direccion direccion)
 	{			
 		CONSECUTIVO++;
 		this.setCodigo(CONSECUTIVO);
