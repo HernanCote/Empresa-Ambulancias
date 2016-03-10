@@ -18,8 +18,7 @@ public class Servicio
 	private Direccion direccion;
 	
 	
-	public Servicio(String paciente,String tipoServicio, String telefono
-					,Direccion direccion)
+	public Servicio(String paciente,String tipoServicio, String telefono,Direccion direccion)
 	{			
 		CONSECUTIVO++;
 		this.setCodigo(CONSECUTIVO);
@@ -33,12 +32,6 @@ public class Servicio
 		this.setAmbulancia(null);
 	}
 	
-	public static long getCONSECUTIVO() {
-		return CONSECUTIVO;
-	}
-	public static void setCONSECUTIVO(long cONSECUTIVO) {
-		CONSECUTIVO = cONSECUTIVO;
-	}
 	public IPS getIps() {
 		return ips;
 	}
@@ -123,12 +116,18 @@ public class Servicio
 		setDireccion(new Direccion(tipoDireccion, calle, carrera, numero));
 	}
 	
-	public void printSelf()
+	public void printSelfNotAsigned()
 	{	
 		if(this.getEstado().equals("NO_ASIGNADO"))
 		{
 			System.out.format("%4s%19s%9s%15s%13s%24s%n", this.getCodigo(),Utils.formatoMes(this.horaSolicitud),
 					this.paciente, this.tipoServicio, this.telefono, this.direccion.toString());	
 		}
+	}
+	
+	public void printSelfAll()
+	{
+		System.out.format("%4s%19s%9s%15s%13s%24s%n", this.getCodigo(),Utils.formatoMes(this.horaSolicitud),
+				this.paciente, this.tipoServicio, this.telefono, this.direccion.toString());	
 	}
 }

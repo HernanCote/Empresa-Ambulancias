@@ -112,12 +112,13 @@ public class Ambulancia
 	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
+	
 	public void printSelf()
 	{
-		if(horaPosicion != null)
+		if(this.horaPosicion != null)
 		{
 			System.out.format("%6s%7s%14s%14s%15s%17s%n", this.codigo, this.placa, this.tipoDotacion
-						,Utils.formatoHora(horaPosicion), this.posicionCalle, this.posicionCarrera);			
+						,Utils.formatoHora(this.horaPosicion), this.posicionCalle, this.posicionCarrera);			
 		}
 		else
 		{

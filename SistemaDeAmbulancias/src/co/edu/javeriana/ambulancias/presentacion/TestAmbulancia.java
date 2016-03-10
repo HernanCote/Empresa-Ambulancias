@@ -3,12 +3,10 @@
  */
 package co.edu.javeriana.ambulancias.presentacion;
 
-import java.util.Scanner;
-
 import co.edu.javeriana.ambulancias.negocio.EmpresaAmbulancias;
 
 /**
- * @author v-heco
+ * @author Hernan Cote and Juan Pablo PeÃ±aloza
  *
  */
 public class TestAmbulancia 
@@ -33,14 +31,18 @@ public class TestAmbulancia
 				case "2":	
 					Utils.agregarAmbulancias(empresaAmbulancias);
 					break;
-				case "3":					
+				case "3":
+					Utils.registrarPosicion(empresaAmbulancias);
 					break;
-				case "4":					
+				case "4":
+					// Added this option on the switch. 
+					Utils.registrarServicio(empresaAmbulancias);
 					break;
 				case "5":
 					empresaAmbulancias.reporteDeAmbulancias();
 					break;
-				case "6":					
+				case "6":
+					Utils.asignarUnServicio(empresaAmbulancias);
 					break;
 				case "7":					
 					break;
@@ -52,7 +54,7 @@ public class TestAmbulancia
 					break;
 				default: 
 					System.out.println("------------------------------------");
-					System.out.println("Por favor ingrese una opción válida.");
+					System.out.println("Por favor ingrese una opciï¿½n vï¿½lida.");
 					System.out.println("------------------------------------");
 					break;
 			}
