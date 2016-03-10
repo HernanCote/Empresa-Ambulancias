@@ -114,7 +114,7 @@ public class Ambulancia
 	}
 	
 	public void printSelf()
-	{
+	{	
 		if(this.horaPosicion != null)
 		{
 			System.out.format("%6s%7s%14s%14s%15s%17s%n", this.codigo, this.placa, this.tipoDotacion

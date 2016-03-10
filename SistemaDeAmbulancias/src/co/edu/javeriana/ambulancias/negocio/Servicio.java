@@ -116,14 +116,6 @@ public class Servicio
 		setDireccion(new Direccion(tipoDireccion, calle, carrera, numero));
 	}
 	
-	public void printSelfNotAsigned()
-	{	
-		if(this.getEstado().equals("NO_ASIGNADO"))
-		{
-			System.out.format("%4s%19s%9s%15s%13s%24s%n", this.getCodigo(),Utils.formatoMes(this.horaSolicitud),
-					this.paciente, this.tipoServicio, this.telefono, this.direccion.toString());	
-		}
-	}
 	
 	public void printSelfAll()
 	{

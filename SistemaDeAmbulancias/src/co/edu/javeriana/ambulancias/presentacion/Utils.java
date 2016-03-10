@@ -10,7 +10,6 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
-import co.edu.javeriana.ambulancias.negocio.Ambulancia;
 import co.edu.javeriana.ambulancias.negocio.Direccion;
 import co.edu.javeriana.ambulancias.negocio.EmpresaAmbulancias;
 import co.edu.javeriana.ambulancias.negocio.Servicio;
@@ -51,7 +50,7 @@ public class Utils  {
 		System.out.println("opcion 9: Reporte de las IPS con servicios asociados");
 		System.out.println("opcion 10: terminar");
 		System.out.println("---------------------------------------------------------------");
-		System.out.print("Ingrese la opciï¿½n que desea acceder: ");
+		System.out.print("Ingrese la opción que desea acceder: ");
 		
 		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
@@ -226,9 +225,11 @@ public class Utils  {
 			System.out.println("--------------------------------------------------------------------");
 			
 		}
+		
 		if((!empresaAmbulancias.getIps().isEmpty()) && (!empresaAmbulancias.getAmbulancias().isEmpty())
 													&& (!empresaAmbulancias.getServicios().isEmpty()))
-		{				
+		{		
+			
 			System.out.println("----------------------------------------------");
 			System.out.println("Asignar un servicio a una IPS y una ambulancia");
 			System.out.println("----------------------------------------------");
@@ -240,18 +241,29 @@ public class Utils  {
 					"paciente", "tipoServicio", "telefono", "dirección");
 			System.out.println("--------------------------------------------"
 					+ "----------------------------------------");
+			int cont = 0;
 			for(Servicio servicio : empresaAmbulancias.getServicios())
 			{
-				servicio.printSelfNotAsigned();
+				if(servicio.getEstado().equals("NO_ASIGNADO"))
+				{
+					servicio.printSelfAll();
+					cont++;
+				}
 			}
-			
-			System.out.print("Ingrese el código del servicio que desea asignar: ");
-			@SuppressWarnings("resource")
-			Scanner scanner = new Scanner(System.in);
-			int codigo = Integer.parseInt(scanner.nextLine());
-			String message = empresaAmbulancias.asignarUnServicio(codigo);
-			
-			return message;
+			if( cont >= 1)
+			{				
+				System.out.print("\nIngrese el código del servicio que desea asignar: ");
+				@SuppressWarnings("resource")
+				Scanner scanner = new Scanner(System.in);
+				int codigo = Integer.parseInt(scanner.nextLine());
+				String message = empresaAmbulancias.asignarUnServicio(codigo);
+				return message;
+			}
+			else
+			{
+				System.out.println("Todos los servicios registrados en el sistema han sido asignados");
+				System.out.println("----------------------------------------------------------------");
+			}			
 		}
 		return null;
 	}

@@ -94,8 +94,8 @@ public class EmpresaAmbulancias
 			//TODO Falta Implementar el servicio!!!
 			System.out.println("------------------------------------------------"
 					+ "-------------------------");
-			System.out.format("%6s%7s%14s%14s%15s%17s%n", "codigo", "placa", "tipoDotacion"
-					,"horaPosicion", "posicionCalle", "posicionCarrera");
+			System.out.format("%6s%7s%14s%14s%15s%17s%10s%n", "codigo", "placa", "tipoDotacion"
+					,"horaPosicion", "posicionCalle", "posicionCarrera", "servicio");
 			System.out.println("------------------------------------------------"
 					+ "-------------------------");
 			for(Ambulancia ambulancia : ambulanciasList)
@@ -141,17 +141,110 @@ public class EmpresaAmbulancias
 		String message = null;
 		for(Servicio servicio : serviciosList)
 		{
-			if(servicio.getCodigo() == codigo)
+			if(servicio.getCodigo() == codigo && servicio.getEstado().equals("NO_ASIGNADO"))
 			{
-				
-			}
-			else
+				ArrayList<Ambulancia> ambulanciasDisponibles = construirAmbulanciasDisponibles(servicio);
+				if(!ambulanciasDisponibles.isEmpty())
+				{
+					Ambulancia ambulanciaMasCercana = calcularAmbulanciaMasCercana(ambulanciasDisponibles,
+																servicio.getDireccion().getCalle(), 
+																servicio.getDireccion().getCarrera());
+					
+					IPS ipsMasCercana = calcularIPSMasCercana(servicio.getDireccion().getCalle(), 
+																servicio.getDireccion().getCarrera());
+					servicio.setEstado("ASIGNADO");
+					
+					servicio.setAmbulancia(ambulanciaMasCercana);
+					
+					ambulanciaMasCercana.setServicios(servicio);
+					ambulanciaMasCercana.setEstado(true);				
+					
+					servicio.setIps(ipsMasCercana);	
+					ipsMasCercana.setServicios(servicio);	
+					return "Al servicio " + servicio.getCodigo() + " le fue asignada la ambulancia " + servicio.getAmbulancia().getCodigo()
+							+ " y la IPS " + servicio.getIps().getNombre();
+				}				
+				else
+				{
+					System.out.println("-------------------------------------------------------");
+					System.out.println("No hay ambulancias disponibles para atender el servicio");
+					System.out.println("-------------------------------------------------------");
+					return null;
+				}
+			}			
+		}		
+		System.out.println("----------------------------------------------------");
+		System.out.println("El código ingresado no existe o ya ha sido asignado ");
+		System.out.println("----------------------------------------------------");
+		return message;
+	}
+	
+	private ArrayList<Ambulancia> construirAmbulanciasDisponibles(Servicio servicio)
+	{
+		ArrayList<Ambulancia> ambulanciasDisponibles = new ArrayList<Ambulancia>();		
+		
+		if(servicio.getTipoServicio().equals("EMERGENCIA"))
+		{
+			for(Ambulancia ambulancia : ambulanciasList)
 			{
-				System.out.println("------------------------------");
-				System.out.println("El código ingresado no existe.");
-				System.out.println("------------------------------");
+				if(ambulancia.getTipoDotacion().equals("ALTA_UCI") && (!ambulancia.isEstado()))
+				{
+					ambulanciasDisponibles.add(ambulancia);
+				}				
 			}
 		}
-		return message;
+		else
+		{
+			for(Ambulancia ambulancia : ambulanciasList)
+			{
+				if(!ambulancia.isEstado())
+				{
+					ambulanciasDisponibles.add(ambulancia);
+				}				
+			}
+		}
+		return ambulanciasDisponibles;						
+	}
+	
+	private Ambulancia calcularAmbulanciaMasCercana(ArrayList<Ambulancia> ambulancias, int calle, int carrera)
+	{
+		Ambulancia ambulanciaCercana = null;
+		int auxiliar = 2000000;
+		int z=200000;
+		for(Ambulancia ambuMasCercana : ambulancias)
+		{
+			
+			z = calcularDistancia(ambuMasCercana.getPosicionCalle(),ambuMasCercana.getPosicionCarrera(), calle, carrera);
+			if(auxiliar > z)
+			{
+				ambulanciaCercana = ambuMasCercana;
+				auxiliar = z;
+			}
+		}
+		return ambulanciaCercana;
+	}
+	
+	private IPS calcularIPSMasCercana( int calle, int carrera)
+	{
+		IPS ipsCercana = null;
+		int auxiliar = 2000000;
+		int z=200000;
+		for(IPS ipsMasCercana : ipsList)
+		{
+			z = calcularDistancia(ipsMasCercana.getDireccion().getCalle(), ipsMasCercana.getDireccion().getCarrera(),calle ,carrera);
+			if(auxiliar > z)
+			{
+				ipsCercana = ipsMasCercana;
+				auxiliar = z;
+			}
+		}
+		return ipsCercana;
+	}
+	
+	private int calcularDistancia(int x1, int y1, int x2, int y2)
+	{
+		int x = Math.abs(x1-x2);
+		int y = Math.abs(y1-y2);
+		return x + y;
 	}
 }

@@ -42,7 +42,19 @@ public class TestAmbulancia
 					empresaAmbulancias.reporteDeAmbulancias();
 					break;
 				case "6":
-					Utils.asignarUnServicio(empresaAmbulancias);
+					String message = Utils.asignarUnServicio(empresaAmbulancias);
+					if(message != null)
+					{
+						System.out.println("---------------------------------"
+								+ "----------------------------------------");
+						System.out.println(message);
+						System.out.println("---------------------------------"
+								+ "----------------------------------------");
+					}
+					else 
+					{
+						System.out.println("Error al asignar el servicio");
+					}
 					break;
 				case "7":					
 					break;
@@ -54,7 +66,7 @@ public class TestAmbulancia
 					break;
 				default: 
 					System.out.println("------------------------------------");
-					System.out.println("Por favor ingrese una opciï¿½n vï¿½lida.");
+					System.out.println("Por favor ingrese una opción válida.");
 					System.out.println("------------------------------------");
 					break;
 			}

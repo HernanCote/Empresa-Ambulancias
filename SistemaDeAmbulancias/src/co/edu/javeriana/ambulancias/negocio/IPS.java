@@ -41,21 +41,25 @@ public class IPS
 	}
 
 	
-	public Direccion getDireccion() {
+	public Direccion getDireccion() 
+	{
 		return direccion;
 	}
 
-	public void setDireccion(Direccion direccion) {
+	public void setDireccion(Direccion direccion) 
+	{
 		this.direccion = direccion;
 	}
 
 	
-	public ArrayList<Servicio> getServicios() {
+	public ArrayList<Servicio> getServicios()
+	{
 		return servicios;
 	}
 
-	public void setServicios(ArrayList<Servicio> servicios) {
-		this.servicios = servicios;
+	public void setServicios(Servicio servicios)
+	{
+		this.servicios.add(servicios);
 	}
 
 	public void asignarDireccion(String tipoDireccion, int calle, int carrera, int numero)
