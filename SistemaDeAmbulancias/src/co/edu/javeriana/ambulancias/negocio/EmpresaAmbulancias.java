@@ -126,4 +126,12 @@ public class EmpresaAmbulancias
 		}
 		return false;
 	}
+	/**
+	 * This method adds an object of type Servicio and 
+	 * adds it to the arrayList of this class.
+	 * @param serv
+	 */
+	public void agregarServicio (Servicio serv) {
+		serviciosList.add(serv);
+	}
 }

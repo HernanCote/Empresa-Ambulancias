@@ -10,15 +10,17 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
+import co.edu.javeriana.ambulancias.negocio.Direccion;
 import co.edu.javeriana.ambulancias.negocio.EmpresaAmbulancias;
+import co.edu.javeriana.ambulancias.negocio.Servicio;
 import co.edu.javeriana.ambulancias.persistencia.ManejoArchivos;
 
 /**
  * @author v-heco
  *
  */
-public class Utils 
-{
+public class Utils  {
+	
 	public static String formatoHora(GregorianCalendar hora)
 	{
 		SimpleDateFormat formatoHora = new SimpleDateFormat("h:mm a");
@@ -48,7 +50,9 @@ public class Utils
 		System.out.println("opcion 9: Reporte de las IPS con servicios asociados");
 		System.out.println("opcion 10: terminar");
 		System.out.println("---------------------------------------------------------------");
-		System.out.print("Ingrese la opción que desea acceder: ");
+		System.out.print("Ingrese la opciï¿½n que desea acceder: ");
+		
+		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
 		String opcion = sc.nextLine();
 		
@@ -114,7 +118,7 @@ public class Utils
 			} 
 			catch (NumberFormatException | IOException e) 
 			{
-				System.out.println("Por favor ingrese datos válidos.");
+				System.out.println("Por favor ingrese datos vï¿½lidos.");
 			}
 			
 			GregorianCalendar horaPosicion = new GregorianCalendar();
@@ -124,13 +128,13 @@ public class Utils
 			if(isExito)
 			{
 				System.out.println("-------------------------------------------------------------");
-				System.out.println("La posición de la ambulancia ha sido actualizada exitosamente");
+				System.out.println("La posiciï¿½n de la ambulancia ha sido actualizada exitosamente");
 				System.out.println("-------------------------------------------------------------");
 			}
 			else
 			{
 				System.out.println("-------------------------------------------------------------------");
-				System.out.println("El código de la ambulancia no está registrado en el sistema existe.");
+				System.out.println("El cï¿½digo de la ambulancia no estï¿½ registrado en el sistema existe.");
 				System.out.println("-------------------------------------------------------------------");
 			}
 		}
@@ -141,4 +145,61 @@ public class Utils
 			System.out.println("--------------------------------------------");
 		}
 	}
+	
+	/**
+	 * Gets the name, phone, type of service, address, and all the 
+	 * data needed to create an object of type Direccion and an object
+	 * of type Servicio. Then it calls a method of EmpresaAmbulancias 
+	 * for it to add the Servicio to it's list of Servicio. 
+	 * @param empresaAmbulancias
+	 */
+	
+	public static void registrarServicio (EmpresaAmbulancias empresaAmbulancias) {
+		InputStreamReader isr = new InputStreamReader (System.in);
+		BufferedReader br = new BufferedReader (isr);
+		String nomPaciente = null;
+		String tipoServ = null;
+		String telefono = null;
+		String tipoDireccion = null;
+		int calle = 0;
+		int carrera = 0;
+		int numero = 0;
+		try {
+			System.out.print("Nombre Paciente: ");
+			nomPaciente = br.readLine();
+			System.out.print("Tipo Servicio: ");
+			tipoServ = br.readLine(); 
+			System.out.print("Telefono: ");
+			telefono = br.readLine();
+			System.out.print("Tipo DirecciÃ³n: ");
+			tipoDireccion = br.readLine();
+			if (tipoDireccion.equals("CARRERA")) {
+				System.out.print("Carrera: ");
+				carrera = Integer.parseInt(br.readLine());
+				System.out.print("Calle: ");
+				calle = Integer.parseInt(br.readLine());
+				System.out.print("Numero: ");
+				numero = Integer.parseInt(br.readLine());
+			} else {
+				System.out.print("Calle: ");
+				calle = Integer.parseInt(br.readLine());
+				System.out.print("Carrera: ");
+				carrera = Integer.parseInt(br.readLine());
+				System.out.print("Numero: ");
+				numero = Integer.parseInt(br.readLine());
+			}
+		} catch (Exception e) {
+			System.out.println("Error En La CreaciÃ³n Del Servicio");
+		}
+		
+		Direccion tempDir = new Direccion (tipoDireccion, calle, carrera, numero);
+		Servicio tempServ = new Servicio (nomPaciente,tipoServ, telefono, tempDir);
+		
+		empresaAmbulancias.agregarServicio(tempServ);
+		
+		System.out.println("El nuevo Servicio tiene codigo: " + tempServ.getCodigo());
+		
+		
+	}
+	
 }
