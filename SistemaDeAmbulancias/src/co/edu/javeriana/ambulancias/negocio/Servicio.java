@@ -4,6 +4,11 @@ import java.util.GregorianCalendar;
 
 import co.edu.javeriana.ambulancias.presentacion.Utils;
 
+/**
+ * 
+ * @author Hernán Cote y Juan Pablo Peñaloza
+ *
+ */
 public class Servicio 
 {
 	private IPS ips;

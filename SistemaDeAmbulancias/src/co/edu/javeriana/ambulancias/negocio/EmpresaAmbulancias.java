@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 /**
- * @author v-heco
+ * @author Hernán Cote y Juan Pablo Peñaloza
  *
  */
 public class EmpresaAmbulancias 
@@ -65,6 +65,15 @@ public class EmpresaAmbulancias
 		this.ambulanciasList.add(ambulancias);
 	}
 
+	/**
+	 * This method adds a new IPS to the system
+	 * @param nombre
+	 * @param tipoAtencion
+	 * @param tipoDireccion
+	 * @param calle
+	 * @param carrera
+	 * @param numero
+	 */
 	public void agregarIPS(String nombre, String tipoAtencion, String tipoDireccion, int calle, int carrera, int numero)
 	{
 		IPS ips = new IPS(nombre, tipoAtencion, tipoDireccion, calle, carrera, numero);
@@ -76,6 +85,12 @@ public class EmpresaAmbulancias
 		System.out.println("----------------------------------------");
 	}
 	
+	/**
+	 * This method adds a new Ambulance to the System
+	 * @param codigo
+	 * @param placa
+	 * @param tipoDotacion
+	 */
 	public void agregarAmbulancia(int codigo, String placa, String tipoDotacion)
 	{
 		Ambulancia ambulancia = new Ambulancia(codigo, placa, tipoDotacion);
@@ -87,6 +102,9 @@ public class EmpresaAmbulancias
 		System.out.println("-----------------------------------------------");
 	}
 
+	/**
+	 * This method prints to the user the ambulances available in the system 
+	 */
 	public void reporteDeAmbulancias()
 	{
 		if(!ambulanciasList.isEmpty())
@@ -111,6 +129,14 @@ public class EmpresaAmbulancias
 		}
 	}
 	
+	/**
+	 * This method let the user register the position of an ambulance
+	 * @param codigo
+	 * @param horaPosicion
+	 * @param posicionCalle
+	 * @param posicionCarrera
+	 * @return
+	 */
 	public boolean registrarPosicionAmbulancia(int codigo, GregorianCalendar horaPosicion
 												,int posicionCalle, int posicionCarrera)
 	{
@@ -136,6 +162,11 @@ public class EmpresaAmbulancias
 		serviciosList.add(serv);
 	}
 	
+	/**
+	 * This method assigns an IPS and an Ambulance to a service  
+	 * @param codigo
+	 * @return
+	 */
 	public String asignarUnServicio(int codigo)
 	{
 		String message = null;
@@ -179,6 +210,12 @@ public class EmpresaAmbulancias
 		return message;
 	}
 	
+	/**
+	 * This method builds a list of available ambulances
+	 * depending of the kind of services that the service needs
+	 * @param servicio
+	 * @return
+	 */
 	private ArrayList<Ambulancia> construirAmbulanciasDisponibles(Servicio servicio)
 	{
 		ArrayList<Ambulancia> ambulanciasDisponibles = new ArrayList<Ambulancia>();		
@@ -206,6 +243,14 @@ public class EmpresaAmbulancias
 		return ambulanciasDisponibles;						
 	}
 	
+	
+	/**
+	 * This method returns the nearest ambulance to an specific service
+	 * @param ambulancias
+	 * @param calle
+	 * @param carrera
+	 * @return
+	 */
 	private Ambulancia calcularAmbulanciaMasCercana(ArrayList<Ambulancia> ambulancias, int calle, int carrera)
 	{
 		Ambulancia ambulanciaCercana = null;
@@ -224,6 +269,12 @@ public class EmpresaAmbulancias
 		return ambulanciaCercana;
 	}
 	
+	/**
+	 * this method return the nearest IPS to an specific service
+	 * @param calle
+	 * @param carrera
+	 * @return
+	 */
 	private IPS calcularIPSMasCercana( int calle, int carrera)
 	{
 		IPS ipsCercana = null;
@@ -241,6 +292,15 @@ public class EmpresaAmbulancias
 		return ipsCercana;
 	}
 	
+	
+	/**
+	 * this method calculates the distance between two different places
+	 * @param x1
+	 * @param y1
+	 * @param x2
+	 * @param y2
+	 * @return
+	 */
 	private int calcularDistancia(int x1, int y1, int x2, int y2)
 	{
 		int x = Math.abs(x1-x2);

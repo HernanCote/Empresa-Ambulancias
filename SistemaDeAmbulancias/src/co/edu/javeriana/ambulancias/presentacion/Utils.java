@@ -16,23 +16,39 @@ import co.edu.javeriana.ambulancias.negocio.Servicio;
 import co.edu.javeriana.ambulancias.persistencia.ManejoArchivos;
 
 /**
- * @author v-heco
+ * @author Hernan Cote y Juan Pablo Peñaloza
  *
  */
+
 public class Utils  {
 	
+	/**
+	 * This method returns an hour format (hh:mm a) from a GregorianCalendar object
+	 * @param hora
+	 * @return
+	 */
 	public static String formatoHora(GregorianCalendar hora)
 	{
 		SimpleDateFormat formatoHora = new SimpleDateFormat("h:mm a");
 		return formatoHora.format(hora.getTime());
 	}
 	
+	/**
+	 * This method returns a time format in the form "Month-day Hour-minutes" from a GregorianCalendar object 
+	 * @param hora
+	 * @return
+	 */
 	public static String formatoMes(GregorianCalendar hora)
 	{
 		SimpleDateFormat formatoHora = new SimpleDateFormat("MMM-dd HH:mm");
 		return formatoHora.format(hora.getTime());
 	}
 	
+	/**
+	 * This method prints the menu of all the features that the system is capable to do
+	 * @param nombre
+	 * @return
+	 */
 	public static String printMenu(String nombre)
 	{
 		
@@ -99,8 +115,11 @@ public class Utils  {
 			ManejoArchivos.leerAmbulancias(nombreArchivo, empresaAmbulancias);
 		}
 	}
-	
-	public static void  registrarPosicion(EmpresaAmbulancias empresaAmbulancias)
+	/**
+	 * 
+	 * @param empresaAmbulancias
+	 */
+	public static void registrarPosicion(EmpresaAmbulancias empresaAmbulancias)
 	{
 		boolean isExito = false;
 		
@@ -128,13 +147,13 @@ public class Utils  {
 			if(isExito)
 			{
 				System.out.println("-------------------------------------------------------------");
-				System.out.println("La posiciï¿½n de la ambulancia ha sido actualizada exitosamente");
+				System.out.println("La posición de la ambulancia ha sido actualizada exitosamente");
 				System.out.println("-------------------------------------------------------------");
 			}
 			else
 			{
 				System.out.println("-------------------------------------------------------------------");
-				System.out.println("El cï¿½digo de la ambulancia no estï¿½ registrado en el sistema existe.");
+				System.out.println("El código de la ambulancia no está registrado en el sistema existe.");
 				System.out.println("-------------------------------------------------------------------");
 			}
 		}
@@ -152,9 +171,9 @@ public class Utils  {
 	 * of type Servicio. Then it calls a method of EmpresaAmbulancias 
 	 * for it to add the Servicio to it's list of Servicio. 
 	 * @param empresaAmbulancias
-	 */
-	
-	public static void registrarServicio (EmpresaAmbulancias empresaAmbulancias) {
+	 */	
+	public static void registrarServicio (EmpresaAmbulancias empresaAmbulancias)
+	{
 		InputStreamReader isr = new InputStreamReader (System.in);
 		BufferedReader br = new BufferedReader (isr);
 		String nomPaciente = null;
@@ -164,23 +183,27 @@ public class Utils  {
 		int calle = 0;
 		int carrera = 0;
 		int numero = 0;
-		try {
+		try 
+		{
 			System.out.print("Nombre Paciente: ");
 			nomPaciente = br.readLine();
-			System.out.print("Tipo Servicio: ");
+			System.out.print("Tipo Servicio (URGENCIA o EMERGENCIA): ");
 			tipoServ = br.readLine(); 
 			System.out.print("Telefono: ");
 			telefono = br.readLine();
-			System.out.print("Tipo Dirección: ");
+			System.out.print("Tipo Dirección CARRERA o CALLE: ");
 			tipoDireccion = br.readLine();
-			if (tipoDireccion.equals("CARRERA")) {
+			if (tipoDireccion.equals("CARRERA")) 
+			{
 				System.out.print("Carrera: ");
 				carrera = Integer.parseInt(br.readLine());
 				System.out.print("Calle: ");
 				calle = Integer.parseInt(br.readLine());
 				System.out.print("Numero: ");
 				numero = Integer.parseInt(br.readLine());
-			} else {
+			}
+			else 
+			{
 				System.out.print("Calle: ");
 				calle = Integer.parseInt(br.readLine());
 				System.out.print("Carrera: ");
@@ -188,7 +211,9 @@ public class Utils  {
 				System.out.print("Numero: ");
 				numero = Integer.parseInt(br.readLine());
 			}
-		} catch (Exception e) {
+		} 
+		catch (Exception e) 
+		{
 			System.out.println("Error En La Creación Del Servicio");
 		}
 		
@@ -198,9 +223,8 @@ public class Utils  {
 		empresaAmbulancias.agregarServicio(tempServ);
 		
 		System.out.println("El nuevo Servicio tiene codigo: " + tempServ.getCodigo());
-		
-		
 	}
+	
 	
 	public static String asignarUnServicio(EmpresaAmbulancias empresaAmbulancias)
 	{
