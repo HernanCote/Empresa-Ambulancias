@@ -20,11 +20,11 @@ public class TestAmbulancia
 		EmpresaAmbulancias empresaAmbulancias = new EmpresaAmbulancias("Ambu S.A.");
 		String opcion = null;
 		
-		while(opcion != "0")
+		do
 		{
 			opcion = Utils.printMenu(empresaAmbulancias.getNombre());
 			switch (opcion) 
-			{
+			{ 
 				case "1":
 					Utils.agregarIPS(empresaAmbulancias);
 					break;
@@ -56,21 +56,24 @@ public class TestAmbulancia
 						System.out.println("Error al asignar el servicio");
 					}
 					break;
-				case "7":					
+				case "7":
+					// Implementar 
 					break;
-				case "8":					
+				case "8":
+					// TODO Juan Pablo
 					break;
-				case "9":					
+				case "9":
+					// TODO Hernan 
 					break;
-				case "10":					
+				case "10":
 					break;
 				default: 
 					System.out.println("------------------------------------");
-					System.out.println("Por favor ingrese una opción válida.");
+					System.out.println("Por favor ingrese una opciï¿½n vï¿½lida.");
 					System.out.println("------------------------------------");
 					break;
 			}
-		}
+		} while (!opcion.equals("10"));
 
 	}
 
