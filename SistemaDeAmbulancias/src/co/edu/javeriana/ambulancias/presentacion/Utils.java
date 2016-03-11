@@ -188,11 +188,11 @@ public class Utils  {
 			System.out.print("Nombre Paciente: ");
 			nomPaciente = br.readLine();
 			System.out.print("Tipo Servicio (URGENCIA o EMERGENCIA): ");
-			tipoServ = br.readLine(); 
+			tipoServ = br.readLine().toUpperCase(); 
 			System.out.print("Telefono: ");
 			telefono = br.readLine();
 			System.out.print("Tipo Dirección CARRERA o CALLE: ");
-			tipoDireccion = br.readLine();
+			tipoDireccion = br.readLine().toUpperCase();
 			if (tipoDireccion.equals("CARRERA")) 
 			{
 				System.out.print("Carrera: ");
