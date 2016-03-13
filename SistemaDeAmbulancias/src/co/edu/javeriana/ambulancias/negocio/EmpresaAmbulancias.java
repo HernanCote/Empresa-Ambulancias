@@ -7,6 +7,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+import co.edu.javeriana.ambulancias.presentacion.Utils;
+
 /**
  * @author Hern�n Cote y Juan Pablo Pe�aloza
  *
@@ -369,7 +371,7 @@ public class EmpresaAmbulancias
 		System.out.println("codigo \t horaSolicitud \t paciente \t tipoServicio \t telefono \t direccion \t estado");
 		System.out.println("--------------------------------------------------------------------------------------------------");
 		System.out.print(serv.getCodigo() + "\t");
-		impFecha(serv.getHoraSolicitud());
+		Utils.formatoMes(serv.getHoraSolicitud());
 		System.out.print("\t" + "\t");
 		System.out.print(serv.getPaciente() + "\t");
 		System.out.print(serv.getTipoServicio() + "\t");
@@ -399,7 +401,7 @@ public class EmpresaAmbulancias
 			if (serv.getAmbulancia().getHoraPosicion() == null) {
 				System.out.print("No Hay" + "\t");
 			} else {
-				impFecha (serv.getAmbulancia().getHoraPosicion());
+				Utils.formatoMes(serv.getAmbulancia().getHoraPosicion());
 				System.out.print("\t");
 			}
 			System.out.print(serv.getAmbulancia().getPosicionCalle()+ "\t");
@@ -407,16 +409,10 @@ public class EmpresaAmbulancias
 			System.out.println();
 		}
 		
-	}
+	}	
 	
-	/**
-	 * Gets a gregorian calendar and print the date in the format 
-	 * of dd/MMMM/yyyy.
-	 * @param cal
-	 */	
-	private void impFecha (GregorianCalendar cal) {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMMM/yyyy");
-        System.out.print(sdf.format(cal.getTime()));
+	public void reporteIpsYServicios()
+	{
+		
 	}
-	
 }
