@@ -43,9 +43,9 @@ public class IPS
 	
 	public Direccion getDireccion() 
 	{
-		return direccion;
+		return this.direccion;
 	}
-
+	
 	public void setDireccion(Direccion direccion) 
 	{
 		this.direccion = direccion;

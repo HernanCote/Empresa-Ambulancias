@@ -124,6 +124,9 @@ public class Ambulancia
 		this.estado = estado;
 	}
 	
+	/**
+	 * Print information about the service
+	 */
 	public void printSelf()
 	{	
 		String actualService = null;

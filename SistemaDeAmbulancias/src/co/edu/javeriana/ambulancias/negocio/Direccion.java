@@ -58,19 +58,15 @@ public class Direccion
 		this.numero = numero;
 	}
 	
+	/**
+	 * returns a string of the direction
+	 * @return 
+	 */
 	public String toString() 
 	{
-		if(this.tipoDireccion.equals("CARRERA"))
-		{
-			return "CARRERA " + this.carrera + " # " + this.calle + " - " + this.numero;  
-		}
-		else if(this.tipoDireccion.equals("CALLE"))
-		{
-			return "CALLE " + this.calle + " # " + this.carrera + " - " + this.numero;
-		}
-		else 
-		{
-			return null;
-		}
+		return (this.getTipoDireccion().equals("CARRERA")) ? 
+				(String) ("CARRERA " + this.getCarrera() + " # " + this.getCalle() 
+						+ " - " + this.getNumero()) : "CALLE " + this.getCalle() 
+						+ " # " + this.getCarrera() + " - " + this.getNumero();
 	}
 }
