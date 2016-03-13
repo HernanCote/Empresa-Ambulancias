@@ -206,7 +206,7 @@ public class EmpresaAmbulancias
 			}			
 		}		
 		System.out.println("----------------------------------------------------");
-		System.out.println("El cï¿½digo ingresado no existe o ya ha sido asignado ");
+		System.out.println("El código ingresado no existe o ya ha sido asignado ");
 		System.out.println("----------------------------------------------------");
 		return message;
 	}
@@ -308,6 +308,43 @@ public class EmpresaAmbulancias
 		int y = Math.abs(y1-y2);
 		return x + y;
 	}
+	
+	/**
+	 * Terminate an Asigned service
+	 * @param codigo
+	 * @return
+	 */
+	public boolean finalizarUnServicio(int codigo)
+	{
+		boolean isTerminated = false;
+		for(Servicio servicios : this.serviciosList)
+		{
+			if(servicios.getCodigo() == codigo)
+			{
+				if(servicios.getEstado().equals("ASIGNADO"))
+				{
+					servicios.setEstado("FINALIZDO");
+					servicios.getAmbulancia().setEstado(false);
+					servicios.getAmbulancia().setServicioActual(0);
+					System.out.println("Exito al finalizar el servicio con código " + servicios.getCodigo());
+					isTerminated = true;
+					return isTerminated;
+				}
+				else
+				{
+					System.out.println("--------------------------------------------------------------");
+					System.out.println("El código del servicio ingresado no está en estado NO_ASIGNADO");
+					System.out.println("--------------------------------------------------------------");
+					return isTerminated;
+				}
+			}
+		}
+		System.out.println("------------------------------------------");
+		System.out.println("El codigo del servicio ingresado no existe");
+		System.out.println("------------------------------------------");
+		return isTerminated;
+	}
+	
 	
 	/**
 	 * For each element of the list of serviciosList prints it 

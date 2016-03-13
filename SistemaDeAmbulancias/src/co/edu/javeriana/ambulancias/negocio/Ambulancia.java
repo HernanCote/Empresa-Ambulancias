@@ -50,7 +50,7 @@ public class Ambulancia
 	public void setServicios(Servicio servicio)
 	{
 		this.servicios.add(servicio);
-		this.servicioActual = servicio.getCodigo();
+		this.setServicioActual(servicio.getCodigo());
 		this.estado = true;
 	}
 	
@@ -108,7 +108,16 @@ public class Ambulancia
 		this.posicionCarrera = posicionCarrera;
 	}
 
-	public boolean isEstado() {
+	public long getServicioActual() 
+	{
+		return servicioActual;
+	}
+	public void setServicioActual(long servicioActual) 
+	{
+		this.servicioActual = servicioActual;
+	}
+	public boolean isEstado() 
+	{
 		return estado;
 	}
 	public void setEstado(boolean estado) {
@@ -118,13 +127,13 @@ public class Ambulancia
 	public void printSelf()
 	{	
 		String actualService = null;
-		if(this.servicioActual == 0)
+		if(this.getServicioActual() == 0)
 		{
 			actualService = "NA";
 		}
 		else
 		{
-			actualService = Integer.toString((int)this.servicioActual);
+			actualService = Integer.toString((int)this.getServicioActual());
 		}
 		
 		if(this.horaPosicion != null)
@@ -139,7 +148,5 @@ public class Ambulancia
 		}
 	}
 	
-	public void printAmbulacia () {
-		
-	}
+	
 }

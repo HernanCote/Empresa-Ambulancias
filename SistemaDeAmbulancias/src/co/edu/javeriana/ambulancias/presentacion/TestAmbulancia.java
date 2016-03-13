@@ -58,7 +58,8 @@ public class TestAmbulancia
 					}
 					break;
 				case "7":
-					// Implementar 
+					// Hernan
+					Utils.imprimirServiciosAsignados(empresaAmbulancias);
 					break;
 				case "8":
 					// TODO Juan Pablo

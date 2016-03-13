@@ -127,4 +127,11 @@ public class Servicio
 		System.out.format("%4s%19s%9s%15s%13s%24s%n", this.getCodigo(),Utils.formatoMes(this.horaSolicitud),
 				this.paciente, this.tipoServicio, this.telefono, this.direccion.toString());	
 	}
+	
+	public void printAsignados()
+	{
+		System.out.format("%1s%17s%12s%3s%23s%n", this.getCodigo(), this.getPaciente()
+				, this.getAmbulancia().getCodigo()," "
+				, this.getIps().getNombre());
+	}
 }

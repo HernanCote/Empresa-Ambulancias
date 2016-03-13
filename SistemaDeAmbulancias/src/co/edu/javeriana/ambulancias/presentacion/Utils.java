@@ -76,6 +76,10 @@ public class Utils  {
 		
 	}
 	
+	/**
+	 * add IPS to the system
+	 * @param empresaAmbulancias
+	 */
 	public static void agregarIPS(EmpresaAmbulancias empresaAmbulancias)
 	{
 		InputStreamReader inputStreamReader = new InputStreamReader(System.in);
@@ -96,6 +100,10 @@ public class Utils  {
 		}
 	}
 	
+	/**
+	 * add an ambulance to the system
+	 * @param empresaAmbulancias
+	 */
 	public static void agregarAmbulancias(EmpresaAmbulancias empresaAmbulancias)
 	{
 		InputStreamReader inputStreamReader = new InputStreamReader(System.in);
@@ -116,7 +124,7 @@ public class Utils  {
 		}
 	}
 	/**
-	 * 
+	 * Register the position of an ambulance
 	 * @param empresaAmbulancias
 	 */
 	public static void registrarPosicion(EmpresaAmbulancias empresaAmbulancias)
@@ -137,7 +145,7 @@ public class Utils  {
 			} 
 			catch (NumberFormatException | IOException e) 
 			{
-				System.out.println("Por favor ingrese datos vï¿½lidos.");
+				System.out.println("Por favor ingrese datos válidos.");
 			}
 			
 			GregorianCalendar horaPosicion = new GregorianCalendar();
@@ -152,9 +160,9 @@ public class Utils  {
 			}
 			else
 			{
-				System.out.println("-------------------------------------------------------------------");
-				System.out.println("El código de la ambulancia no está registrado en el sistema existe.");
-				System.out.println("-------------------------------------------------------------------");
+				System.out.println("-----------------------------------------------------------");
+				System.out.println("El código de la ambulancia no está registrado en el sistema");
+				System.out.println("-----------------------------------------------------------");
 			}
 		}
 		else
@@ -256,8 +264,7 @@ public class Utils  {
 			
 			System.out.println("----------------------------------------------");
 			System.out.println("Asignar un servicio a una IPS y una ambulancia");
-			System.out.println("----------------------------------------------");
-			System.out.println("Se muestran los servicios del sistema sin asignar");
+			System.out.println("Se muestran los servicios del sistema sin asignar:");
 			
 			System.out.println("--------------------------------------------"
 					+ "----------------------------------------");
@@ -290,6 +297,45 @@ public class Utils  {
 			}			
 		}
 		return null;
+	}
+	
+	public static void imprimirServiciosAsignados(EmpresaAmbulancias empresaAmbulancias)
+	{
+		System.out.println("	---------------------");
+		System.out.println("	FINALIZAR UN SERVICIO");
+		System.out.println("	---------------------");
+		System.out.println("Servicios en el sistema asignados:");
+		System.out.println("-----------------------------------------------------------");
+		System.out.format("%6s%12s%16s%6s%n", "código", "paciente", "ambulancia", "IPS");
+		System.out.println("-----------------------------------------------------------");
+		int cont = 0;
+		
+		for(Servicio servicios : empresaAmbulancias.getServicios())
+		{
+			if(servicios.getEstado().equals("ASIGNADO"))
+			{
+				servicios.printAsignados();
+				cont++;
+			}
+		}
+		if(cont >= 1)
+		{
+			System.out.print("Ingrese el código del servicio que desea finalizar: ");
+			@SuppressWarnings("resource")
+			Scanner scanner = new Scanner(System.in);
+			int codigo = Integer.parseInt(scanner.nextLine());
+			boolean isTerminated = empresaAmbulancias.finalizarUnServicio(codigo);
+			if(!isTerminated)
+			{
+				System.out.println("Error al finalizar el servicio.");
+				System.out.println("-------------------------------");
+			}
+		}
+		else
+		{
+			System.out.println("No hay servicios que estén en estado asignado para finalizar");
+			System.out.println("------------------------------------------------------------");
+		}	
 	}
 	
 }
