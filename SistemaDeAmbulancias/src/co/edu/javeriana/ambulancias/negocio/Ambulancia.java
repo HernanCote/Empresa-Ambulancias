@@ -126,4 +126,8 @@ public class Ambulancia
 					,"NA",this.posicionCalle,this.posicionCarrera);
 		}
 	}
+	
+	public void printAmbulacia () {
+		
+	}
 }

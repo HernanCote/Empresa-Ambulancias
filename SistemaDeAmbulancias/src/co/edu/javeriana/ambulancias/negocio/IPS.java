@@ -67,9 +67,18 @@ public class IPS
 		setDireccion(new Direccion(tipoDireccion, calle, carrera, numero));
 	}
 	
+	/**
+	 * This method prints the content of an object of this 
+	 * class.
+	 */
+	
 	public void printSelf()
 	{		
-		System.out.format("%6s%7s%14s%n", this.nombre, this.tipoAtencion, this.direccion);
+		System.out.print(this.nombre + "\t");
+		System.out.print(this.tipoAtencion + "\t");
+		System.out.print(this.direccion + "\t");
 	}
+	
+	
 		
 }

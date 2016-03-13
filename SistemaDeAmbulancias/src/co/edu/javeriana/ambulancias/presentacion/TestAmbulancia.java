@@ -30,6 +30,7 @@ public class TestAmbulancia
 					break;
 				case "2":	
 					Utils.agregarAmbulancias(empresaAmbulancias);
+					
 					break;
 				case "3":
 					Utils.registrarPosicion(empresaAmbulancias);
@@ -61,6 +62,7 @@ public class TestAmbulancia
 					break;
 				case "8":
 					// TODO Juan Pablo
+					empresaAmbulancias.imprimirTodosLosrServicios();
 					break;
 				case "9":
 					// TODO Hernan 

@@ -3,11 +3,12 @@
  */
 package co.edu.javeriana.ambulancias.negocio;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 /**
- * @author Hernán Cote y Juan Pablo Peñaloza
+ * @author Hernï¿½n Cote y Juan Pablo Peï¿½aloza
  *
  */
 public class EmpresaAmbulancias 
@@ -205,7 +206,7 @@ public class EmpresaAmbulancias
 			}			
 		}		
 		System.out.println("----------------------------------------------------");
-		System.out.println("El código ingresado no existe o ya ha sido asignado ");
+		System.out.println("El cï¿½digo ingresado no existe o ya ha sido asignado ");
 		System.out.println("----------------------------------------------------");
 		return message;
 	}
@@ -307,4 +308,79 @@ public class EmpresaAmbulancias
 		int y = Math.abs(y1-y2);
 		return x + y;
 	}
+	
+	/**
+	 * For each element of the list of serviciosList prints it 
+	 * with the method provided bellow. 
+	 */
+	
+	public void imprimirTodosLosrServicios () {
+		for (int i = 0; i < this.serviciosList.size(); i++) {
+			generarReporteDeServicio (this.serviciosList.get(i));
+		}
+	}
+	
+	/**
+	 * Takes a single service and prints its content according to 
+	 * to its attributes.
+	 * @param serv
+	 */
+	
+	private void generarReporteDeServicio (Servicio serv) {
+		System.out.println();
+		System.out.println("SERVICIO:");
+		System.out.println("codigo \t horaSolicitud \t paciente \t tipoServicio \t telefono \t direccion \t estado");
+		System.out.println("--------------------------------------------------------------------------------------------------");
+		System.out.print(serv.getCodigo() + "\t");
+		impFecha(serv.getHoraSolicitud());
+		System.out.print("\t" + "\t");
+		System.out.print(serv.getPaciente() + "\t");
+		System.out.print(serv.getTipoServicio() + "\t");
+		System.out.print(serv.getTelefono() + "\t" + "\t");
+		System.out.print(serv.getDireccion() + "\t");
+		System.out.print(serv.getEstado() + "\t");
+		System.out.println();
+		System.out.println();
+		if (serv.getIps() == null) {
+			System.out.println("IPS asignada: ");
+			System.out.println("No Se Ha Asignado");
+		} else {
+			System.out.println("IPS asignada: ");
+			System.out.println("nombre                tipoAtencion            direccion");
+			serv.getIps().printSelf();
+		}
+		if (serv.getAmbulancia() == null) {
+			System.out.println("Ambulancia asignada:");
+			System.out.println("No Se Ha Asignado");
+			System.out.println("------------------------------------------------------------------------------");
+		} else {
+			System.out.println("Ambulancia asignada:");
+			System.out.println("codigo placa   tipoDotacion  horaPosicion  posicionCalle posicionCarrera");
+			System.out.println("------------------------------------------------------------------------------");
+			System.out.print(serv.getAmbulancia().getPlaca()+ "\t");
+			System.out.print(serv.getAmbulancia().getTipoDotacion()+ "\t");
+			if (serv.getAmbulancia().getHoraPosicion() == null) {
+				System.out.print("No Hay" + "\t");
+			} else {
+				impFecha (serv.getAmbulancia().getHoraPosicion());
+				System.out.print("\t");
+			}
+			System.out.print(serv.getAmbulancia().getPosicionCalle()+ "\t");
+			System.out.print(serv.getAmbulancia().getPosicionCarrera()+ "\t");
+			System.out.println();
+		}
+		
+	}
+	
+	/**
+	 * Gets a gregorian calendar and print the date in the format 
+	 * of dd/MMMM/yyyy.
+	 * @param cal
+	 */
+	
+	private void impFecha (GregorianCalendar cal) {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMMM/yyyy");
+        System.out.print(sdf.format(cal.getTime()));
+	}
+	
 }
