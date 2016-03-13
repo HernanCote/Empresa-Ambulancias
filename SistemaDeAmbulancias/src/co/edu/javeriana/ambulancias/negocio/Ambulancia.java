@@ -21,6 +21,7 @@ public class Ambulancia
 	private int posicionCalle;
 	private int posicionCarrera;
 	private ArrayList<Servicio> servicios;
+	private long servicioActual;
 	private boolean estado;
 	
 	public Ambulancia(int codigo, String placa, String tipoDotacion)
@@ -49,6 +50,7 @@ public class Ambulancia
 	public void setServicios(Servicio servicio)
 	{
 		this.servicios.add(servicio);
+		this.servicioActual = servicio.getCodigo();
 		this.estado = true;
 	}
 	
@@ -115,15 +117,25 @@ public class Ambulancia
 	
 	public void printSelf()
 	{	
-		if(this.horaPosicion != null)
+		String actualService = null;
+		if(this.servicioActual == 0)
 		{
-			System.out.format("%6s%7s%14s%14s%15s%17s%n", this.codigo, this.placa, this.tipoDotacion
-						,Utils.formatoHora(this.horaPosicion), this.posicionCalle, this.posicionCarrera);			
+			actualService = "NA";
 		}
 		else
 		{
-			System.out.format("%6s%7s%14s%14s%15s%17s%n", this.codigo, this.placa,this.tipoDotacion
-					,"NA",this.posicionCalle,this.posicionCarrera);
+			actualService = Integer.toString((int)this.servicioActual);
+		}
+		
+		if(this.horaPosicion != null)
+		{
+			System.out.format("%6s%7s%14s%14s%15s%17s%7s%n", this.codigo, this.placa, this.tipoDotacion
+						,Utils.formatoHora(this.horaPosicion), this.posicionCalle, this.posicionCarrera, actualService);			
+		}
+		else
+		{
+			System.out.format("%6s%7s%14s%14s%15s%17s%7s%n", this.codigo, this.placa,this.tipoDotacion
+					,"NA",this.posicionCalle,this.posicionCarrera, actualService);
 		}
 	}
 	

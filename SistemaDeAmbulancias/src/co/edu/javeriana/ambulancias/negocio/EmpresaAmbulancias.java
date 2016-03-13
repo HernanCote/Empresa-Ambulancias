@@ -295,7 +295,7 @@ public class EmpresaAmbulancias
 	
 	
 	/**
-	 * this method calculates the distance between two different places
+	 * this method calculates the distance between two points (x1,y1) and (x2,y2)
 	 * @param x1
 	 * @param y1
 	 * @param x2
@@ -376,8 +376,7 @@ public class EmpresaAmbulancias
 	 * Gets a gregorian calendar and print the date in the format 
 	 * of dd/MMMM/yyyy.
 	 * @param cal
-	 */
-	
+	 */	
 	private void impFecha (GregorianCalendar cal) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMMM/yyyy");
         System.out.print(sdf.format(cal.getTime()));
