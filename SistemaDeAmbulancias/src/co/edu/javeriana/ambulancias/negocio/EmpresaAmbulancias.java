@@ -9,7 +9,7 @@ import java.util.GregorianCalendar;
 import co.edu.javeriana.ambulancias.presentacion.Utils;
 
 /**
- * @author Hernï¿½n Cote y Juan Pablo Peï¿½aloza
+ * @author Hernan Cote y Juan Pablo Peï¿½aloza
  *
  */
 public class EmpresaAmbulancias 
@@ -112,11 +112,11 @@ public class EmpresaAmbulancias
 		if(!ambulanciasList.isEmpty())
 		{
 			System.out.println("------------------------------------------------"
-					+ "-------------------------");
+					+ "------------------------------------");
 			System.out.format("%6s%7s%14s%14s%15s%17s%10s%n", "codigo", "placa", "tipoDotacion"
 					,"horaPosicion", "posicionCalle", "posicionCarrera", "servicio");
 			System.out.println("------------------------------------------------"
-					+ "-------------------------");
+					+ "------------------------------------");
 			for(Ambulancia ambulancia : ambulanciasList)
 			{
 				ambulancia.printSelf();
@@ -206,7 +206,7 @@ public class EmpresaAmbulancias
 			}			
 		}		
 		System.out.println("----------------------------------------------------");
-		System.out.println("El cï¿½digo ingresado no existe o ya ha sido asignado ");
+		System.out.println("El codigo ingresado no existe o ya ha sido asignado ");
 		System.out.println("----------------------------------------------------");
 		return message;
 	}
@@ -326,14 +326,14 @@ public class EmpresaAmbulancias
 					servicios.setEstado("FINALIZDO");
 					servicios.getAmbulancia().setEstado(false);
 					servicios.getAmbulancia().setServicioActual(0);
-					System.out.println("Exito al finalizar el servicio con cï¿½digo " + servicios.getCodigo());
+					System.out.println("Exito al finalizar el servicio con codigo " + servicios.getCodigo());
 					isTerminated = true;
 					return isTerminated;
 				}
 				else
 				{
 					System.out.println("--------------------------------------------------------------");
-					System.out.println("El cï¿½digo del servicio ingresado no estï¿½ en estado NO_ASIGNADO");
+					System.out.println("El codigo del servicio ingresado no esta en estado NO_ASIGNADO");
 					System.out.println("--------------------------------------------------------------");
 					return isTerminated;
 				}
@@ -420,16 +420,16 @@ public class EmpresaAmbulancias
 			for(IPS ips : this.ipsList)
 			{	
 				System.out.println("IPS: ");
-				System.out.format("%10s%32s%19s%n","nombre","Tipo de atenciï¿½n","Direcciï¿½n");
+				System.out.format("%10s%32s%19s%n","nombre","Tipo de atencion","Direccion");
 				System.out.println("-------------------------------------------------------------");
 				System.out.format("%10s%24s%29s%n%n", ips.getNombre(),ips.getTipoAtencion(), ips.getDireccion().toString());
 				System.out.println("SERVICIOS: ");
 			
 				if(!ips.getServicios().isEmpty())
 				{
-					System.out.format("\t%7s%15s%17s%14s%10s%12s%21s%17s%n","Cï¿½digo"
-							,"horaSolicitud","paciente","tipoServicio","Telï¿½fono"
-							,"Direcciï¿½n","Estado","Ambulancia");
+					System.out.format("\t%7s%15s%17s%14s%10s%12s%21s%17s%n","Codigo"
+							,"horaSolicitud","paciente","tipoServicio","Telefono"
+							,"Dirección","Estado","Ambulancia");
 					System.out.println("\t----------------------------------------------------------"
 							+ "-------------------------------------------------------");
 					for(Servicio servicios : ips.getServicios())

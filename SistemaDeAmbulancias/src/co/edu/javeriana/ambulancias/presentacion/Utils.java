@@ -66,7 +66,7 @@ public class Utils  {
 		System.out.println("opcion 9: Reporte de las IPS con servicios asociados");
 		System.out.println("opcion 10: terminar");
 		System.out.println("---------------------------------------------------------------");
-		System.out.print("Ingrese la opción que desea acceder: ");
+		System.out.print("Ingrese la opcion que desea acceder: ");
 		
 		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
@@ -222,7 +222,7 @@ public class Utils  {
 		} 
 		catch (Exception e) 
 		{
-			System.out.println("Error En La Creación Del Servicio");
+			System.out.println("Error En La Creacion Del Servicio");
 		}
 		
 		Direccion tempDir = new Direccion (tipoDireccion, calle, carrera, numero);
@@ -288,7 +288,7 @@ public class Utils  {
 			}
 			if( cont >= 1)
 			{				
-				System.out.print("\nIngrese el código del servicio que desea asignar: ");
+				System.out.print("\nIngrese el codigo del servicio que desea asignar: ");
 				@SuppressWarnings("resource")
 				Scanner scanner = new Scanner(System.in);
 				int codigo = Integer.parseInt(scanner.nextLine());
@@ -329,7 +329,7 @@ public class Utils  {
 		}
 		if(cont >= 1)
 		{
-			System.out.print("Ingrese el código del servicio que desea finalizar: ");
+			System.out.print("Ingrese el codigo del servicio que desea finalizar: ");
 			@SuppressWarnings("resource")
 			Scanner scanner = new Scanner(System.in);
 			int codigo = Integer.parseInt(scanner.nextLine());
@@ -342,7 +342,7 @@ public class Utils  {
 		}
 		else
 		{
-			System.out.println("No hay servicios que estén en estado asignado para finalizar");
+			System.out.println("No hay servicios que esten en estado asignado para finalizar");
 			System.out.println("------------------------------------------------------------");
 		}	
 	}
