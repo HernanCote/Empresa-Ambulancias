@@ -234,6 +234,11 @@ public class Utils  {
 	}
 	
 	
+	/**
+	 * Assign a service to an IPS and an Ambulance
+	 * @param empresaAmbulancias
+	 * @return
+	 */
 	public static String asignarUnServicio(EmpresaAmbulancias empresaAmbulancias)
 	{
 		if(empresaAmbulancias.getServicios().isEmpty())
@@ -268,7 +273,7 @@ public class Utils  {
 			
 			System.out.println("--------------------------------------------"
 					+ "----------------------------------------");
-			System.out.format("%4s%17s%10s%15s%13s%12s%n", "Código","horaSolicitud",
+			System.out.format("%4s%17s%15s%15s%13s%12s%n", "Código","horaSolicitud",
 					"paciente", "tipoServicio", "telefono", "dirección");
 			System.out.println("--------------------------------------------"
 					+ "----------------------------------------");
@@ -299,6 +304,10 @@ public class Utils  {
 		return null;
 	}
 	
+	/**
+	 * prints all assigned services
+	 * @param empresaAmbulancias
+	 */
 	public static void imprimirServiciosAsignados(EmpresaAmbulancias empresaAmbulancias)
 	{
 		System.out.println("	---------------------");

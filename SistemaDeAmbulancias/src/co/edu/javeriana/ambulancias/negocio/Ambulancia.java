@@ -124,6 +124,9 @@ public class Ambulancia
 		this.estado = estado;
 	}
 	
+	/**
+	 * Print information about the service
+	 */
 	public void printSelf()
 	{	
 		@SuppressWarnings("unused")
@@ -139,7 +142,7 @@ public class Ambulancia
 		
 		if(this.horaPosicion != null)
 		{
-			System.out.format("%6s%15s%14s%14s%15s%17s%n", this.codigo, this.placa, this.tipoDotacion
+			System.out.format("%6s%15s%14s%14s%20s%20s%n", this.codigo, this.placa, this.tipoDotacion
 					,Utils.formatoHora(this.horaPosicion), this.posicionCalle, this.posicionCarrera);			
 		}
 		else

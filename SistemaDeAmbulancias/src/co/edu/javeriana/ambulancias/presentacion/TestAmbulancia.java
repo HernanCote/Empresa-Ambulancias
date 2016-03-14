@@ -13,6 +13,7 @@ public class TestAmbulancia
 {
 
 	/**
+	 * Main method
 	 * @param args
 	 */
 	public static void main(String[] args) 
@@ -65,15 +66,16 @@ public class TestAmbulancia
 					// TODO Juan Pablo
 					empresaAmbulancias.imprimirTodosLosrServicios();
 					break;
-				case "9":
-					
-					// TODO Hernan 
+				case "9":					
+					// TODO Hernan
+					empresaAmbulancias.reporteIpsYServicios();
 					break;
 				case "10":
+					System.out.println("Sistema Terminado!!");
 					break;
 				default: 
 					System.out.println("------------------------------------");
-					System.out.println("Por favor ingrese una opciï¿½n vï¿½lida.");
+					System.out.println("Por favor ingrese una opción válida.");
 					System.out.println("------------------------------------");
 					break;
 			}

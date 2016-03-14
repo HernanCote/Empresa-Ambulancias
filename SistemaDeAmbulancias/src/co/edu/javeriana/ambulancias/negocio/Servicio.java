@@ -132,10 +132,11 @@ public class Servicio
 	 * 
 	 */
 	
-	public void printAsignados() {
-		System.out.format("%1s%17s%12s%3s%23s%n", this.getCodigo(), this.getPaciente()
-				, this.getAmbulancia().getCodigo()," "
-				, this.getIps().getNombre());
+	
+	public void printAsignados()
+	{
+		System.out.format("%1s%21s%7s%28s%n", this.getCodigo(), this.getPaciente()
+				, this.getAmbulancia().getCodigo(), this.getIps().getNombre());
 	}
 	
 }

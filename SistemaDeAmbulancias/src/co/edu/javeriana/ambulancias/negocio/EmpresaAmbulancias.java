@@ -6,6 +6,8 @@ package co.edu.javeriana.ambulancias.negocio;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+import co.edu.javeriana.ambulancias.presentacion.Utils;
+
 /**
  * @author Hern�n Cote y Juan Pablo Pe�aloza
  *
@@ -109,7 +111,6 @@ public class EmpresaAmbulancias
 	{
 		if(!ambulanciasList.isEmpty())
 		{
-			//TODO Falta Implementar el servicio!!!
 			System.out.println("------------------------------------------------"
 					+ "-------------------------");
 			System.out.format("%6s%7s%14s%14s%15s%17s%10s%n", "codigo", "placa", "tipoDotacion"
@@ -403,6 +404,54 @@ public class EmpresaAmbulancias
 		
 	}	
 	
-	public void reporteIpsYServicios() {
+
+	
+
+	/**
+	 * Report of the IPS with associated Services
+	 */
+	public void reporteIpsYServicios()
+	{
+		System.out.println("\t------------------------------------------");
+		System.out.println("\tREPORTE DE LAS IPS CON SERVICIOS ASOCIADOS");
+		System.out.println("\t------------------------------------------");
+		if(!this.ipsList.isEmpty())
+		{
+			for(IPS ips : this.ipsList)
+			{	
+				System.out.println("IPS: ");
+				System.out.format("%10s%32s%19s%n","nombre","Tipo de atenci�n","Direcci�n");
+				System.out.println("-------------------------------------------------------------");
+				System.out.format("%10s%24s%29s%n%n", ips.getNombre(),ips.getTipoAtencion(), ips.getDireccion().toString());
+				System.out.println("SERVICIOS: ");
+			
+				if(!ips.getServicios().isEmpty())
+				{
+					System.out.format("\t%7s%15s%17s%14s%10s%12s%21s%17s%n","C�digo"
+							,"horaSolicitud","paciente","tipoServicio","Tel�fono"
+							,"Direcci�n","Estado","Ambulancia");
+					System.out.println("\t----------------------------------------------------------"
+							+ "-------------------------------------------------------");
+					for(Servicio servicios : ips.getServicios())
+					{
+						System.out.format("\t%7d%15s%17s%14s%10s%24s%11s%10s%n",servicios.getCodigo()
+								,Utils.formatoMes(servicios.getHoraSolicitud()),servicios.getPaciente()
+								,servicios.getTipoServicio(),servicios.getTelefono(), servicios.getDireccion().toString()
+								,servicios.getEstado(), servicios.getAmbulancia().getCodigo());
+					}
+				}
+				else
+				{
+					System.out.println("No hay servicios asignados a esta IPS");
+					System.out.println("-------------------------------------");
+				}
+			}
+		}
+		else
+		{
+			System.out.println("---------------------------------------------------------------------------");
+			System.out.println("La base de datos del sistema no tiene IPS registradas para hacer el reporte");
+			System.out.println("---------------------------------------------------------------------------");
+		}		
 	}
 }
