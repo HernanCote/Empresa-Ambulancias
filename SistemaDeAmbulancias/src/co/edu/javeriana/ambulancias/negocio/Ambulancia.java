@@ -9,7 +9,7 @@ import java.util.GregorianCalendar;
 import co.edu.javeriana.ambulancias.presentacion.Utils;
 
 /**
- * @author Hernan y Juan Pablo Peñaloza
+ * @author Hernan Cote y Juan Pablo Peñaloza
  *
  */
 public class Ambulancia 
@@ -21,6 +21,7 @@ public class Ambulancia
 	private int posicionCalle;
 	private int posicionCarrera;
 	private ArrayList<Servicio> servicios;
+	private long servicioActual;
 	private boolean estado;
 	
 	public Ambulancia(int codigo, String placa, String tipoDotacion)
@@ -49,6 +50,7 @@ public class Ambulancia
 	public void setServicios(Servicio servicio)
 	{
 		this.servicios.add(servicio);
+		this.setServicioActual(servicio.getCodigo());
 		this.estado = true;
 	}
 	
@@ -106,24 +108,48 @@ public class Ambulancia
 		this.posicionCarrera = posicionCarrera;
 	}
 
-	public boolean isEstado() {
+	public long getServicioActual() 
+	{
+		return servicioActual;
+	}
+	public void setServicioActual(long servicioActual) 
+	{
+		this.servicioActual = servicioActual;
+	}
+	public boolean isEstado() 
+	{
 		return estado;
 	}
 	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
 	
+	/**
+	 * Print information about the service
+	 */
 	public void printSelf()
-	{
-		if(this.horaPosicion != null)
+	{	
+		String actualService = null;
+		if(this.getServicioActual() == 0)
 		{
-			System.out.format("%6s%7s%14s%14s%15s%17s%n", this.codigo, this.placa, this.tipoDotacion
-						,Utils.formatoHora(this.horaPosicion), this.posicionCalle, this.posicionCarrera);			
+			actualService = "NA";
 		}
 		else
 		{
-			System.out.format("%6s%7s%14s%14s%15s%17s%n", this.codigo, this.placa,this.tipoDotacion
-					,"NA",this.posicionCalle,this.posicionCarrera);
+			actualService = Integer.toString((int)this.getServicioActual());
+		}
+		
+		if(this.horaPosicion != null)
+		{
+			System.out.format("%6s%7s%14s%14s%9s%15s%15s%n", this.codigo, this.placa, this.tipoDotacion
+					,Utils.formatoHora(this.horaPosicion), this.posicionCalle, this.posicionCarrera, actualService);			
+		}
+		else
+		{
+			System.out.format("%6s%7s%14s%14s%9s%15s%15s%n", this.codigo, this.placa,this.tipoDotacion
+					,"NA",this.posicionCalle,this.posicionCarrera, actualService);
 		}
 	}
+	
+	
 }

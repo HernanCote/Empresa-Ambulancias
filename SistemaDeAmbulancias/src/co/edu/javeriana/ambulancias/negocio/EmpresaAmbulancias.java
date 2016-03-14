@@ -6,8 +6,10 @@ package co.edu.javeriana.ambulancias.negocio;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+import co.edu.javeriana.ambulancias.presentacion.Utils;
+
 /**
- * @author v-heco
+ * @author Hernan Cote y Juan Pablo Peï¿½aloza
  *
  */
 public class EmpresaAmbulancias 
@@ -65,6 +67,15 @@ public class EmpresaAmbulancias
 		this.ambulanciasList.add(ambulancias);
 	}
 
+	/**
+	 * This method adds a new IPS to the system
+	 * @param nombre
+	 * @param tipoAtencion
+	 * @param tipoDireccion
+	 * @param calle
+	 * @param carrera
+	 * @param numero
+	 */
 	public void agregarIPS(String nombre, String tipoAtencion, String tipoDireccion, int calle, int carrera, int numero)
 	{
 		IPS ips = new IPS(nombre, tipoAtencion, tipoDireccion, calle, carrera, numero);
@@ -76,6 +87,12 @@ public class EmpresaAmbulancias
 		System.out.println("----------------------------------------");
 	}
 	
+	/**
+	 * This method adds a new Ambulance to the System
+	 * @param codigo
+	 * @param placa
+	 * @param tipoDotacion
+	 */
 	public void agregarAmbulancia(int codigo, String placa, String tipoDotacion)
 	{
 		Ambulancia ambulancia = new Ambulancia(codigo, placa, tipoDotacion);
@@ -87,17 +104,19 @@ public class EmpresaAmbulancias
 		System.out.println("-----------------------------------------------");
 	}
 
+	/**
+	 * This method prints to the user the ambulances available in the system 
+	 */
 	public void reporteDeAmbulancias()
 	{
 		if(!ambulanciasList.isEmpty())
 		{
-			//TODO Falta Implementar el servicio!!!
 			System.out.println("------------------------------------------------"
-					+ "-------------------------");
-			System.out.format("%6s%7s%14s%14s%15s%17s%n", "codigo", "placa", "tipoDotacion"
-					,"horaPosicion", "posicionCalle", "posicionCarrera");
+					+ "------------------------------------");
+			System.out.format("%6s%7s%14s%14s%15s%17s%10s%n", "codigo", "placa", "tipoDotacion"
+					,"horaPosicion", "posicionCalle", "posicionCarrera", "servicio");
 			System.out.println("------------------------------------------------"
-					+ "-------------------------");
+					+ "------------------------------------");
 			for(Ambulancia ambulancia : ambulanciasList)
 			{
 				ambulancia.printSelf();
@@ -111,6 +130,14 @@ public class EmpresaAmbulancias
 		}
 	}
 	
+	/**
+	 * This method let the user register the position of an ambulance
+	 * @param codigo
+	 * @param horaPosicion
+	 * @param posicionCalle
+	 * @param posicionCarrera
+	 * @return
+	 */
 	public boolean registrarPosicionAmbulancia(int codigo, GregorianCalendar horaPosicion
 												,int posicionCalle, int posicionCarrera)
 	{
@@ -136,22 +163,295 @@ public class EmpresaAmbulancias
 		serviciosList.add(serv);
 	}
 	
+	/**
+	 * This method assigns an IPS and an Ambulance to a service  
+	 * @param codigo
+	 * @return
+	 */
 	public String asignarUnServicio(int codigo)
 	{
 		String message = null;
 		for(Servicio servicio : serviciosList)
 		{
-			if(servicio.getCodigo() == codigo)
+			if(servicio.getCodigo() == codigo && servicio.getEstado().equals("NO_ASIGNADO"))
 			{
-				
-			}
-			else
+				ArrayList<Ambulancia> ambulanciasDisponibles = construirAmbulanciasDisponibles(servicio);
+				if(!ambulanciasDisponibles.isEmpty())
+				{
+					Ambulancia ambulanciaMasCercana = calcularAmbulanciaMasCercana(ambulanciasDisponibles,
+																servicio.getDireccion().getCalle(), 
+																servicio.getDireccion().getCarrera());
+					
+					IPS ipsMasCercana = calcularIPSMasCercana(servicio.getDireccion().getCalle(), 
+																servicio.getDireccion().getCarrera());
+					servicio.setEstado("ASIGNADO");
+					
+					servicio.setAmbulancia(ambulanciaMasCercana);
+					
+					ambulanciaMasCercana.setServicios(servicio);
+					ambulanciaMasCercana.setEstado(true);				
+					
+					servicio.setIps(ipsMasCercana);	
+					ipsMasCercana.setServicios(servicio);	
+					return "Al servicio " + servicio.getCodigo() + " le fue asignada la ambulancia " + servicio.getAmbulancia().getCodigo()
+							+ " y la IPS " + servicio.getIps().getNombre();
+				}				
+				else
+				{
+					System.out.println("-------------------------------------------------------");
+					System.out.println("No hay ambulancias disponibles para atender el servicio");
+					System.out.println("-------------------------------------------------------");
+					return null;
+				}
+			}			
+		}		
+		System.out.println("----------------------------------------------------");
+		System.out.println("El codigo ingresado no existe o ya ha sido asignado ");
+		System.out.println("----------------------------------------------------");
+		return message;
+	}
+	
+	/**
+	 * This method builds a list of available ambulances
+	 * depending of the kind of services that the service needs
+	 * @param servicio
+	 * @return
+	 */
+	private ArrayList<Ambulancia> construirAmbulanciasDisponibles(Servicio servicio)
+	{
+		ArrayList<Ambulancia> ambulanciasDisponibles = new ArrayList<Ambulancia>();		
+		
+		if(servicio.getTipoServicio().equals("EMERGENCIA"))
+		{
+			for(Ambulancia ambulancia : ambulanciasList)
 			{
-				System.out.println("------------------------------");
-				System.out.println("El código ingresado no existe.");
-				System.out.println("------------------------------");
+				if(ambulancia.getTipoDotacion().equals("ALTA_UCI") && (!ambulancia.isEstado()))
+				{
+					ambulanciasDisponibles.add(ambulancia);
+				}				
 			}
 		}
-		return message;
+		else
+		{
+			for(Ambulancia ambulancia : ambulanciasList)
+			{
+				if(!ambulancia.isEstado())
+				{
+					ambulanciasDisponibles.add(ambulancia);
+				}				
+			}
+		}
+		return ambulanciasDisponibles;						
+	}
+	
+	
+	/**
+	 * This method returns the nearest ambulance to an specific service
+	 * @param ambulancias
+	 * @param calle
+	 * @param carrera
+	 * @return
+	 */
+	private Ambulancia calcularAmbulanciaMasCercana(ArrayList<Ambulancia> ambulancias, int calle, int carrera)
+	{
+		Ambulancia ambulanciaCercana = null;
+		int auxiliar = 2000000;
+		int z=200000;
+		for(Ambulancia ambuMasCercana : ambulancias)
+		{
+			
+			z = calcularDistancia(ambuMasCercana.getPosicionCalle(),ambuMasCercana.getPosicionCarrera(), calle, carrera);
+			if(auxiliar > z)
+			{
+				ambulanciaCercana = ambuMasCercana;
+				auxiliar = z;
+			}
+		}
+		return ambulanciaCercana;
+	}
+	
+	/**
+	 * this method return the nearest IPS to an specific service
+	 * @param calle
+	 * @param carrera
+	 * @return
+	 */
+	private IPS calcularIPSMasCercana( int calle, int carrera)
+	{
+		IPS ipsCercana = null;
+		int auxiliar = 2000000;
+		int z=200000;
+		for(IPS ipsMasCercana : ipsList)
+		{
+			z = calcularDistancia(ipsMasCercana.getDireccion().getCalle(), ipsMasCercana.getDireccion().getCarrera(),calle ,carrera);
+			if(auxiliar > z)
+			{
+				ipsCercana = ipsMasCercana;
+				auxiliar = z;
+			}
+		}
+		return ipsCercana;
+	}
+	
+	
+	/**
+	 * this method calculates the distance between two points (x1,y1) and (x2,y2)
+	 * @param x1
+	 * @param y1
+	 * @param x2
+	 * @param y2
+	 * @return
+	 */
+	private int calcularDistancia(int x1, int y1, int x2, int y2)
+	{
+		int x = Math.abs(x1-x2);
+		int y = Math.abs(y1-y2);
+		return x + y;
+	}
+	
+	/**
+	 * Terminate an Asigned service
+	 * @param codigo
+	 * @return
+	 */
+	public boolean finalizarUnServicio(int codigo)
+	{
+		boolean isTerminated = false;
+		for(Servicio servicios : this.serviciosList)
+		{
+			if(servicios.getCodigo() == codigo)
+			{
+				if(servicios.getEstado().equals("ASIGNADO"))
+				{
+					servicios.setEstado("FINALIZDO");
+					servicios.getAmbulancia().setEstado(false);
+					servicios.getAmbulancia().setServicioActual(0);
+					System.out.println("Exito al finalizar el servicio con codigo " + servicios.getCodigo());
+					isTerminated = true;
+					return isTerminated;
+				}
+				else
+				{
+					System.out.println("--------------------------------------------------------------");
+					System.out.println("El codigo del servicio ingresado no esta en estado NO_ASIGNADO");
+					System.out.println("--------------------------------------------------------------");
+					return isTerminated;
+				}
+			}
+		}
+		System.out.println("------------------------------------------");
+		System.out.println("El codigo del servicio ingresado no existe");
+		System.out.println("------------------------------------------");
+		return isTerminated;
+	}
+	
+	
+	/**
+	 * For each element of the list of serviciosList prints it 
+	 * with the method provided bellow. 
+	 */
+	
+	public void imprimirTodosLosrServicios () {
+		for (int i = 0; i < this.serviciosList.size(); i++) {
+			generarReporteDeServicio (this.serviciosList.get(i));
+		}
+	}
+	
+	/**
+	 * Takes a single service and prints its content according to 
+	 * to its attributes.
+	 * @param serv
+	 */
+	
+	private void generarReporteDeServicio (Servicio serv) {
+		System.out.println();
+		System.out.println("SERVICIO:");
+		System.out.println("Codigo \t HoraSolicitud \t Paciente \t TipoServicio \t Telefono \t Direccion \t \t Estado");
+		System.out.println("----------------------------------------------------------------------------------------------------------------------");
+		
+		serv.printSelfAll();	
+		
+		System.out.println();
+		System.out.println();
+		
+		if (serv.getIps() == null) {
+			System.out.println("IPS asignada: ");
+			System.out.println("nombre                           tipoAtencion                      direccion");
+			System.out.println("----------------------------------------------------------------------------------------------------------------------");
+			System.out.println("No Se Ha Asignado");
+		} else {
+			System.out.println("IPS asignada: ");
+			System.out.println("nombre                           tipoAtencion                      direccion");
+			System.out.println("----------------------------------------------------------------------------------------------------------------------");
+			System.out.println();
+			serv.getIps().printSelf();
+		}
+		
+		System.out.println();
+		System.out.println();
+		
+		if (serv.getAmbulancia() == null) {
+			System.out.println("Ambulancia asignada:");
+			System.out.println("----------------------------------------------------------------------------------------------------------------------");
+			System.out.println("No Se Ha Asignado");
+		} else {
+			System.out.println("Ambulancia asignada:");
+			System.out.println(" codigo       placa     tipoDotacion  	horaPosicion  		posicionCalle 		posicionCarrera");
+			System.out.println("----------------------------------------------------------------------------------------------------------------------");
+			serv.getAmbulancia().printSelf();
+			System.out.println();
+		}
+		
+	}	
+	
+
+	
+
+	/**
+	 * Report of the IPS with associated Services
+	 */
+	public void reporteIpsYServicios()
+	{
+		System.out.println("\t------------------------------------------");
+		System.out.println("\tREPORTE DE LAS IPS CON SERVICIOS ASOCIADOS");
+		System.out.println("\t------------------------------------------");
+		if(!this.ipsList.isEmpty())
+		{
+			for(IPS ips : this.ipsList)
+			{	
+				System.out.println("IPS: ");
+				System.out.format("%10s%32s%19s%n","nombre","Tipo de atencion","Direccion");
+				System.out.println("-------------------------------------------------------------");
+				System.out.format("%10s%24s%29s%n%n", ips.getNombre(),ips.getTipoAtencion(), ips.getDireccion().toString());
+				System.out.println("SERVICIOS: ");
+			
+				if(!ips.getServicios().isEmpty())
+				{
+					System.out.format("\t%7s%15s%17s%14s%10s%12s%21s%17s%n","Codigo"
+							,"horaSolicitud","paciente","tipoServicio","Telefono"
+							,"Dirección","Estado","Ambulancia");
+					System.out.println("\t----------------------------------------------------------"
+							+ "-------------------------------------------------------");
+					for(Servicio servicios : ips.getServicios())
+					{
+						System.out.format("\t%7d%15s%17s%14s%10s%24s%11s%10s%n",servicios.getCodigo()
+								,Utils.formatoMes(servicios.getHoraSolicitud()),servicios.getPaciente()
+								,servicios.getTipoServicio(),servicios.getTelefono(), servicios.getDireccion().toString()
+								,servicios.getEstado(), servicios.getAmbulancia().getCodigo());
+					}
+				}
+				else
+				{
+					System.out.println("No hay servicios asignados a esta IPS");
+					System.out.println("-------------------------------------");
+				}
+			}
+		}
+		else
+		{
+			System.out.println("---------------------------------------------------------------------------");
+			System.out.println("La base de datos del sistema no tiene IPS registradas para hacer el reporte");
+			System.out.println("---------------------------------------------------------------------------");
+		}		
 	}
 }

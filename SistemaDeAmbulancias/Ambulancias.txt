@@ -1,5 +1,7 @@
 #codigo---placa------tipoDotacion(MEDICALIZADA o ALTA_UCI) 
 20       , ABJ345    , ALTA_UCI     
 10       , DED432    , MEDICALIZADA 
-30       ,DED305     ,MEDICALIZADA     
+30       ,DED305     ,MEDICALIZADA
+40       , DEV345    , ALTA_UCI
+50       , OPS538    ,MEDICALIZADA    
 0

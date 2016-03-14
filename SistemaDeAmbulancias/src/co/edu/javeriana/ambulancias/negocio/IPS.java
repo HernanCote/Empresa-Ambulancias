@@ -5,6 +5,8 @@ package co.edu.javeriana.ambulancias.negocio;
 
 import java.util.ArrayList;
 
+
+
 /**
  * @author v-heco
  *
@@ -41,21 +43,25 @@ public class IPS
 	}
 
 	
-	public Direccion getDireccion() {
-		return direccion;
+	public Direccion getDireccion() 
+	{
+		return this.direccion;
 	}
-
-	public void setDireccion(Direccion direccion) {
+	
+	public void setDireccion(Direccion direccion) 
+	{
 		this.direccion = direccion;
 	}
 
 	
-	public ArrayList<Servicio> getServicios() {
+	public ArrayList<Servicio> getServicios()
+	{
 		return servicios;
 	}
 
-	public void setServicios(ArrayList<Servicio> servicios) {
-		this.servicios = servicios;
+	public void setServicios(Servicio servicios)
+	{
+		this.servicios.add(servicios);
 	}
 
 	public void asignarDireccion(String tipoDireccion, int calle, int carrera, int numero)
@@ -63,9 +69,15 @@ public class IPS
 		setDireccion(new Direccion(tipoDireccion, calle, carrera, numero));
 	}
 	
-	public void printSelf()
-	{		
-		System.out.format("%6s%7s%14s%n", this.nombre, this.tipoAtencion, this.direccion);
+	/**
+	 * This method prints the content of an object of this 
+	 * class.
+	 */
+	
+	public void printSelf() {
+		System.out.format("%10s%30s%30s%n", this.nombre, this.tipoAtencion, this.direccion);
 	}
+	
+	
 		
 }

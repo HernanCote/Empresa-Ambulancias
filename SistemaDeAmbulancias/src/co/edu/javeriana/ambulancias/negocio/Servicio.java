@@ -4,6 +4,11 @@ import java.util.GregorianCalendar;
 
 import co.edu.javeriana.ambulancias.presentacion.Utils;
 
+/**
+ * 
+ * @author Hern�n Cote y Juan Pablo Pe�aloza
+ *
+ */
 public class Servicio 
 {
 	private IPS ips;
@@ -116,18 +121,22 @@ public class Servicio
 		setDireccion(new Direccion(tipoDireccion, calle, carrera, numero));
 	}
 	
-	public void printSelfNotAsigned()
-	{	
-		if(this.getEstado().equals("NO_ASIGNADO"))
-		{
-			System.out.format("%4s%19s%9s%15s%13s%24s%n", this.getCodigo(),Utils.formatoMes(this.horaSolicitud),
-					this.paciente, this.tipoServicio, this.telefono, this.direccion.toString());	
-		}
-	}
 	
 	public void printSelfAll()
-	{
-		System.out.format("%4s%19s%9s%15s%13s%24s%n", this.getCodigo(),Utils.formatoMes(this.horaSolicitud),
-				this.paciente, this.tipoServicio, this.telefono, this.direccion.toString());	
+	{	
+		System.out.format("%4s%19s%9s%15s%13s%24s%10s%n", this.getCodigo(),Utils.formatoMes(this.horaSolicitud), 
+			("     " + this.paciente), this.tipoServicio, this.telefono, this.direccion.toString(), ("    " + this.estado));	
 	}
+	
+	/**
+	 * 
+	 */
+	
+	
+	public void printAsignados()
+	{
+		System.out.format("%1s%21s%7s%28s%n", this.getCodigo(), this.getPaciente()
+				, this.getAmbulancia().getCodigo(), this.getIps().getNombre());
+	}
+	
 }
