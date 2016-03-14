@@ -3,11 +3,8 @@
  */
 package co.edu.javeriana.ambulancias.negocio;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
-
-import co.edu.javeriana.ambulancias.presentacion.Utils;
 
 /**
  * @author Hernï¿½n Cote y Juan Pablo Peï¿½aloza
@@ -208,7 +205,7 @@ public class EmpresaAmbulancias
 			}			
 		}		
 		System.out.println("----------------------------------------------------");
-		System.out.println("El código ingresado no existe o ya ha sido asignado ");
+		System.out.println("El cï¿½digo ingresado no existe o ya ha sido asignado ");
 		System.out.println("----------------------------------------------------");
 		return message;
 	}
@@ -328,14 +325,14 @@ public class EmpresaAmbulancias
 					servicios.setEstado("FINALIZDO");
 					servicios.getAmbulancia().setEstado(false);
 					servicios.getAmbulancia().setServicioActual(0);
-					System.out.println("Exito al finalizar el servicio con código " + servicios.getCodigo());
+					System.out.println("Exito al finalizar el servicio con cï¿½digo " + servicios.getCodigo());
 					isTerminated = true;
 					return isTerminated;
 				}
 				else
 				{
 					System.out.println("--------------------------------------------------------------");
-					System.out.println("El código del servicio ingresado no está en estado NO_ASIGNADO");
+					System.out.println("El cï¿½digo del servicio ingresado no estï¿½ en estado NO_ASIGNADO");
 					System.out.println("--------------------------------------------------------------");
 					return isTerminated;
 				}
@@ -368,51 +365,44 @@ public class EmpresaAmbulancias
 	private void generarReporteDeServicio (Servicio serv) {
 		System.out.println();
 		System.out.println("SERVICIO:");
-		System.out.println("codigo \t horaSolicitud \t paciente \t tipoServicio \t telefono \t direccion \t estado");
-		System.out.println("--------------------------------------------------------------------------------------------------");
-		System.out.print(serv.getCodigo() + "\t");
-		Utils.formatoMes(serv.getHoraSolicitud());
-		System.out.print("\t" + "\t");
-		System.out.print(serv.getPaciente() + "\t");
-		System.out.print(serv.getTipoServicio() + "\t");
-		System.out.print(serv.getTelefono() + "\t" + "\t");
-		System.out.print(serv.getDireccion() + "\t");
-		System.out.print(serv.getEstado() + "\t");
+		System.out.println("Codigo \t HoraSolicitud \t Paciente \t TipoServicio \t Telefono \t Direccion \t \t Estado");
+		System.out.println("----------------------------------------------------------------------------------------------------------------------");
+		
+		serv.printSelfAll();	
+		
 		System.out.println();
 		System.out.println();
+		
 		if (serv.getIps() == null) {
 			System.out.println("IPS asignada: ");
+			System.out.println("nombre                           tipoAtencion                      direccion");
+			System.out.println("----------------------------------------------------------------------------------------------------------------------");
 			System.out.println("No Se Ha Asignado");
 		} else {
 			System.out.println("IPS asignada: ");
-			System.out.println("nombre                tipoAtencion            direccion");
+			System.out.println("nombre                           tipoAtencion                      direccion");
+			System.out.println("----------------------------------------------------------------------------------------------------------------------");
+			System.out.println();
 			serv.getIps().printSelf();
 		}
+		
+		System.out.println();
+		System.out.println();
+		
 		if (serv.getAmbulancia() == null) {
 			System.out.println("Ambulancia asignada:");
+			System.out.println("----------------------------------------------------------------------------------------------------------------------");
 			System.out.println("No Se Ha Asignado");
-			System.out.println("------------------------------------------------------------------------------");
 		} else {
 			System.out.println("Ambulancia asignada:");
-			System.out.println("codigo placa   tipoDotacion  horaPosicion  posicionCalle posicionCarrera");
-			System.out.println("------------------------------------------------------------------------------");
-			System.out.print(serv.getAmbulancia().getPlaca()+ "\t");
-			System.out.print(serv.getAmbulancia().getTipoDotacion()+ "\t");
-			if (serv.getAmbulancia().getHoraPosicion() == null) {
-				System.out.print("No Hay" + "\t");
-			} else {
-				Utils.formatoMes(serv.getAmbulancia().getHoraPosicion());
-				System.out.print("\t");
-			}
-			System.out.print(serv.getAmbulancia().getPosicionCalle()+ "\t");
-			System.out.print(serv.getAmbulancia().getPosicionCarrera()+ "\t");
+			System.out.println(" codigo       placa     tipoDotacion  	horaPosicion  		posicionCalle 		posicionCarrera");
+			System.out.println("----------------------------------------------------------------------------------------------------------------------");
+			serv.getAmbulancia().printSelf();
 			System.out.println();
 		}
 		
 	}	
 	
-	public void reporteIpsYServicios()
-	{
-		
+	public void reporteIpsYServicios() {
 	}
 }

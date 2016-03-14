@@ -126,6 +126,7 @@ public class Ambulancia
 	
 	public void printSelf()
 	{	
+		@SuppressWarnings("unused")
 		String actualService = null;
 		if(this.getServicioActual() == 0)
 		{
@@ -138,13 +139,13 @@ public class Ambulancia
 		
 		if(this.horaPosicion != null)
 		{
-			System.out.format("%6s%7s%14s%14s%15s%17s%7s%n", this.codigo, this.placa, this.tipoDotacion
-						,Utils.formatoHora(this.horaPosicion), this.posicionCalle, this.posicionCarrera, actualService);			
+			System.out.format("%6s%15s%14s%14s%15s%17s%n", this.codigo, this.placa, this.tipoDotacion
+					,Utils.formatoHora(this.horaPosicion), this.posicionCalle, this.posicionCarrera);			
 		}
 		else
 		{
-			System.out.format("%6s%7s%14s%14s%15s%17s%7s%n", this.codigo, this.placa,this.tipoDotacion
-					,"NA",this.posicionCalle,this.posicionCarrera, actualService);
+			System.out.format("%6s%15s%14s%14s%20s%20s%n", this.codigo, this.placa,this.tipoDotacion
+					,"NA",this.posicionCalle,this.posicionCarrera);
 		}
 	}
 	

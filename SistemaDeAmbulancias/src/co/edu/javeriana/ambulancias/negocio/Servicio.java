@@ -6,7 +6,7 @@ import co.edu.javeriana.ambulancias.presentacion.Utils;
 
 /**
  * 
- * @author Hernán Cote y Juan Pablo Peñaloza
+ * @author Hernï¿½n Cote y Juan Pablo Peï¿½aloza
  *
  */
 public class Servicio 
@@ -123,15 +123,19 @@ public class Servicio
 	
 	
 	public void printSelfAll()
-	{
-		System.out.format("%4s%19s%9s%15s%13s%24s%n", this.getCodigo(),Utils.formatoMes(this.horaSolicitud),
-				this.paciente, this.tipoServicio, this.telefono, this.direccion.toString());	
+	{	
+		System.out.format("%4s%19s%9s%15s%13s%24s%10s%n", this.getCodigo(),Utils.formatoMes(this.horaSolicitud), 
+			("     " + this.paciente), this.tipoServicio, this.telefono, this.direccion.toString(), ("    " + this.estado));	
 	}
 	
-	public void printAsignados()
-	{
+	/**
+	 * 
+	 */
+	
+	public void printAsignados() {
 		System.out.format("%1s%17s%12s%3s%23s%n", this.getCodigo(), this.getPaciente()
 				, this.getAmbulancia().getCodigo()," "
 				, this.getIps().getNombre());
 	}
+	
 }

@@ -5,6 +5,8 @@ package co.edu.javeriana.ambulancias.negocio;
 
 import java.util.ArrayList;
 
+
+
 /**
  * @author v-heco
  *
@@ -72,11 +74,8 @@ public class IPS
 	 * class.
 	 */
 	
-	public void printSelf()
-	{		
-		System.out.print(this.nombre + "\t");
-		System.out.print(this.tipoAtencion + "\t");
-		System.out.print(this.direccion + "\t");
+	public void printSelf() {
+		System.out.format("%10s%30s%30s%n", this.nombre, this.tipoAtencion, this.direccion);
 	}
 	
 	
