@@ -1,6 +1,3 @@
-/**
- * 
- */
 package co.edu.javeriana.ambulancias.presentacion;
 
 import java.io.BufferedReader;
@@ -16,7 +13,12 @@ import co.edu.javeriana.ambulancias.negocio.Servicio;
 import co.edu.javeriana.ambulancias.persistencia.ManejoArchivos;
 
 /**
- * @author Hernan Cote y Juan Pablo Peñaloza
+ * Utils.java
+ * --------------------------------------------------
+ * This class is created to have useful utilities to 
+ * help the printing of menus, date formating and
+ * more methods.
+ * @author Hernan Cote y Juan Pablo Penaloza
  *
  */
 
@@ -145,7 +147,7 @@ public class Utils  {
 			} 
 			catch (NumberFormatException | IOException e) 
 			{
-				System.out.println("Por favor ingrese datos válidos.");
+				System.out.println("Por favor ingrese datos vï¿½lidos.");
 			}
 			
 			GregorianCalendar horaPosicion = new GregorianCalendar();
@@ -155,13 +157,13 @@ public class Utils  {
 			if(isExito)
 			{
 				System.out.println("-------------------------------------------------------------");
-				System.out.println("La posición de la ambulancia ha sido actualizada exitosamente");
+				System.out.println("La posiciï¿½n de la ambulancia ha sido actualizada exitosamente");
 				System.out.println("-------------------------------------------------------------");
 			}
 			else
 			{
 				System.out.println("-----------------------------------------------------------");
-				System.out.println("El código de la ambulancia no está registrado en el sistema");
+				System.out.println("El cï¿½digo de la ambulancia no estï¿½ registrado en el sistema");
 				System.out.println("-----------------------------------------------------------");
 			}
 		}
@@ -199,7 +201,7 @@ public class Utils  {
 			tipoServ = br.readLine().toUpperCase(); 
 			System.out.print("Telefono: ");
 			telefono = br.readLine();
-			System.out.print("Tipo Dirección CARRERA o CALLE: ");
+			System.out.print("Tipo Direcciï¿½n CARRERA o CALLE: ");
 			tipoDireccion = br.readLine().toUpperCase();
 			if (tipoDireccion.equals("CARRERA")) 
 			{
@@ -273,8 +275,8 @@ public class Utils  {
 			
 			System.out.println("--------------------------------------------"
 					+ "----------------------------------------");
-			System.out.format("%4s%17s%15s%15s%13s%12s%n", "Código","horaSolicitud",
-					"paciente", "tipoServicio", "telefono", "dirección");
+			System.out.format("%4s%17s%15s%15s%13s%12s%n", "Cï¿½digo","horaSolicitud",
+					"paciente", "tipoServicio", "telefono", "direcciï¿½n");
 			System.out.println("--------------------------------------------"
 					+ "----------------------------------------");
 			int cont = 0;
@@ -315,7 +317,7 @@ public class Utils  {
 		System.out.println("	---------------------");
 		System.out.println("Servicios en el sistema asignados:");
 		System.out.println("-----------------------------------------------------------");
-		System.out.format("%6s%12s%16s%6s%n", "código", "paciente", "ambulancia", "IPS");
+		System.out.format("%6s%12s%16s%6s%n", "cï¿½digo", "paciente", "ambulancia", "IPS");
 		System.out.println("-----------------------------------------------------------");
 		int cont = 0;
 		

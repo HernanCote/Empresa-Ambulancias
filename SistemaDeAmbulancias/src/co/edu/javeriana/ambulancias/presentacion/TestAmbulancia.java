@@ -1,12 +1,16 @@
-/**
- * 
- */
 package co.edu.javeriana.ambulancias.presentacion;
 
 import co.edu.javeriana.ambulancias.negocio.EmpresaAmbulancias;
 
 /**
- * @author Hernan Cote and Juan Pablo PeÃ±aloza
+ * TestAmbulancia.java
+ * ------------------------------------------
+ * This is a program that administrate the assignment of 
+ * ambulances to services based on the proximity of 
+ * a fleet of ambulances. This class just presents 
+ * the menu of the program.
+ * @author Hernan Cote and Juan Pablo Penaloza
+ * @version 2.0
  *
  */
 public class TestAmbulancia 
@@ -37,7 +41,6 @@ public class TestAmbulancia
 					Utils.registrarPosicion(empresaAmbulancias);
 					break;
 				case "4":
-					// Added this option on the switch. 
 					Utils.registrarServicio(empresaAmbulancias);
 					break;
 				case "5":
@@ -59,15 +62,12 @@ public class TestAmbulancia
 					}
 					break;
 				case "7":
-					// Hernan
 					Utils.imprimirServiciosAsignados(empresaAmbulancias);
 					break;
 				case "8":
-					// TODO Juan Pablo
 					empresaAmbulancias.imprimirTodosLosrServicios();
 					break;
 				case "9":					
-					// TODO Hernan
 					empresaAmbulancias.reporteIpsYServicios();
 					break;
 				case "10":
@@ -75,7 +75,7 @@ public class TestAmbulancia
 					break;
 				default: 
 					System.out.println("------------------------------------");
-					System.out.println("Por favor ingrese una opción válida.");
+					System.out.println("Por favor ingrese una opciï¿½n vï¿½lida.");
 					System.out.println("------------------------------------");
 					break;
 			}

@@ -9,8 +9,10 @@ import java.io.IOException;
 import co.edu.javeriana.ambulancias.negocio.EmpresaAmbulancias;
 
 /**
- *This class drives all the archives needs to add data to the system
- * @author Hernán Cote y Juan Pablo Peñaloza
+ * ManejoArchivos.java
+ * ------------------------------------------------------------------
+ * This class drives all the archives methods to add data to the system.
+ * @author Hernan Cote y Juan Pablo Penaloza
  *
  */
 public class ManejoArchivos 
@@ -57,7 +59,6 @@ public class ManejoArchivos
 	          }
 	        }
 	        archivoLeido = true;
-	        //TODO devolver lo que se supone...
 	        return archivoLeido;
 	      }
 	      catch (FileNotFoundException e)
