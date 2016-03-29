@@ -1,6 +1,3 @@
-/**
- * 
- */
 package co.edu.javeriana.ambulancias.persistencia;
 
 import java.io.BufferedReader;
@@ -12,7 +9,10 @@ import java.io.IOException;
 import co.edu.javeriana.ambulancias.negocio.EmpresaAmbulancias;
 
 /**
- * @author v-heco
+ * ManejoArchivos.java
+ * ------------------------------------------------------------------
+ * This class drives all the archives methods to add data to the system.
+ * @author Hernan Cote y Juan Pablo Penaloza
  *
  */
 public class ManejoArchivos 
@@ -20,6 +20,12 @@ public class ManejoArchivos
 	private static String path = System.getProperty("user.dir") + File.separator;
 	private static BufferedReader bReader;
 	  
+	/**
+	 * This method lets the user read a file to add IPS to the system
+	 * @param fileName
+	 * @param empresaAmbulancias
+	 * @return
+	 */
 	  public static boolean leerIPS(String fileName, EmpresaAmbulancias empresaAmbulancias)
 	  {	  
 		boolean archivoLeido = false;  
@@ -53,7 +59,6 @@ public class ManejoArchivos
 	          }
 	        }
 	        archivoLeido = true;
-	        //TODO devolver lo que se supone...
 	        return archivoLeido;
 	      }
 	      catch (FileNotFoundException e)
@@ -70,7 +75,12 @@ public class ManejoArchivos
 	    System.out.println("El archivo " + fileName + " no existe.");
 	    return archivoLeido;
 	  }
-	  
+	  /**
+	   * This method lets the user read a file to add Ambulances to the system
+	   * @param fileName
+	   * @param empresaAmbulancias
+	   * @return
+	   */
 	  public static boolean leerAmbulancias(String fileName, EmpresaAmbulancias empresaAmbulancias)
 	  {	  
 		boolean archivoLeido = false;  

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package co.edu.javeriana.ambulancias.presentacion;
 
 import java.io.BufferedReader;
@@ -10,30 +7,50 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
-import co.edu.javeriana.ambulancias.negocio.Ambulancia;
 import co.edu.javeriana.ambulancias.negocio.Direccion;
 import co.edu.javeriana.ambulancias.negocio.EmpresaAmbulancias;
 import co.edu.javeriana.ambulancias.negocio.Servicio;
 import co.edu.javeriana.ambulancias.persistencia.ManejoArchivos;
 
 /**
- * @author v-heco
+ * Utils.java
+ * --------------------------------------------------
+ * This class is created to have useful utilities to 
+ * help the printing of menus, date formating and
+ * more methods.
+ * @author Hernan Cote y Juan Pablo Penaloza
  *
  */
+
 public class Utils  {
 	
+	/**
+	 * This method returns an hour format (hh:mm a) from a GregorianCalendar object
+	 * @param hora
+	 * @return
+	 */
 	public static String formatoHora(GregorianCalendar hora)
 	{
 		SimpleDateFormat formatoHora = new SimpleDateFormat("h:mm a");
 		return formatoHora.format(hora.getTime());
 	}
 	
+	/**
+	 * This method returns a time format in the form "Month-day Hour-minutes" from a GregorianCalendar object 
+	 * @param hora
+	 * @return
+	 */
 	public static String formatoMes(GregorianCalendar hora)
 	{
 		SimpleDateFormat formatoHora = new SimpleDateFormat("MMM-dd HH:mm");
 		return formatoHora.format(hora.getTime());
 	}
 	
+	/**
+	 * This method prints the menu of all the features that the system is capable to do
+	 * @param nombre
+	 * @return
+	 */
 	public static String printMenu(String nombre)
 	{
 		
@@ -51,7 +68,7 @@ public class Utils  {
 		System.out.println("opcion 9: Reporte de las IPS con servicios asociados");
 		System.out.println("opcion 10: terminar");
 		System.out.println("---------------------------------------------------------------");
-		System.out.print("Ingrese la opciï¿½n que desea acceder: ");
+		System.out.print("Ingrese la opcion que desea acceder: ");
 		
 		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
@@ -61,6 +78,10 @@ public class Utils  {
 		
 	}
 	
+	/**
+	 * add IPS to the system
+	 * @param empresaAmbulancias
+	 */
 	public static void agregarIPS(EmpresaAmbulancias empresaAmbulancias)
 	{
 		InputStreamReader inputStreamReader = new InputStreamReader(System.in);
@@ -81,6 +102,10 @@ public class Utils  {
 		}
 	}
 	
+	/**
+	 * add an ambulance to the system
+	 * @param empresaAmbulancias
+	 */
 	public static void agregarAmbulancias(EmpresaAmbulancias empresaAmbulancias)
 	{
 		InputStreamReader inputStreamReader = new InputStreamReader(System.in);
@@ -100,8 +125,11 @@ public class Utils  {
 			ManejoArchivos.leerAmbulancias(nombreArchivo, empresaAmbulancias);
 		}
 	}
-	
-	public static void  registrarPosicion(EmpresaAmbulancias empresaAmbulancias)
+	/**
+	 * Register the position of an ambulance
+	 * @param empresaAmbulancias
+	 */
+	public static void registrarPosicion(EmpresaAmbulancias empresaAmbulancias)
 	{
 		boolean isExito = false;
 		
@@ -134,9 +162,9 @@ public class Utils  {
 			}
 			else
 			{
-				System.out.println("-------------------------------------------------------------------");
-				System.out.println("El cï¿½digo de la ambulancia no estï¿½ registrado en el sistema existe.");
-				System.out.println("-------------------------------------------------------------------");
+				System.out.println("-----------------------------------------------------------");
+				System.out.println("El cï¿½digo de la ambulancia no estï¿½ registrado en el sistema");
+				System.out.println("-----------------------------------------------------------");
 			}
 		}
 		else
@@ -153,9 +181,9 @@ public class Utils  {
 	 * of type Servicio. Then it calls a method of EmpresaAmbulancias 
 	 * for it to add the Servicio to it's list of Servicio. 
 	 * @param empresaAmbulancias
-	 */
-	
-	public static void registrarServicio (EmpresaAmbulancias empresaAmbulancias) {
+	 */	
+	public static void registrarServicio (EmpresaAmbulancias empresaAmbulancias)
+	{
 		InputStreamReader isr = new InputStreamReader (System.in);
 		BufferedReader br = new BufferedReader (isr);
 		String nomPaciente = null;
@@ -165,23 +193,27 @@ public class Utils  {
 		int calle = 0;
 		int carrera = 0;
 		int numero = 0;
-		try {
+		try 
+		{
 			System.out.print("Nombre Paciente: ");
 			nomPaciente = br.readLine();
-			System.out.print("Tipo Servicio: ");
-			tipoServ = br.readLine(); 
+			System.out.print("Tipo Servicio (URGENCIA o EMERGENCIA): ");
+			tipoServ = br.readLine().toUpperCase(); 
 			System.out.print("Telefono: ");
 			telefono = br.readLine();
-			System.out.print("Tipo Dirección: ");
-			tipoDireccion = br.readLine();
-			if (tipoDireccion.equals("CARRERA")) {
+			System.out.print("Tipo Direcciï¿½n CARRERA o CALLE: ");
+			tipoDireccion = br.readLine().toUpperCase();
+			if (tipoDireccion.equals("CARRERA")) 
+			{
 				System.out.print("Carrera: ");
 				carrera = Integer.parseInt(br.readLine());
 				System.out.print("Calle: ");
 				calle = Integer.parseInt(br.readLine());
 				System.out.print("Numero: ");
 				numero = Integer.parseInt(br.readLine());
-			} else {
+			}
+			else 
+			{
 				System.out.print("Calle: ");
 				calle = Integer.parseInt(br.readLine());
 				System.out.print("Carrera: ");
@@ -189,8 +221,10 @@ public class Utils  {
 				System.out.print("Numero: ");
 				numero = Integer.parseInt(br.readLine());
 			}
-		} catch (Exception e) {
-			System.out.println("Error En La Creación Del Servicio");
+		} 
+		catch (Exception e) 
+		{
+			System.out.println("Error En La Creacion Del Servicio");
 		}
 		
 		Direccion tempDir = new Direccion (tipoDireccion, calle, carrera, numero);
@@ -199,10 +233,14 @@ public class Utils  {
 		empresaAmbulancias.agregarServicio(tempServ);
 		
 		System.out.println("El nuevo Servicio tiene codigo: " + tempServ.getCodigo());
-		
-		
 	}
 	
+	
+	/**
+	 * Assign a service to an IPS and an Ambulance
+	 * @param empresaAmbulancias
+	 * @return
+	 */
 	public static String asignarUnServicio(EmpresaAmbulancias empresaAmbulancias)
 	{
 		if(empresaAmbulancias.getServicios().isEmpty())
@@ -226,34 +264,89 @@ public class Utils  {
 			System.out.println("--------------------------------------------------------------------");
 			
 		}
+		
 		if((!empresaAmbulancias.getIps().isEmpty()) && (!empresaAmbulancias.getAmbulancias().isEmpty())
 													&& (!empresaAmbulancias.getServicios().isEmpty()))
-		{				
+		{		
+			
 			System.out.println("----------------------------------------------");
 			System.out.println("Asignar un servicio a una IPS y una ambulancia");
-			System.out.println("----------------------------------------------");
-			System.out.println("Se muestran los servicios del sistema sin asignar");
+			System.out.println("Se muestran los servicios del sistema sin asignar:");
 			
 			System.out.println("--------------------------------------------"
 					+ "----------------------------------------");
-			System.out.format("%4s%17s%10s%15s%13s%12s%n", "Código","horaSolicitud",
-					"paciente", "tipoServicio", "telefono", "dirección");
+			System.out.format("%4s%17s%15s%15s%13s%12s%n", "Cï¿½digo","horaSolicitud",
+					"paciente", "tipoServicio", "telefono", "direcciï¿½n");
 			System.out.println("--------------------------------------------"
 					+ "----------------------------------------");
+			int cont = 0;
 			for(Servicio servicio : empresaAmbulancias.getServicios())
 			{
-				servicio.printSelfNotAsigned();
+				if(servicio.getEstado().equals("NO_ASIGNADO"))
+				{
+					servicio.printSelfAll();
+					cont++;
+				}
 			}
-			
-			System.out.print("Ingrese el código del servicio que desea asignar: ");
+			if( cont >= 1)
+			{				
+				System.out.print("\nIngrese el codigo del servicio que desea asignar: ");
+				@SuppressWarnings("resource")
+				Scanner scanner = new Scanner(System.in);
+				int codigo = Integer.parseInt(scanner.nextLine());
+				String message = empresaAmbulancias.asignarUnServicio(codigo);
+				return message;
+			}
+			else
+			{
+				System.out.println("Todos los servicios registrados en el sistema han sido asignados");
+				System.out.println("----------------------------------------------------------------");
+			}			
+		}
+		return null;
+	}
+	
+	/**
+	 * prints all assigned services
+	 * @param empresaAmbulancias
+	 */
+	public static void imprimirServiciosAsignados(EmpresaAmbulancias empresaAmbulancias)
+	{
+		System.out.println("	---------------------");
+		System.out.println("	FINALIZAR UN SERVICIO");
+		System.out.println("	---------------------");
+		System.out.println("Servicios en el sistema asignados:");
+		System.out.println("-----------------------------------------------------------");
+		System.out.format("%6s%12s%16s%6s%n", "cï¿½digo", "paciente", "ambulancia", "IPS");
+		System.out.println("-----------------------------------------------------------");
+		int cont = 0;
+		
+		for(Servicio servicios : empresaAmbulancias.getServicios())
+		{
+			if(servicios.getEstado().equals("ASIGNADO"))
+			{
+				servicios.printAsignados();
+				cont++;
+			}
+		}
+		if(cont >= 1)
+		{
+			System.out.print("Ingrese el codigo del servicio que desea finalizar: ");
 			@SuppressWarnings("resource")
 			Scanner scanner = new Scanner(System.in);
 			int codigo = Integer.parseInt(scanner.nextLine());
-			String message = empresaAmbulancias.asignarUnServicio(codigo);
-			
-			return message;
+			boolean isTerminated = empresaAmbulancias.finalizarUnServicio(codigo);
+			if(!isTerminated)
+			{
+				System.out.println("Error al finalizar el servicio.");
+				System.out.println("-------------------------------");
+			}
 		}
-		return null;
+		else
+		{
+			System.out.println("No hay servicios que esten en estado asignado para finalizar");
+			System.out.println("------------------------------------------------------------");
+		}	
 	}
 	
 }
