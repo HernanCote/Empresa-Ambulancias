@@ -9,7 +9,12 @@ import java.util.GregorianCalendar;
 import co.edu.javeriana.ambulancias.presentacion.Utils;
 
 /**
- * @author Hernan Cote y Juan Pablo Peï¿½aloza
+ * EmpresaAmbulancias.java
+ * --------------------------------------------
+ * This is the business class where it contains 
+ * all the IPS, all the Servicios and all the 
+ * Ambulancias. 
+ * @author Hernan Cote and Juan Pablo Penaloza
  *
  */
 public class EmpresaAmbulancias 
@@ -27,40 +32,65 @@ public class EmpresaAmbulancias
 		this.serviciosList = new ArrayList<Servicio>();
 		this.ambulanciasList = new ArrayList<Ambulancia>();
 	}
-	
+	/**
+	 * Gets the name of the company.
+	 * @return
+	 */
 	public String getNombre() 
 	{
 		return nombre;
 	}
-
+	/**
+	 * Sets the name of the company.
+	 * @param nombre
+	 */
 	public void setNombre(String nombre) 
 	{
 		this.nombre = nombre;
 	}
-	
+	/**
+	 * Gets the list of IPS
+	 * @return
+	 */
 	public ArrayList<IPS> getIps() {
 		return ipsList;
 	}
-
+	/**
+	 * Add an IPS to the IPS list
+	 * @param ips
+	 */
 	public void setIps(IPS ips) 
 	{
 		this.ipsList.add(ips);
 	}
-	
+	/**
+	 * Gets the list of Servicios 
+	 * @return
+	 */
 	public ArrayList<Servicio> getServicios() 
 	{
 		return serviciosList;
 	}
-
+	/**
+	 * Sets the list of Servicios
+	 * @param servicios
+	 */
 	public void setServicios(ArrayList<Servicio> servicios) 
 	{
 		this.serviciosList = servicios;
 	}
-
+	/**
+	 * Gets the list of ambulances  
+	 * @return
+	 */
 	public ArrayList<Ambulancia> getAmbulancias()
 	{
 		return ambulanciasList;
 	}
+	/**
+	 * Adds an ambulance to the list of ambulances
+	 * @param ambulancias
+	 */
 
 	public void setAmbulancias(Ambulancia ambulancias) 
 	{
@@ -429,7 +459,7 @@ public class EmpresaAmbulancias
 				{
 					System.out.format("\t%7s%15s%17s%14s%10s%12s%21s%17s%n","Codigo"
 							,"horaSolicitud","paciente","tipoServicio","Telefono"
-							,"Dirección","Estado","Ambulancia");
+							,"Direcciï¿½n","Estado","Ambulancia");
 					System.out.println("\t----------------------------------------------------------"
 							+ "-------------------------------------------------------");
 					for(Servicio servicios : ips.getServicios())
