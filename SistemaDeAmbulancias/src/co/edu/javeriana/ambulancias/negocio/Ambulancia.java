@@ -224,13 +224,13 @@ public class Ambulancia
 		
 		if(this.horaPosicion != null)
 		{
-			System.out.format("%6s%15s%14s%14s%20s%20s%n", this.codigo, this.placa, this.tipoDotacion
-					,Utils.formatoHora(this.horaPosicion), this.posicionCalle, this.posicionCarrera);			
+			System.out.format("%6s%7s%14s%11s%10s%18s%14s%n", this.codigo, this.placa, this.tipoDotacion
+					,Utils.formatoHora(this.horaPosicion), this.posicionCalle, this.posicionCarrera, actualService);					
 		}
 		else
 		{
-			System.out.format("%6s%15s%14s%14s%20s%20s%n", this.codigo, this.placa,this.tipoDotacion
-					,"NA",this.posicionCalle,this.posicionCarrera);
+			System.out.format("%6s%7s%14s%11s%10s%18s%14s%n", this.codigo, this.placa,this.tipoDotacion
+					,"NA",this.posicionCalle,this.posicionCarrera, actualService);
 		}
 	}
 	
