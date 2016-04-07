@@ -2,6 +2,7 @@ package co.edu.javeriana.ambulancias.negocio;
 
 import java.util.GregorianCalendar;
 
+import co.edu.javeriana.ambulancias.ambulancias.Ambulancia;
 import co.edu.javeriana.ambulancias.presentacion.Utils;
 
 /**

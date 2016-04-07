@@ -1,9 +1,10 @@
 
-package co.edu.javeriana.ambulancias.negocio;
+package co.edu.javeriana.ambulancias.ambulancias;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+import co.edu.javeriana.ambulancias.negocio.Servicio;
 import co.edu.javeriana.ambulancias.presentacion.Utils;
 
 /**
@@ -16,14 +17,15 @@ import co.edu.javeriana.ambulancias.presentacion.Utils;
  * @version 2.0
  */
 
-public class Ambulancia 
+public abstract class Ambulancia 
 {
-	private int codigo;
-	private String placa;
-	private String tipoDotacion;
-	private GregorianCalendar horaPosicion;
-	private int posicionCalle;
-	private int posicionCarrera;
+	public static final long TARIFA_BASE = 80000;
+	protected int codigo;
+	protected String placa;
+	//private String tipoDotacion;
+	protected GregorianCalendar horaPosicion;
+	protected int posicionCalle;
+	protected int posicionCarrera;
 	private ArrayList<Servicio> servicios;
 	private long servicioActual;
 	private boolean estado;
@@ -36,13 +38,13 @@ public class Ambulancia
 	 * @param tipoDotacion
 	 * @return Ambulancia
 	 */
-	public Ambulancia(int codigo, String placa, String tipoDotacion)
+	public Ambulancia(int codigo, String placa)
 	{	
 		this.setEstado(false);
 		this.servicios = new ArrayList<Servicio>();
 		this.codigo = codigo;
 		this.placa = placa;
-		this.tipoDotacion = tipoDotacion;
+		//this.tipoDotacion = tipoDotacion;
 		this.horaPosicion = null;
 		this.posicionCalle = 1;
 		this.posicionCarrera = 1;		
@@ -105,22 +107,7 @@ public class Ambulancia
 	{
 		this.placa = placa;
 	}
-	/**
-	 * Returns the type of ambulance.
-	 * @return the type of ambulance
-	 */
-	public String getTipoDotacion()
-	{
-		return tipoDotacion;
-	}
-	/**
-	 * Sets the value type of ambulance to a new one. 
-	 * @param tipoDotacion
-	 */
-	public void setTipoDotacion(String tipoDotacion) 
-	{
-		this.tipoDotacion = tipoDotacion;
-	}
+	
 	/**
 	 * Gets the last hour of position of the ambulance
 	 * @return GregorianCalendar last hour of position
@@ -224,14 +211,19 @@ public class Ambulancia
 		
 		if(this.horaPosicion != null)
 		{
-			System.out.format("%6s%15s%14s%14s%20s%20s%n", this.codigo, this.placa, this.tipoDotacion
-					,Utils.formatoHora(this.horaPosicion), this.posicionCalle, this.posicionCarrera);			
+			System.out.format("%6s%15s%14s%20s%20s%n", this.codigo, this.placa,Utils.formatoHora(this.horaPosicion), this.posicionCalle, this.posicionCarrera);			
 		}
 		else
 		{
-			System.out.format("%6s%15s%14s%14s%20s%20s%n", this.codigo, this.placa,this.tipoDotacion
-					,"NA",this.posicionCalle,this.posicionCarrera);
+			System.out.format("%6s%15s%14s%20s%20s%n", this.codigo, this.placa,"NA",this.posicionCalle,this.posicionCarrera);
 		}
+	}
+	
+	/**
+	 * This function calculates the total cost o the usage of the ambulance.
+	 */
+	public long calcularTarifa () {
+		return TARIFA_BASE;
 	}
 	
 	

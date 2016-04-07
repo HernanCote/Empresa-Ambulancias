@@ -230,7 +230,7 @@ public class Utils  {
 		Direccion tempDir = new Direccion (tipoDireccion, calle, carrera, numero);
 		Servicio tempServ = new Servicio (nomPaciente,tipoServ, telefono, tempDir);
 		
-		empresaAmbulancias.agregarServicio(tempServ);
+		empresaAmbulancias.registrarServicio(tempServ);
 		
 		System.out.println("El nuevo Servicio tiene codigo: " + tempServ.getCodigo());
 	}
