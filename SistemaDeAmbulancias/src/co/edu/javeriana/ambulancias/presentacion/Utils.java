@@ -29,8 +29,8 @@ public class Utils  {
 	 * @param hora
 	 * @return
 	 */
-	public static String formatoHora(GregorianCalendar hora)
-	{
+	public static String formatoHora(GregorianCalendar hora) {
+		if (hora == null) return "NA";
 		SimpleDateFormat formatoHora = new SimpleDateFormat("h:mm a");
 		return formatoHora.format(hora.getTime());
 	}

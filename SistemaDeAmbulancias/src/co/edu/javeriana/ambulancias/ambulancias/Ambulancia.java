@@ -196,26 +196,21 @@ public abstract class Ambulancia
 	/**
 	 * Print information about the service in format that matches the project
 	 */
-	public void printSelf()
-	{	
+	public void printSelf() {	
 		@SuppressWarnings("unused")
 		String actualService = null;
-		if(this.getServicioActual() == 0)
-		{
+		if(this.getServicioActual() == 0) {
 			actualService = "NA";
 		}
-		else
-		{
+		else {
 			actualService = Integer.toString((int)this.getServicioActual());
 		}
 		
-		if(this.horaPosicion != null)
-		{
-			System.out.format("%6s%15s%14s%20s%20s%n", this.codigo, this.placa,Utils.formatoHora(this.horaPosicion), this.posicionCalle, this.posicionCarrera);			
+		if(this.horaPosicion != null) {
+			System.out.format("%10s%15s%14s%20s%20s", this.codigo, this.placa,Utils.formatoHora(this.horaPosicion), this.posicionCalle, this.posicionCarrera);			
 		}
-		else
-		{
-			System.out.format("%6s%15s%14s%20s%20s%n", this.codigo, this.placa,"NA",this.posicionCalle,this.posicionCarrera);
+		else {
+			System.out.format("%10s%15s%14s%20s%20s", this.codigo, this.placa,"NA",this.posicionCalle,this.posicionCarrera);
 		}
 	}
 	

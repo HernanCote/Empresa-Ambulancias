@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -31,6 +30,8 @@ import co.edu.javeriana.ambulancias.presentacion.Utils;
  */
 public class EmpresaAmbulancias implements IServiciosAmbulancias
 {
+	public static final String LINE_SEPARATOR = "-----------------------------------------------------------------------------------------------------------------------------";
+	
 	public static final String TAG_AMBULANCIA_BASICA = "BASICA";
 	public static final String TAG_AMBULANCIA_UCI = "UCI";
 	public static final String TAG_AMBULANCIA_NO_MEDICALIZADA = "NOMEDICALIZADA";
@@ -170,13 +171,12 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 		ArrayList <Integer> code = new ArrayList <Integer>();
 		if(!ambulanciasList.isEmpty())
 		{
-			System.out.println("------------------------------------------------"
-					+ "------------------------------------");
-			System.out.format("%6s%7s%14s%14s%15s%17s%10s%n", "codigo", "placa", "tipoDotacion","horaPosicion", "posicionCalle", "posicionCarrera", "servicio");
-			System.out.println("------------------------------------------------"+ "------------------------------------");
+			System.out.println(LINE_SEPARATOR);
+			System.out.format("%6s%18s%7s%27s%15s%17s%10s%10s%10s%n", "tipoAmbu", "codigo", "placa","medico/enfermero", "tipoUCI", "horaPosicion", 
+					"Calle", "Carrera", "tarifa");
+			System.out.println(LINE_SEPARATOR);
 			
 			for (Entry<Integer, Ambulancia> entry : ambulanciasList.entrySet()) {
-				System.out.println("Item : " + entry.getKey() + " Count : " + entry.getValue());
 				code.add(entry.getKey());
 			}
 			
