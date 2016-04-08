@@ -96,9 +96,11 @@ public class ManejoArchivos
 	        {
 	          fileRead = bReader.readLine();
 	          fileRead = bReader.readLine();
+	          fileRead = bReader.readLine();
+	          fileRead = bReader.readLine();
 	        }
 	        while (!fileRead.matches("0"))
-	        {
+	        {	        	
 	          String[] tokens = fileRead.split(",");
 	          String tipoAmbulancia = tokens[0].trim();
 	          int codigo = Integer.parseInt(tokens[1].trim());

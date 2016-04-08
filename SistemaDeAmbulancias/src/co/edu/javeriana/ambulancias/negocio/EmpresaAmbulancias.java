@@ -9,6 +9,8 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -35,8 +37,8 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 	private HashMap<String, IPS> ipsList;
 	//private ArrayList<IPS> ipsList; This will no longer work for part 2 of the project. Replaced with HashMap
 	private ArrayList<Servicio> serviciosList;
-	private ArrayList<Ambulancia> ambulanciasList;
-	
+	//private ArrayList<Ambulancia> ambulanciasList;
+	private HashMap <Integer, Ambulancia> ambulanciasList;
 	private String nombre;
 
 	public EmpresaAmbulancias(String nombre)
@@ -44,7 +46,7 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 		this.nombre = nombre;
 		this.ipsList = new HashMap<String, IPS>();
 		this.serviciosList = new ArrayList<Servicio>();
-		this.ambulanciasList = new ArrayList<Ambulancia>();
+		this.ambulanciasList = new HashMap<Integer, Ambulancia>();
 	}
 	/**
 	 * Gets the name of the company.
@@ -97,9 +99,9 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 	 * Gets the list of ambulances  
 	 * @return
 	 */
-	public ArrayList<Ambulancia> getAmbulancias()
+	public HashMap<Integer, Ambulancia> getAmbulancias()
 	{
-		return ambulanciasList;
+		return this.ambulanciasList;
 	}
 	/**
 	 * Adds an ambulance to the list of ambulances
@@ -108,7 +110,7 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 
 	public void setAmbulancias(Ambulancia ambulancias) 
 	{
-		this.ambulanciasList.add(ambulancias);
+		this.ambulanciasList.put(ambulancias.getCodigo(),ambulancias);
 	}
 
 	/**
@@ -172,9 +174,12 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 					+ "------------------------------------");
 			System.out.format("%6s%7s%14s%14s%15s%17s%10s%n", "codigo", "placa", "tipoDotacion","horaPosicion", "posicionCalle", "posicionCarrera", "servicio");
 			System.out.println("------------------------------------------------"+ "------------------------------------");
-			for(Ambulancia ambulancia : ambulanciasList) {
-				code.add(ambulancia.getCodigo());
+			
+			for (Entry<Integer, Ambulancia> entry : ambulanciasList.entrySet()) {
+				System.out.println("Item : " + entry.getKey() + " Count : " + entry.getValue());
+				code.add(entry.getKey());
 			}
+			
 			Collections.sort(code);
 			for (int i = 0; i < code.size(); i++) {
 				this.getAmbulanciaByCodigo(code.get(i)).printSelf();
@@ -198,8 +203,12 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 	 */
 	public boolean registrarPosicionAmbulancia(int codigo, GregorianCalendar horaPosicion,int posicionCalle, int posicionCarrera)
 	{
-		for(Ambulancia ambulancia : ambulanciasList)
+		Iterator<Integer> it = ambulanciasList.keySet().iterator();
+		//for(Ambulancia ambulancia : ambulanciasList)
+		while (it.hasNext())
 		{
+			Integer key = it.next();
+			Ambulancia ambulancia = ambulanciasList.get(key);
 			if(ambulancia.getCodigo() == codigo)
 			{
 				ambulancia.setHoraPosicion(horaPosicion);
@@ -280,8 +289,9 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 		
 		if(servicio.getTipoServicio().equals("EMERGENCIA"))
 		{
-			for(Ambulancia ambulancia : ambulanciasList)
+			for (Entry<Integer, Ambulancia> entry : ambulanciasList.entrySet())
 			{
+				Ambulancia ambulancia = entry.getValue();
 				if (ambulancia instanceof AmbulanciaUCI) {
 					if(((AmbulanciaUCI) ambulancia).getTipoUCI().equals("ALTA_UCI") && (!ambulancia.isEstado()))
 					{
@@ -293,8 +303,9 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 		}
 		else
 		{
-			for(Ambulancia ambulancia : ambulanciasList)
+			for (Entry<Integer, Ambulancia> entry : ambulanciasList.entrySet())
 			{
+				Ambulancia ambulancia = entry.getValue();
 				if(!ambulancia.isEstado())
 				{
 					ambulanciasDisponibles.add(ambulancia);
@@ -531,7 +542,8 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 	}
 	
 	private Ambulancia getAmbulanciaByCodigo (int codigo) {
-		for (Ambulancia ambu: this.ambulanciasList) {
+		for (Entry<Integer, Ambulancia> entry : ambulanciasList.entrySet()) {
+			Ambulancia ambu = entry.getValue();
 			if (ambu.getCodigo() == codigo) return ambu;
 		}
 		return null;

@@ -2,6 +2,7 @@ package co.edu.javeriana.ambulancias.negocio;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 
 import co.edu.javeriana.ambulancias.ambulancias.Ambulancia;
 
@@ -14,6 +15,6 @@ public interface IServiciosAmbulancias {
 	public String asignarUnServicio(int codigo);
 	public boolean finalizarUnServicio(int codigo);
 	public ArrayList<Servicio> getServicios();
-	public ArrayList<Ambulancia> getAmbulancias();
+	public HashMap<Integer, Ambulancia> getAmbulancias();
 	
 }
