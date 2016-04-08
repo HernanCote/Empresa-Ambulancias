@@ -4,9 +4,13 @@
 package co.edu.javeriana.ambulancias.negocio;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import co.edu.javeriana.ambulancias.ambulancias.Ambulancia;
 import co.edu.javeriana.ambulancias.ambulancias.AmbulanciaBasica;
@@ -161,17 +165,19 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 	 */
 	public void reporteDeAmbulancias()
 	{
+		ArrayList <Integer> code = new ArrayList <Integer>();
 		if(!ambulanciasList.isEmpty())
 		{
 			System.out.println("------------------------------------------------"
 					+ "------------------------------------");
-			System.out.format("%6s%7s%14s%14s%15s%17s%10s%n", "codigo", "placa", "tipoDotacion"
-					,"horaPosicion", "posicionCalle", "posicionCarrera", "servicio");
-			System.out.println("------------------------------------------------"
-					+ "------------------------------------");
-			for(Ambulancia ambulancia : ambulanciasList)
-			{
-				ambulancia.printSelf();
+			System.out.format("%6s%7s%14s%14s%15s%17s%10s%n", "codigo", "placa", "tipoDotacion","horaPosicion", "posicionCalle", "posicionCarrera", "servicio");
+			System.out.println("------------------------------------------------"+ "------------------------------------");
+			for(Ambulancia ambulancia : ambulanciasList) {
+				code.add(ambulancia.getCodigo());
+			}
+			Collections.sort(code);
+			for (int i = 0; i < code.size(); i++) {
+				this.getAmbulanciaByCodigo(code.get(i)).printSelf();
 			}
 		}
 		else
@@ -477,11 +483,15 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 		System.out.println("\t------------------------------------------");
 		if(!this.ipsList.isEmpty())
 		{
-			//for(IPS ips : this.ipsList)
-			Iterator <String> ipsIterator = ipsList.keySet().iterator();
+			
+			SortedSet <String> keySet = new TreeSet <String>(); 
+			for (Map.Entry<String, IPS> entry: ipsList.entrySet())
+				keySet.add(entry.getKey());
+			
+			Iterator<String> ipsIterator = keySet.iterator();
 			while (ipsIterator.hasNext())
 			{	
-				String keyActual = ipsIterator.next();
+				String keyActual = (String) ipsIterator.next();
 				IPS ips = ipsList.get(keyActual);
 				System.out.println("IPS: ");
 				System.out.format("%10s%32s%19s%n","nombre","Tipo de atencion","Direccion");
@@ -496,6 +506,7 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 							,"Direcci�n","Estado","Ambulancia");
 					System.out.println("\t----------------------------------------------------------"
 							+ "-------------------------------------------------------");
+					ips.sortServicios(); // NEW
 					for(Servicio servicios : ips.getServicios())
 					{
 						System.out.format("\t%7d%15s%17s%14s%10s%24s%11s%10s%n",servicios.getCodigo()
@@ -517,5 +528,12 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 			System.out.println("La base de datos del sistema no tiene IPS registradas para hacer el reporte");
 			System.out.println("---------------------------------------------------------------------------");
 		}		
+	}
+	
+	private Ambulancia getAmbulanciaByCodigo (int codigo) {
+		for (Ambulancia ambu: this.ambulanciasList) {
+			if (ambu.getCodigo() == codigo) return ambu;
+		}
+		return null;
 	}
 }
