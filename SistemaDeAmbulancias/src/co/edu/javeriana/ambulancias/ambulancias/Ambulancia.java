@@ -22,7 +22,7 @@ public abstract class Ambulancia
 	public static final long TARIFA_BASE = 80000;
 	protected int codigo;
 	protected String placa;
-	//private String tipoDotacion;
+	private String tipoDotacion;
 	protected GregorianCalendar horaPosicion;
 	protected int posicionCalle;
 	protected int posicionCarrera;
@@ -196,8 +196,8 @@ public abstract class Ambulancia
 	/**
 	 * Print information about the service in format that matches the project
 	 */
-	public void printSelf() {	
-		@SuppressWarnings("unused")
+	public void printSelf() 
+	{	
 		String actualService = null;
 		if(this.getServicioActual() == 0) {
 			actualService = "NA";
@@ -205,8 +205,6 @@ public abstract class Ambulancia
 		else {
 			actualService = Integer.toString((int)this.getServicioActual());
 		}
-		
-<<<<<<< HEAD:SistemaDeAmbulancias/src/co/edu/javeriana/ambulancias/negocio/Ambulancia.java
 		if(this.horaPosicion != null)
 		{
 			System.out.format("%6s%7s%14s%11s%10s%18s%14s%n", this.codigo, this.placa, this.tipoDotacion
@@ -216,13 +214,15 @@ public abstract class Ambulancia
 		{
 			System.out.format("%6s%7s%14s%11s%10s%18s%14s%n", this.codigo, this.placa,this.tipoDotacion
 					,"NA",this.posicionCalle,this.posicionCarrera, actualService);
-=======
-		if(this.horaPosicion != null) {
-			System.out.format("%10s%15s%14s%20s%20s", this.codigo, this.placa,Utils.formatoHora(this.horaPosicion), this.posicionCalle, this.posicionCarrera);			
-		}
-		else {
-			System.out.format("%10s%15s%14s%20s%20s", this.codigo, this.placa,"NA",this.posicionCalle,this.posicionCarrera);
->>>>>>> b90b76c1d215b136e9a582535b7bf250831d8630:SistemaDeAmbulancias/src/co/edu/javeriana/ambulancias/ambulancias/Ambulancia.java
+		
+			if(this.horaPosicion != null) 
+			{
+				System.out.format("%10s%15s%14s%20s%20s", this.codigo, this.placa,Utils.formatoHora(this.horaPosicion), this.posicionCalle, this.posicionCarrera);			
+			}
+			else 
+			{
+				System.out.format("%10s%15s%14s%20s%20s", this.codigo, this.placa,"NA",this.posicionCalle,this.posicionCarrera);
+			}
 		}
 	}
 	
