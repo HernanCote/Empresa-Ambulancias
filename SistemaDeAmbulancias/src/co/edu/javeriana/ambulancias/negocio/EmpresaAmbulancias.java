@@ -4,8 +4,19 @@
 package co.edu.javeriana.ambulancias.negocio;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
+import co.edu.javeriana.ambulancias.ambulancias.Ambulancia;
+import co.edu.javeriana.ambulancias.ambulancias.AmbulanciaBasica;
+import co.edu.javeriana.ambulancias.ambulancias.AmbulanciaNoMedicalizada;
+import co.edu.javeriana.ambulancias.ambulancias.AmbulanciaUCI;
 import co.edu.javeriana.ambulancias.presentacion.Utils;
 
 /**
@@ -17,20 +28,26 @@ import co.edu.javeriana.ambulancias.presentacion.Utils;
  * @author Hernan Cote and Juan Pablo Penaloza
  *
  */
-public class EmpresaAmbulancias 
+public class EmpresaAmbulancias implements IServiciosAmbulancias
 {
-	private ArrayList<IPS> ipsList;
-	private ArrayList<Servicio> serviciosList;
-	private ArrayList<Ambulancia> ambulanciasList;
+	public static final String LINE_SEPARATOR = "-----------------------------------------------------------------------------------------------------------------------------";
 	
+	public static final String TAG_AMBULANCIA_BASICA = "BASICA";
+	public static final String TAG_AMBULANCIA_UCI = "UCI";
+	public static final String TAG_AMBULANCIA_NO_MEDICALIZADA = "NOMEDICALIZADA";
+	private HashMap<String, IPS> ipsList;
+	//private ArrayList<IPS> ipsList; This will no longer work for part 2 of the project. Replaced with HashMap
+	private ArrayList<Servicio> serviciosList;
+	//private ArrayList<Ambulancia> ambulanciasList;
+	private HashMap <Integer, Ambulancia> ambulanciasList;
 	private String nombre;
 
 	public EmpresaAmbulancias(String nombre)
 	{
 		this.nombre = nombre;
-		this.ipsList = new ArrayList<IPS>();
+		this.ipsList = new HashMap<String, IPS>();
 		this.serviciosList = new ArrayList<Servicio>();
-		this.ambulanciasList = new ArrayList<Ambulancia>();
+		this.ambulanciasList = new HashMap<Integer, Ambulancia>();
 	}
 	/**
 	 * Gets the name of the company.
@@ -52,7 +69,7 @@ public class EmpresaAmbulancias
 	 * Gets the list of IPS
 	 * @return
 	 */
-	public ArrayList<IPS> getIps() {
+	public HashMap<String, IPS> getIps() {
 		return ipsList;
 	}
 	/**
@@ -61,7 +78,7 @@ public class EmpresaAmbulancias
 	 */
 	public void setIps(IPS ips) 
 	{
-		this.ipsList.add(ips);
+		this.ipsList.put(ips.getNombre(), ips);
 	}
 	/**
 	 * Gets the list of Servicios 
@@ -83,9 +100,9 @@ public class EmpresaAmbulancias
 	 * Gets the list of ambulances  
 	 * @return
 	 */
-	public ArrayList<Ambulancia> getAmbulancias()
+	public HashMap<Integer, Ambulancia> getAmbulancias()
 	{
-		return ambulanciasList;
+		return this.ambulanciasList;
 	}
 	/**
 	 * Adds an ambulance to the list of ambulances
@@ -94,7 +111,7 @@ public class EmpresaAmbulancias
 
 	public void setAmbulancias(Ambulancia ambulancias) 
 	{
-		this.ambulanciasList.add(ambulancias);
+		this.ambulanciasList.put(ambulancias.getCodigo(),ambulancias);
 	}
 
 	/**
@@ -123,9 +140,21 @@ public class EmpresaAmbulancias
 	 * @param placa
 	 * @param tipoDotacion
 	 */
-	public void agregarAmbulancia(int codigo, String placa, String tipoDotacion)
+	public void agregarAmbulancia(String tipoAmbulancia, int codigo, String placa, String medicoEnfermero, String tipoUCI) // Change parameters to match new requirements
 	{
-		Ambulancia ambulancia = new Ambulancia(codigo, placa, tipoDotacion);
+		Ambulancia ambulancia = null; 
+		
+		if (tipoAmbulancia.equals(TAG_AMBULANCIA_BASICA)) {
+			ambulancia = new AmbulanciaBasica (codigo, placa, medicoEnfermero);
+		}
+		
+		if (tipoAmbulancia.equals(TAG_AMBULANCIA_UCI)) {
+			ambulancia = new AmbulanciaUCI (codigo, placa, medicoEnfermero, tipoUCI);
+		}
+		
+		if (tipoAmbulancia.equals(TAG_AMBULANCIA_NO_MEDICALIZADA)) {
+			ambulancia = new AmbulanciaNoMedicalizada (codigo, placa, medicoEnfermero);
+		}
 		
 		this.setAmbulancias(ambulancia);
 		
@@ -139,17 +168,21 @@ public class EmpresaAmbulancias
 	 */
 	public void reporteDeAmbulancias()
 	{
+		ArrayList <Integer> code = new ArrayList <Integer>();
 		if(!ambulanciasList.isEmpty())
 		{
-			System.out.println("------------------------------------------------"
-					+ "------------------------------------");
-			System.out.format("%6s%7s%14s%14s%15s%17s%10s%n", "codigo", "placa", "tipoDotacion"
-					,"horaPosicion", "posicionCalle", "posicionCarrera", "servicio");
-			System.out.println("------------------------------------------------"
-					+ "------------------------------------");
-			for(Ambulancia ambulancia : ambulanciasList)
-			{
-				ambulancia.printSelf();
+			System.out.println(LINE_SEPARATOR);
+			System.out.format("%6s%18s%7s%27s%15s%17s%10s%10s%10s%n", "tipoAmbu", "codigo", "placa","medico/enfermero", "tipoUCI", "horaPosicion", 
+					"Calle", "Carrera", "tarifa");
+			System.out.println(LINE_SEPARATOR);
+			
+			for (Entry<Integer, Ambulancia> entry : ambulanciasList.entrySet()) {
+				code.add(entry.getKey());
+			}
+			
+			Collections.sort(code);
+			for (int i = 0; i < code.size(); i++) {
+				this.getAmbulanciaByCodigo(code.get(i)).printSelf();
 			}
 		}
 		else
@@ -168,11 +201,14 @@ public class EmpresaAmbulancias
 	 * @param posicionCarrera
 	 * @return
 	 */
-	public boolean registrarPosicionAmbulancia(int codigo, GregorianCalendar horaPosicion
-												,int posicionCalle, int posicionCarrera)
+	public boolean registrarPosicionAmbulancia(int codigo, GregorianCalendar horaPosicion,int posicionCalle, int posicionCarrera)
 	{
-		for(Ambulancia ambulancia : ambulanciasList)
+		Iterator<Integer> it = ambulanciasList.keySet().iterator();
+		//for(Ambulancia ambulancia : ambulanciasList)
+		while (it.hasNext())
 		{
+			Integer key = it.next();
+			Ambulancia ambulancia = ambulanciasList.get(key);
 			if(ambulancia.getCodigo() == codigo)
 			{
 				ambulancia.setHoraPosicion(horaPosicion);
@@ -188,7 +224,7 @@ public class EmpresaAmbulancias
 	 * adds it to the arrayList of this class.
 	 * @param serv
 	 */
-	public void agregarServicio (Servicio serv) 
+	public void registrarServicio (Servicio serv) 
 	{
 		serviciosList.add(serv);
 	}
@@ -198,7 +234,7 @@ public class EmpresaAmbulancias
 	 * @param codigo
 	 * @return
 	 */
-	public String asignarUnServicio(int codigo)
+	public String asignarUnServicio(int codigo) // 
 	{
 		String message = null;
 		for(Servicio servicio : serviciosList)
@@ -247,24 +283,29 @@ public class EmpresaAmbulancias
 	 * @param servicio
 	 * @return
 	 */
-	private ArrayList<Ambulancia> construirAmbulanciasDisponibles(Servicio servicio)
+	private ArrayList<Ambulancia> construirAmbulanciasDisponibles(Servicio servicio) // Verificar Este Metodo Para que funcuione para la segunda entrega.
 	{
 		ArrayList<Ambulancia> ambulanciasDisponibles = new ArrayList<Ambulancia>();		
 		
 		if(servicio.getTipoServicio().equals("EMERGENCIA"))
 		{
-			for(Ambulancia ambulancia : ambulanciasList)
+			for (Entry<Integer, Ambulancia> entry : ambulanciasList.entrySet())
 			{
-				if(ambulancia.getTipoDotacion().equals("ALTA_UCI") && (!ambulancia.isEstado()))
-				{
-					ambulanciasDisponibles.add(ambulancia);
-				}				
+				Ambulancia ambulancia = entry.getValue();
+				if (ambulancia instanceof AmbulanciaUCI) {
+					if(((AmbulanciaUCI) ambulancia).getTipoUCI().equals("ALTA_UCI") && (!ambulancia.isEstado()))
+					{
+						ambulanciasDisponibles.add(ambulancia);
+					}
+				}
+				
 			}
 		}
 		else
 		{
-			for(Ambulancia ambulancia : ambulanciasList)
+			for (Entry<Integer, Ambulancia> entry : ambulanciasList.entrySet())
 			{
+				Ambulancia ambulancia = entry.getValue();
 				if(!ambulancia.isEstado())
 				{
 					ambulanciasDisponibles.add(ambulancia);
@@ -311,8 +352,14 @@ public class EmpresaAmbulancias
 		IPS ipsCercana = null;
 		int auxiliar = 2000000;
 		int z=200000;
-		for(IPS ipsMasCercana : ipsList)
+		
+		Iterator <String> ipsIterator = ipsList.keySet().iterator();
+		
+		//for(IPS ipsMasCercana : ipsList) Change this for an iterator to go through the map of IPS.
+		while (ipsIterator.hasNext())
 		{
+			String key = ipsIterator.next();
+			IPS ipsMasCercana = ipsList.get(key);
 			z = calcularDistancia(ipsMasCercana.getDireccion().getCalle(), ipsMasCercana.getDireccion().getCarrera(),calle ,carrera);
 			if(auxiliar > z)
 			{
@@ -447,8 +494,16 @@ public class EmpresaAmbulancias
 		System.out.println("\t------------------------------------------");
 		if(!this.ipsList.isEmpty())
 		{
-			for(IPS ips : this.ipsList)
+			
+			SortedSet <String> keySet = new TreeSet <String>(); 
+			for (Map.Entry<String, IPS> entry: ipsList.entrySet())
+				keySet.add(entry.getKey());
+			
+			Iterator<String> ipsIterator = keySet.iterator();
+			while (ipsIterator.hasNext())
 			{	
+				String keyActual = (String) ipsIterator.next();
+				IPS ips = ipsList.get(keyActual);
 				System.out.println("IPS: ");
 				System.out.format("%10s%32s%19s%n","nombre","Tipo de atencion","Direccion");
 				System.out.println("-------------------------------------------------------------");
@@ -462,6 +517,7 @@ public class EmpresaAmbulancias
 							,"Direcci�n","Estado","Ambulancia");
 					System.out.println("\t----------------------------------------------------------"
 							+ "-------------------------------------------------------");
+					ips.sortServicios(); // NEW
 					for(Servicio servicios : ips.getServicios())
 					{
 						System.out.format("\t%7d%15s%17s%14s%10s%24s%11s%10s%n",servicios.getCodigo()
@@ -483,5 +539,13 @@ public class EmpresaAmbulancias
 			System.out.println("La base de datos del sistema no tiene IPS registradas para hacer el reporte");
 			System.out.println("---------------------------------------------------------------------------");
 		}		
+	}
+	
+	private Ambulancia getAmbulanciaByCodigo (int codigo) {
+		for (Entry<Integer, Ambulancia> entry : ambulanciasList.entrySet()) {
+			Ambulancia ambu = entry.getValue();
+			if (ambu.getCodigo() == codigo) return ambu;
+		}
+		return null;
 	}
 }

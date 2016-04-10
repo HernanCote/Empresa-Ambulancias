@@ -29,8 +29,8 @@ public class Utils  {
 	 * @param hora
 	 * @return
 	 */
-	public static String formatoHora(GregorianCalendar hora)
-	{
+	public static String formatoHora(GregorianCalendar hora) {
+		if (hora == null) return "NA";
 		SimpleDateFormat formatoHora = new SimpleDateFormat("h:mm a");
 		return formatoHora.format(hora.getTime());
 	}
@@ -230,7 +230,7 @@ public class Utils  {
 		Direccion tempDir = new Direccion (tipoDireccion, calle, carrera, numero);
 		Servicio tempServ = new Servicio (nomPaciente,tipoServ, telefono, tempDir);
 		
-		empresaAmbulancias.agregarServicio(tempServ);
+		empresaAmbulancias.registrarServicio(tempServ);
 		
 		System.out.println("El nuevo Servicio tiene codigo: " + tempServ.getCodigo());
 	}

@@ -4,6 +4,8 @@
 package co.edu.javeriana.ambulancias.negocio;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 
 
@@ -122,6 +124,14 @@ public class IPS
 		System.out.format("%10s%30s%30s%n", this.nombre, this.tipoAtencion, this.direccion);
 	}
 	
+	public void sortServicios () {
+		Collections.sort(servicios, new Comparator <Servicio> () {
+			@Override
+			public int compare(Servicio o1, Servicio o2) {
+				return o1.getHoraSolicitud().compareTo(o2.getHoraSolicitud());
+			}
+		});
+	}
 	
 		
 }

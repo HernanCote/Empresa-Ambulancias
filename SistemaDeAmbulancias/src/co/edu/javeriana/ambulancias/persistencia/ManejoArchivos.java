@@ -75,6 +75,7 @@ public class ManejoArchivos
 	    System.out.println("El archivo " + fileName + " no existe.");
 	    return archivoLeido;
 	  }
+	  
 	  /**
 	   * This method lets the user read a file to add Ambulances to the system
 	   * @param fileName
@@ -95,16 +96,19 @@ public class ManejoArchivos
 	        {
 	          fileRead = bReader.readLine();
 	          fileRead = bReader.readLine();
+	          fileRead = bReader.readLine();
+	          fileRead = bReader.readLine();
 	        }
 	        while (!fileRead.matches("0"))
-	        {
+	        {	        	
 	          String[] tokens = fileRead.split(",");
+	          String tipoAmbulancia = tokens[0].trim();
+	          int codigo = Integer.parseInt(tokens[1].trim());
+	          String placa = tokens[2].trim();
+	          String medicoEnfermero = tokens[3].trim();
+	          String tipoDotacion = tokens[4].trim();
 	          
-	          int codigo = Integer.parseInt(tokens[0].trim());
-	          String placa = tokens[1].trim();
-	          String tipoDotacion = tokens[2].trim();
-	          
-	          empresaAmbulancias.agregarAmbulancia(codigo, placa, tipoDotacion);
+	          empresaAmbulancias.agregarAmbulancia(tipoAmbulancia, codigo, placa, medicoEnfermero,tipoDotacion); // New add ambulancia
 	          
 	          if (bReader.ready())
 	          {	        	  
