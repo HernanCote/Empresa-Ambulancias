@@ -197,8 +197,14 @@ public class Servicio
 	
 	public void printSelfAll()
 	{	
-		System.out.format("%4s%19s%9s%15s%13s%24s%10s%n", this.getCodigo(),Utils.formatoMes(this.horaSolicitud), 
+		System.out.format("%4s%19s%15s%15s%13s%24s%10s%n", this.getCodigo(),Utils.formatoMes(this.horaSolicitud), 
 			("     " + this.paciente), this.tipoServicio, this.telefono, this.direccion.toString(), ("    " + this.estado));	
+	}
+	
+	public void printNoAsignados() 
+	{
+		System.out.format("%4s%19s%15s%15s%13s%24s%n", this.getCodigo(),Utils.formatoMes(this.horaSolicitud), 
+				this.paciente, this.tipoServicio, this.telefono, this.direccion.toString());
 	}
 	
 	/**

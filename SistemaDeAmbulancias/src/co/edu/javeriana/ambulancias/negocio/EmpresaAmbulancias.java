@@ -239,28 +239,46 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 		String message = null;
 		for(Servicio servicio : serviciosList)
 		{
+			
 			if(servicio.getCodigo() == codigo && servicio.getEstado().equals("NO_ASIGNADO"))
 			{
 				ArrayList<Ambulancia> ambulanciasDisponibles = construirAmbulanciasDisponibles(servicio);
 				if(!ambulanciasDisponibles.isEmpty())
 				{
-					Ambulancia ambulanciaMasCercana = calcularAmbulanciaMasCercana(ambulanciasDisponibles,
-																servicio.getDireccion().getCalle(), 
-																servicio.getDireccion().getCarrera());
-					
-					IPS ipsMasCercana = calcularIPSMasCercana(servicio.getDireccion().getCalle(), 
-																servicio.getDireccion().getCarrera());
-					servicio.setEstado("ASIGNADO");
-					
-					servicio.setAmbulancia(ambulanciaMasCercana);
-					
-					ambulanciaMasCercana.setServicios(servicio);
-					ambulanciaMasCercana.setEstado(true);				
-					
-					servicio.setIps(ipsMasCercana);	
-					ipsMasCercana.setServicios(servicio);	
-					return "Al servicio " + servicio.getCodigo() + " le fue asignada la ambulancia " + servicio.getAmbulancia().getCodigo()
-							+ " y la IPS " + servicio.getIps().getNombre();
+					if(servicio.getTipoServicio().equals("EMERGENCIA") || servicio.getTipoServicio().equals("URGENCIA"))
+					{	
+						Ambulancia ambulanciaMasCercana = calcularAmbulanciaMasCercana(ambulanciasDisponibles,
+																	servicio.getDireccion().getCalle(), 
+																	servicio.getDireccion().getCarrera());
+						
+						IPS ipsMasCercana = calcularIPSMasCercana(servicio.getDireccion().getCalle(), 
+																	servicio.getDireccion().getCarrera());
+						servicio.setEstado("ASIGNADO");
+						
+						servicio.setAmbulancia(ambulanciaMasCercana);
+						
+						ambulanciaMasCercana.setServicios(servicio);
+						ambulanciaMasCercana.setEstado(true);				
+						
+						servicio.setIps(ipsMasCercana);	
+						ipsMasCercana.setServicios(servicio);	
+						return "Al servicio " + servicio.getCodigo() + " le fue asignada la ambulancia " + servicio.getAmbulancia().getCodigo()
+								+ " y la IPS " + servicio.getIps().getNombre();
+					}
+					else if(servicio.getTipoServicio().equals("DOMICILIO"))
+					{
+						Ambulancia ambulanciaMasCercana = calcularAmbulanciaMasCercana(ambulanciasDisponibles,
+								servicio.getDireccion().getCalle(), 
+								servicio.getDireccion().getCarrera());
+						
+						servicio.setEstado("ASIGNADO");
+						
+						servicio.setAmbulancia(ambulanciaMasCercana);
+						
+						ambulanciaMasCercana.setServicios(servicio);
+						ambulanciaMasCercana.setEstado(true);		
+						return "Al servicio " + servicio.getCodigo() + " le fue asignada la ambulancia " + servicio.getAmbulancia().getCodigo();
+					}					
 				}				
 				else
 				{

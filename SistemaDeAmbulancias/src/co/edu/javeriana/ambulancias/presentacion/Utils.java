@@ -286,7 +286,7 @@ public class Utils  {
 			{
 				if(servicio.getEstado().equals("NO_ASIGNADO"))
 				{
-					servicio.printSelfAll();
+					servicio.printNoAsignados();
 					cont++;
 				}
 			}
