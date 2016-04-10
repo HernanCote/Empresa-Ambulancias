@@ -66,7 +66,9 @@ public class Utils  {
 		System.out.println("opcion 7: Finalizar un servicio");
 		System.out.println("opcion 8: Reporte de servicios con IPS y ambulancias asignados");
 		System.out.println("opcion 9: Reporte de las IPS con servicios asociados");
-		System.out.println("opcion 10: terminar");
+		System.out.println("opcion 10: Estadisticas de las ambulancias disponibles");
+		System.out.println("opcion 11: Pacientes atendidos");
+		System.out.println("opcion 12: Terminar");
 		System.out.println("---------------------------------------------------------------");
 		System.out.print("Ingrese la opcion que desea acceder: ");
 		
@@ -197,11 +199,11 @@ public class Utils  {
 		{
 			System.out.print("Nombre Paciente: ");
 			nomPaciente = br.readLine();
-			System.out.print("Tipo Servicio (URGENCIA o EMERGENCIA): ");
+			System.out.print("Tipo Servicio (URGENCIA, EMERGENCIA o DOMICILIO): ");
 			tipoServ = br.readLine().toUpperCase(); 
 			System.out.print("Telefono: ");
 			telefono = br.readLine();
-			System.out.print("Tipo Direcci�n CARRERA o CALLE: ");
+			System.out.print("Tipo Direccion CARRERA o CALLE: ");
 			tipoDireccion = br.readLine().toUpperCase();
 			if (tipoDireccion.equals("CARRERA")) 
 			{
@@ -275,8 +277,8 @@ public class Utils  {
 			
 			System.out.println("--------------------------------------------"
 					+ "----------------------------------------");
-			System.out.format("%4s%17s%15s%15s%13s%12s%n", "C�digo","horaSolicitud",
-					"paciente", "tipoServicio", "telefono", "direcci�n");
+			System.out.format("%4s%17s%15s%15s%13s%12s%n", "Codigo","horaSolicitud",
+					"paciente", "tipoServicio", "telefono", "direccion");
 			System.out.println("--------------------------------------------"
 					+ "----------------------------------------");
 			int cont = 0;

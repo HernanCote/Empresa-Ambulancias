@@ -2,7 +2,8 @@ package co.edu.javeriana.ambulancias.ambulancias;
 
 import co.edu.javeriana.ambulancias.presentacion.Utils;
 
-public abstract class AmbulanciaMedicalizada extends Ambulancia{
+public abstract class AmbulanciaMedicalizada extends Ambulancia
+{
 	protected String tipo;
 	protected String medico;
 
@@ -12,7 +13,8 @@ public abstract class AmbulanciaMedicalizada extends Ambulancia{
 	}
 
 	@Override
-	public long calcularTarifa() {
+	public long calcularTarifa() 
+	{
 		return super.calcularTarifa();
 	}
 
