@@ -405,7 +405,7 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 	}
 	
 	/**
-	 * Terminate an Asigned service
+	 * Terminate an Assigned service
 	 * @param codigo
 	 * @return
 	 */
