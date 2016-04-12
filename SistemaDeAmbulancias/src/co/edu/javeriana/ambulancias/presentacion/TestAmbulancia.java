@@ -73,6 +73,9 @@ public class TestAmbulancia
 				case "10":
 					System.out.println("Sistema Terminado!!");
 					break;
+				case "11":
+					Utils.pacientesAtendidos(empresaAmbulancias);
+					break;
 				default: 
 					System.out.println("------------------------------------");
 					System.out.println("Por favor ingrese una opci�n v�lida.");

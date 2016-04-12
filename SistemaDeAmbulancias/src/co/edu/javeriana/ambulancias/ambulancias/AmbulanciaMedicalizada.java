@@ -18,6 +18,22 @@ public abstract class AmbulanciaMedicalizada extends Ambulancia
 		return super.calcularTarifa();
 	}
 
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public String getMedico() {
+		return medico;
+	}
+
+	public void setMedico(String medico) {
+		this.medico = medico;
+	}
+
 	@Override
 	public void printSelf() {
 		//String actualService = null;
