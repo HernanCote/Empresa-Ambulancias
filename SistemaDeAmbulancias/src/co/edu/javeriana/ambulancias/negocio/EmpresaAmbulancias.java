@@ -311,7 +311,7 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 			{
 				Ambulancia ambulancia = entry.getValue();
 				if (ambulancia instanceof AmbulanciaUCI) {
-					if(((AmbulanciaUCI) ambulancia).getTipoUCI().equals("ALTA_UCI") && (!ambulancia.isEstado()))
+					if(((AmbulanciaUCI) ambulancia).getTipo().equals("UCI") && (!ambulancia.isEstado()))
 					{
 						ambulanciasDisponibles.add(ambulancia);
 					}
@@ -319,7 +319,7 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 				
 			}
 		}
-		else
+		else 
 		{
 			for (Entry<Integer, Ambulancia> entry : ambulanciasList.entrySet())
 			{

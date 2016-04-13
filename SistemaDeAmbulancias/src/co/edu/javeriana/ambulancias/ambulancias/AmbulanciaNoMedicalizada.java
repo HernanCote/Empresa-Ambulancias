@@ -1,5 +1,7 @@
 package co.edu.javeriana.ambulancias.ambulancias;
 
+import java.text.DecimalFormat;
+
 import co.edu.javeriana.ambulancias.presentacion.Utils;
 
 public class AmbulanciaNoMedicalizada extends Ambulancia{
@@ -26,7 +28,8 @@ public class AmbulanciaNoMedicalizada extends Ambulancia{
 
 	@Override
 	public void printSelf() {
-		System.out.format("%16s%9s%10s%18s%36s%10s%10s%13s%n", LABEL_TIPO_AMBULANCIA, this.codigo, this.placa,  this.enfermero, Utils.formatoHora(this.horaPosicion), 
-				this.posicionCalle, this.posicionCarrera, this.calcularTarifa());
+		DecimalFormat format = new DecimalFormat("##,###.00");
+		System.out.format("%16s%9s%10s%18s%36s%10s%10s%16s%n", LABEL_TIPO_AMBULANCIA, this.codigo, this.placa,  this.enfermero, Utils.formatoHora(this.horaPosicion), 
+				this.posicionCalle, this.posicionCarrera, "$" + format.format(this.calcularTarifa()));
 	}
 }
