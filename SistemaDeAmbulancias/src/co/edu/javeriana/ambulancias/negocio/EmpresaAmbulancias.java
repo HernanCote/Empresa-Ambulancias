@@ -36,9 +36,7 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 	public static final String TAG_AMBULANCIA_UCI = "UCI";
 	public static final String TAG_AMBULANCIA_NO_MEDICALIZADA = "NOMEDICALIZADA";
 	private HashMap<String, IPS> ipsList;
-	//private ArrayList<IPS> ipsList; This will no longer work for part 2 of the project. Replaced with HashMap
 	private ArrayList<Servicio> serviciosList;
-	//private ArrayList<Ambulancia> ambulanciasList;
 	private HashMap <Integer, Ambulancia> ambulanciasList;
 	private String nombre;
 

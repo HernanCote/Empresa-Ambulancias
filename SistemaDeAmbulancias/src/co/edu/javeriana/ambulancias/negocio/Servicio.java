@@ -12,6 +12,7 @@ import co.edu.javeriana.ambulancias.presentacion.Utils;
  */
 public class Servicio 
 {
+	public static final String TAG_ASIGNADO = "ASIGNADO";
 	private IPS ips;
 	private Ambulancia ambulancia;
 	private static long CONSECUTIVO = 0;
