@@ -248,6 +248,7 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 						Ambulancia ambulanciaMasCercana = calcularAmbulanciaMasCercana(ambulanciasDisponibles,
 																	servicio.getDireccion().getCalle(), 
 																	servicio.getDireccion().getCarrera());
+						servicio.calcularValor(ambulanciaMasCercana);
 						
 						IPS ipsMasCercana = calcularIPSMasCercana(servicio.getDireccion().getCalle(), 
 																	servicio.getDireccion().getCarrera());
@@ -269,6 +270,7 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 								servicio.getDireccion().getCalle(), 
 								servicio.getDireccion().getCarrera());
 						
+						servicio.calcularValor(ambulanciaMasCercana);
 						servicio.setEstado("ASIGNADO");
 						
 						servicio.setAmbulancia(ambulanciaMasCercana);
@@ -299,7 +301,7 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 	 * @param servicio
 	 * @return
 	 */
-	private ArrayList<Ambulancia> construirAmbulanciasDisponibles(Servicio servicio) // Verificar Este Metodo Para que funcuione para la segunda entrega.
+	private ArrayList<Ambulancia> construirAmbulanciasDisponibles(Servicio servicio) 
 	{
 		ArrayList<Ambulancia> ambulanciasDisponibles = new ArrayList<Ambulancia>();		
 		
@@ -309,7 +311,7 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 			{
 				Ambulancia ambulancia = entry.getValue();
 				if (ambulancia instanceof AmbulanciaUCI) {
-					if(((AmbulanciaUCI) ambulancia).getTipoUCI().equals("ALTA_UCI") && (!ambulancia.isEstado()))
+					if(((AmbulanciaUCI) ambulancia).getTipo().equals("UCI") && (!ambulancia.isEstado()))
 					{
 						ambulanciasDisponibles.add(ambulancia);
 					}
@@ -317,7 +319,7 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 				
 			}
 		}
-		else
+		else 
 		{
 			for (Entry<Integer, Ambulancia> entry : ambulanciasList.entrySet())
 			{
@@ -459,7 +461,7 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 	private void generarReporteDeServicio (Servicio serv) {
 		System.out.println();
 		System.out.println("SERVICIO:");
-		System.out.println("Codigo \t HoraSolicitud \t Paciente \t TipoServicio \t Telefono \t Direccion \t \t Estado");
+		System.out.println("Codigo \t HoraSolicitud \t Paciente \t TipoServicio \t Telefono \t Direccion \t \t Estado \t Valor");
 		System.out.println("----------------------------------------------------------------------------------------------------------------------");
 		
 		serv.printSelfAll();	

@@ -23,6 +23,7 @@ public class Servicio
 	private String telefono;
 	private String estado;
 	private Direccion direccion;
+	private long valor;
 	
 	
 	public Servicio(String paciente,String tipoServicio, String telefono,Direccion direccion)
@@ -37,6 +38,7 @@ public class Servicio
 		this.direccion = direccion;
 		this.setIps(null);
 		this.setAmbulancia(null);
+		this.valor = 0;
 	}
 	/**
 	 * Gets the IPS
@@ -179,6 +181,12 @@ public class Servicio
 		this.direccion = direccion;
 	}
 	
+	public long getValor() {
+		return valor;
+	}
+	public void setValor(long valor) {
+		this.valor = valor;
+	}
 	/**
 	 * Assigns the address.
 	 * @param tipoDireccion
@@ -217,6 +225,11 @@ public class Servicio
 	{
 		System.out.format("%1s%21s%7s%28s%n", this.getCodigo(), this.getPaciente()
 				, this.getAmbulancia().getCodigo(), this.getIps().getNombre());
+	}
+	
+	public void calcularValor(Ambulancia ambulancia)
+	{
+		setValor(ambulancia.calcularTarifa());
 	}
 	
 }
