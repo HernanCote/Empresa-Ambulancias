@@ -20,10 +20,7 @@ public abstract class AmbulanciaMedicalizada extends Ambulancia
 	}
 	
 	@Override
-	public long calcularTarifa() 
-	{
-		return super.calcularTarifa();
-	}
+	public abstract long calcularTarifa();
 
 
 	public void setTipo(String tipo) {

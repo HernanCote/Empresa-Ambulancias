@@ -227,11 +227,9 @@ public abstract class Ambulancia
 	}
 	
 	/**
-	 * This function calculates the total cost o the usage of the ambulance.
+	 * Abstract function that depending of the ambulance type will calculate the total cost;
 	 */
-	public long calcularTarifa () {
-		return TARIFA_BASE;
-	}
+	public abstract long calcularTarifa ();
 	
 	
 }

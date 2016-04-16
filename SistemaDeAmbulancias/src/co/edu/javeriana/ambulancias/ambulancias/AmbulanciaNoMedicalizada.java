@@ -23,7 +23,7 @@ public class AmbulanciaNoMedicalizada extends Ambulancia{
 
 	@Override
 	public long calcularTarifa() {
-		return super.calcularTarifa();
+		return Ambulancia.TARIFA_BASE;
 	}
 
 	@Override

@@ -15,7 +15,7 @@ public class AmbulanciaBasica extends AmbulanciaMedicalizada {
 
 	@Override
 	public long calcularTarifa() {
-		return (long) (super.calcularTarifa() * INCREMENTO_TARIFA);
+		return (long) (Ambulancia.TARIFA_BASE * INCREMENTO_TARIFA);
 	}
 
 	@Override
