@@ -71,10 +71,13 @@ public class TestAmbulancia
 					empresaAmbulancias.reporteIpsYServicios();
 					break;
 				case "10":
-					System.out.println("Sistema Terminado!!");
+					empresaAmbulancias.estadisticaAmbulanciasDisponibles();
 					break;
 				case "11":
 					Utils.pacientesAtendidos(empresaAmbulancias);
+					break;
+				case "12":
+					System.out.println("Sistema Terminado!!");
 					break;
 				default: 
 					System.out.println("------------------------------------");

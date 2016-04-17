@@ -572,4 +572,52 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 		}
 		return null;
 	}
+	
+	public void estadisticaAmbulanciasDisponibles()
+	{
+		int ambuBasica = 0, ambuUci = 0, ambuNoMedicalizada = 0;
+		if(!ambulanciasList.isEmpty())
+		{
+			for(Entry<Integer, Ambulancia> entry :ambulanciasList.entrySet())
+			{	
+				Ambulancia ambulancia = entry.getValue();
+				if(!ambulancia.isEstado())
+				{
+					if (ambulancia instanceof AmbulanciaBasica) 
+					{
+						ambuBasica++;
+					}
+					else if (ambulancia instanceof AmbulanciaUCI) 
+					{
+						ambuUci++;
+					}
+					else if (ambulancia instanceof AmbulanciaNoMedicalizada) 
+					{
+						ambuNoMedicalizada++;						
+					}
+				}
+			}
+			if((ambuBasica == 0) && (ambuNoMedicalizada == 0) && (ambuUci == 0))
+			{
+				System.out.println("--------------------------------------------");
+				System.out.println("No hay ambulancias disponibles en el momento");
+				System.out.println("--------------------------------------------");
+			}
+			else
+			{
+				System.out.println("Listado de ambulancias disponibles");
+				System.out.println("----------------------------------");
+				System.out.format("%30s%3d%n", "Ambulancias basicas: ", ambuBasica);
+				System.out.format("%30s%3d%n", "Ambulancias UCI: " , ambuUci);
+				System.out.format("%30s%3d%n", "Ambulancias No Medicalizadas: ", ambuNoMedicalizada);
+			}
+		}
+		else
+		{
+			System.out.println("--------------------------------------------");
+			System.out.println("No hay ambulancias registradas en el sistema");
+			System.out.println("--------------------------------------------");
+		}
+	}
+	
 }

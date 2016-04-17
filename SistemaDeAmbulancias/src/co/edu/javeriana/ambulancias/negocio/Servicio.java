@@ -226,8 +226,16 @@ public class Servicio
 	
 	public void printAsignados()
 	{
-		System.out.format("%1s%21s%7s%28s%n", this.getCodigo(), this.getPaciente()
+		if(this.getIps()!=null)
+		{
+		System.out.format("%1s%21s%7s%27s%n", this.getCodigo(), this.getPaciente()
 				, this.getAmbulancia().getCodigo(), this.getIps().getNombre());
+		}
+		else
+		{
+			System.out.format("%1s%21s%7s%10s%n", this.getCodigo(), this.getPaciente()
+					, this.getAmbulancia().getCodigo(), "NA");
+		}
 	}
 	
 	/**
