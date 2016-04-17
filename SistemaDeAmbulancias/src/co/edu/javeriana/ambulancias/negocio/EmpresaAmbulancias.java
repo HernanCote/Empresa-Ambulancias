@@ -559,6 +559,12 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 		}		
 	}
 	
+	/**
+	 * Returns the ambulance that matches with the code that enters in the parameters. 
+	 * @param codigo
+	 * @return
+	 */
+	
 	private Ambulancia getAmbulanciaByCodigo (int codigo) {
 		for (Entry<Integer, Ambulancia> entry : ambulanciasList.entrySet()) {
 			Ambulancia ambu = entry.getValue();

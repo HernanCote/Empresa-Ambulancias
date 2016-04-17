@@ -209,6 +209,9 @@ public class Servicio
 		System.out.format("%4s%19s%15s%15s%13s%24s%10s%n", this.getCodigo(),Utils.formatoMes(this.horaSolicitud), 
 			("     " + this.paciente), this.tipoServicio, this.telefono, this.direccion.toString(), ("    " + this.estado));	
 	}
+	/**
+	 * Prints the services in the right format.
+	 */
 	
 	public void printNoAsignados() 
 	{
@@ -227,6 +230,10 @@ public class Servicio
 				, this.getAmbulancia().getCodigo(), this.getIps().getNombre());
 	}
 	
+	/**
+	 * Sets the value to charge of the service.
+	 * @param ambulancia
+	 */
 	public void calcularValor(Ambulancia ambulancia)
 	{
 		setValor(ambulancia.calcularTarifa());
