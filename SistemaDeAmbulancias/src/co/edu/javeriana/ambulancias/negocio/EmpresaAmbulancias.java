@@ -461,7 +461,7 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 	private void generarReporteDeServicio (Servicio serv) {
 		System.out.println();
 		System.out.println("SERVICIO:");
-		System.out.println("Codigo \t HoraSolicitud \t Paciente \t TipoServicio \t Telefono \t Direccion \t \t Estado \t Valor");
+		System.out.println("Codigo \t HoraSolicitud \t Paciente \t TipoServicio \t Telefono \t Direccion \t \t Estado    Valor");
 		System.out.println("----------------------------------------------------------------------------------------------------------------------");
 		
 		serv.printSelfAll();	

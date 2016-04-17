@@ -358,7 +358,8 @@ public class Utils  {
 	
 	public static void pacientesAtendidos (EmpresaAmbulancias emresaAmbulancias) {
 		ArrayList <Servicio> listaServicios = emresaAmbulancias.getServicios();
-		Collections.sort(listaServicios, new Comparator <Servicio> () {
+		Collections.sort(listaServicios, new Comparator <Servicio> () 
+		{
 			@Override
 			public int compare(Servicio o1, Servicio o2) {
 				return o1.getHoraSolicitud().compareTo(o2.getHoraSolicitud());
@@ -366,6 +367,7 @@ public class Utils  {
 		});
 		System.out.println(EmpresaAmbulancias.LINE_SEPARATOR);
 		System.out.format("%4s%19s%20s%15s%20s%17s%25s%n", "HoraSolicitud","Paciente","TipoServicio","Telefono","Direccion","Estado","MedicoEnfermero");
+		System.out.println(EmpresaAmbulancias.LINE_SEPARATOR);
 		for (Servicio serv : listaServicios) {
 			if (serv.getEstado().equals(Servicio.TAG_ASIGNADO)) {
 				String medicoEnfermero = "NO_ASIGNADO";
