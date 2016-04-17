@@ -85,5 +85,5 @@ public class TestAmbulancia
 		} while (!opcion.equals("12"));
 
 	}
-
+	
 }

@@ -124,6 +124,9 @@ public class IPS
 		System.out.format("%10s%30s%30s%n", this.nombre, this.tipoAtencion, this.direccion);
 	}
 	
+	/**
+	 * Sorts the list of services depending on the hour they were required.
+	 */
 	public void sortServicios () {
 		Collections.sort(servicios, new Comparator <Servicio> () {
 			@Override

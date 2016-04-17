@@ -356,6 +356,14 @@ public class Utils  {
 		}	
 	}
 	
+	/**
+	 * Prints all the services weather the have been completed, in process or not assigned
+	 * for each service it prints the hour, name, type of service, phone
+	 * address, state and the doctor or nurse that is currently with the
+	 * patience if there is one.
+	 * @param emresaAmbulancias an object of business class.
+	 */
+	
 	public static void pacientesAtendidos (EmpresaAmbulancias emresaAmbulancias) {
 		ArrayList <Servicio> listaServicios = emresaAmbulancias.getServicios();
 		Collections.sort(listaServicios, new Comparator <Servicio> () 
