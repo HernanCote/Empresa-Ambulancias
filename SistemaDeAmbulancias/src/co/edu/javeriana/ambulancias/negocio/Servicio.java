@@ -2,6 +2,7 @@ package co.edu.javeriana.ambulancias.negocio;
 
 import java.util.GregorianCalendar;
 
+import co.edu.javeriana.ambulancias.ambulancias.Ambulancia;
 import co.edu.javeriana.ambulancias.presentacion.Utils;
 
 /**
@@ -11,6 +12,7 @@ import co.edu.javeriana.ambulancias.presentacion.Utils;
  */
 public class Servicio 
 {
+	public static final String TAG_ASIGNADO = "ASIGNADO";
 	private IPS ips;
 	private Ambulancia ambulancia;
 	private static long CONSECUTIVO = 0;
@@ -21,6 +23,7 @@ public class Servicio
 	private String telefono;
 	private String estado;
 	private Direccion direccion;
+	private long valor;
 	
 	
 	public Servicio(String paciente,String tipoServicio, String telefono,Direccion direccion)
@@ -35,6 +38,7 @@ public class Servicio
 		this.direccion = direccion;
 		this.setIps(null);
 		this.setAmbulancia(null);
+		this.valor = 0;
 	}
 	/**
 	 * Gets the IPS
@@ -177,6 +181,12 @@ public class Servicio
 		this.direccion = direccion;
 	}
 	
+	public long getValor() {
+		return valor;
+	}
+	public void setValor(long valor) {
+		this.valor = valor;
+	}
 	/**
 	 * Assigns the address.
 	 * @param tipoDireccion
@@ -196,8 +206,17 @@ public class Servicio
 	
 	public void printSelfAll()
 	{	
-		System.out.format("%4s%19s%9s%15s%13s%24s%10s%n", this.getCodigo(),Utils.formatoMes(this.horaSolicitud), 
-			("     " + this.paciente), this.tipoServicio, this.telefono, this.direccion.toString(), ("    " + this.estado));	
+		System.out.format("%4s%19s%15s%15s%13s%24s%10s%11s%n", this.getCodigo(),Utils.formatoMes(this.horaSolicitud), 
+			 this.paciente, this.tipoServicio, this.telefono, this.direccion.toString(), ("    " + this.estado), this.getValor());	
+	}
+	/**
+	 * Prints the services in the right format.
+	 */
+	
+	public void printNoAsignados() 
+	{
+		System.out.format("%4s%19s%15s%15s%13s%24s%n", this.getCodigo(),Utils.formatoMes(this.horaSolicitud), 
+				this.paciente, this.tipoServicio, this.telefono, this.direccion.toString());
 	}
 	
 	/**
@@ -207,8 +226,25 @@ public class Servicio
 	
 	public void printAsignados()
 	{
-		System.out.format("%1s%21s%7s%28s%n", this.getCodigo(), this.getPaciente()
+		if(this.getIps()!=null)
+		{
+		System.out.format("%1s%21s%7s%27s%n", this.getCodigo(), this.getPaciente()
 				, this.getAmbulancia().getCodigo(), this.getIps().getNombre());
+		}
+		else
+		{
+			System.out.format("%1s%21s%7s%10s%n", this.getCodigo(), this.getPaciente()
+					, this.getAmbulancia().getCodigo(), "NA");
+		}
+	}
+	
+	/**
+	 * Sets the value to charge of the service.
+	 * @param ambulancia
+	 */
+	public void calcularValor(Ambulancia ambulancia)
+	{
+		setValor(ambulancia.calcularTarifa());
 	}
 	
 }

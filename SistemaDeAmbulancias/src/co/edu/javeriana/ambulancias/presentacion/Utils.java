@@ -4,9 +4,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
+import co.edu.javeriana.ambulancias.ambulancias.AmbulanciaMedicalizada;
+import co.edu.javeriana.ambulancias.ambulancias.AmbulanciaNoMedicalizada;
 import co.edu.javeriana.ambulancias.negocio.Direccion;
 import co.edu.javeriana.ambulancias.negocio.EmpresaAmbulancias;
 import co.edu.javeriana.ambulancias.negocio.Servicio;
@@ -29,8 +34,8 @@ public class Utils  {
 	 * @param hora
 	 * @return
 	 */
-	public static String formatoHora(GregorianCalendar hora)
-	{
+	public static String formatoHora(GregorianCalendar hora) {
+		if (hora == null) return "NA";
 		SimpleDateFormat formatoHora = new SimpleDateFormat("h:mm a");
 		return formatoHora.format(hora.getTime());
 	}
@@ -66,7 +71,9 @@ public class Utils  {
 		System.out.println("opcion 7: Finalizar un servicio");
 		System.out.println("opcion 8: Reporte de servicios con IPS y ambulancias asignados");
 		System.out.println("opcion 9: Reporte de las IPS con servicios asociados");
-		System.out.println("opcion 10: terminar");
+		System.out.println("opcion 10: Estadisticas de las ambulancias disponibles");
+		System.out.println("opcion 11: Pacientes atendidos");
+		System.out.println("opcion 12: Terminar");
 		System.out.println("---------------------------------------------------------------");
 		System.out.print("Ingrese la opcion que desea acceder: ");
 		
@@ -197,11 +204,11 @@ public class Utils  {
 		{
 			System.out.print("Nombre Paciente: ");
 			nomPaciente = br.readLine();
-			System.out.print("Tipo Servicio (URGENCIA o EMERGENCIA): ");
+			System.out.print("Tipo Servicio (URGENCIA, EMERGENCIA o DOMICILIO): ");
 			tipoServ = br.readLine().toUpperCase(); 
 			System.out.print("Telefono: ");
 			telefono = br.readLine();
-			System.out.print("Tipo Direcci�n CARRERA o CALLE: ");
+			System.out.print("Tipo Direccion CARRERA o CALLE: ");
 			tipoDireccion = br.readLine().toUpperCase();
 			if (tipoDireccion.equals("CARRERA")) 
 			{
@@ -230,7 +237,7 @@ public class Utils  {
 		Direccion tempDir = new Direccion (tipoDireccion, calle, carrera, numero);
 		Servicio tempServ = new Servicio (nomPaciente,tipoServ, telefono, tempDir);
 		
-		empresaAmbulancias.agregarServicio(tempServ);
+		empresaAmbulancias.registrarServicio(tempServ);
 		
 		System.out.println("El nuevo Servicio tiene codigo: " + tempServ.getCodigo());
 	}
@@ -275,8 +282,8 @@ public class Utils  {
 			
 			System.out.println("--------------------------------------------"
 					+ "----------------------------------------");
-			System.out.format("%4s%17s%15s%15s%13s%12s%n", "C�digo","horaSolicitud",
-					"paciente", "tipoServicio", "telefono", "direcci�n");
+			System.out.format("%4s%17s%15s%15s%13s%12s%n", "Codigo","horaSolicitud",
+					"paciente", "tipoServicio", "telefono", "direccion");
 			System.out.println("--------------------------------------------"
 					+ "----------------------------------------");
 			int cont = 0;
@@ -284,7 +291,7 @@ public class Utils  {
 			{
 				if(servicio.getEstado().equals("NO_ASIGNADO"))
 				{
-					servicio.printSelfAll();
+					servicio.printNoAsignados();
 					cont++;
 				}
 			}
@@ -317,7 +324,7 @@ public class Utils  {
 		System.out.println("	---------------------");
 		System.out.println("Servicios en el sistema asignados:");
 		System.out.println("-----------------------------------------------------------");
-		System.out.format("%6s%12s%16s%6s%n", "c�digo", "paciente", "ambulancia", "IPS");
+		System.out.format("%6s%12s%16s%6s%n", "codigo", "paciente", "ambulancia", "IPS");
 		System.out.println("-----------------------------------------------------------");
 		int cont = 0;
 		
@@ -347,6 +354,45 @@ public class Utils  {
 			System.out.println("No hay servicios que esten en estado asignado para finalizar");
 			System.out.println("------------------------------------------------------------");
 		}	
+	}
+	
+	/**
+	 * Prints all the services weather the have been completed, in process or not assigned
+	 * for each service it prints the hour, name, type of service, phone
+	 * address, state and the doctor or nurse that is currently with the
+	 * patience if there is one.
+	 * @param emresaAmbulancias an object of business class.
+	 */
+	
+	public static void pacientesAtendidos (EmpresaAmbulancias emresaAmbulancias) {
+		ArrayList <Servicio> listaServicios = emresaAmbulancias.getServicios();
+		Collections.sort(listaServicios, new Comparator <Servicio> () 
+		{
+			@Override
+			public int compare(Servicio o1, Servicio o2) {
+				return o1.getHoraSolicitud().compareTo(o2.getHoraSolicitud());
+			}
+		});
+		System.out.println(EmpresaAmbulancias.LINE_SEPARATOR);
+		System.out.format("%4s%19s%20s%15s%20s%17s%25s%n", "HoraSolicitud","Paciente","TipoServicio","Telefono","Direccion","Estado","MedicoEnfermero");
+		System.out.println(EmpresaAmbulancias.LINE_SEPARATOR);
+		for (Servicio serv : listaServicios) {
+			if (serv.getEstado().equals(Servicio.TAG_ASIGNADO)) {
+				String medicoEnfermero = "NO_ASIGNADO";
+				if (serv.getAmbulancia() instanceof AmbulanciaMedicalizada)
+					medicoEnfermero = ((AmbulanciaMedicalizada) serv.getAmbulancia()).getMedico();
+				else
+					medicoEnfermero = ((AmbulanciaNoMedicalizada) serv.getAmbulancia()).getEnfermo();
+				System.out.format("%4s%26s%15s%20s%25s%13s%23s%n", Utils.formatoHora(serv.getHoraSolicitud()), 
+						serv.getPaciente(), serv.getTipoServicio(), serv.getTelefono(), 
+						serv.getDireccion().toString(), serv.getEstado(), medicoEnfermero);
+			} else {
+				String medicoEnfermero = "NA"; 
+				System.out.format("%4s%26s%15s%20s%25s%13s%23s%n", Utils.formatoHora(serv.getHoraSolicitud()), 
+						serv.getPaciente(), serv.getTipoServicio(), serv.getTelefono(), 
+						serv.getDireccion().toString(), serv.getEstado(), medicoEnfermero);
+			}
+		}
 	}
 	
 }

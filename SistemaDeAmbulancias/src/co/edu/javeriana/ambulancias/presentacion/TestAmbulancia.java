@@ -71,16 +71,22 @@ public class TestAmbulancia
 					empresaAmbulancias.reporteIpsYServicios();
 					break;
 				case "10":
+					empresaAmbulancias.estadisticaAmbulanciasDisponibles();
+					break;
+				case "11":
+					Utils.pacientesAtendidos(empresaAmbulancias);
+					break;
+				case "12":
 					System.out.println("Sistema Terminado!!");
 					break;
 				default: 
 					System.out.println("------------------------------------");
-					System.out.println("Por favor ingrese una opci�n v�lida.");
+					System.out.println("Por favor ingrese una opcion valida.");
 					System.out.println("------------------------------------");
 					break;
 			}
-		} while (!opcion.equals("10"));
+		} while (!opcion.equals("12"));
 
 	}
-
+	
 }
