@@ -4,7 +4,7 @@ package co.edu.javeriana.ambulancias.ambulancias;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-import co.edu.javeriana.ambulancias.negocio.Servicio;
+import co.edu.javeriana.ambulancias.entidades.Servicio;
 import co.edu.javeriana.ambulancias.presentacion.Utils;
 
 /**
@@ -199,12 +199,15 @@ public abstract class Ambulancia
 	public void printSelf() 
 	{	
 		String actualService = null;
-		if(this.getServicioActual() == 0) {
+		if(this.getServicioActual() == 0) 
+		{
 			actualService = "NA";
 		}
-		else {
+		else 
+		{
 			actualService = Integer.toString((int)this.getServicioActual());
 		}
+		
 		if(this.horaPosicion != null)
 		{
 			System.out.format("%6s%7s%14s%11s%10s%18s%14s%n", this.codigo, this.placa, this.tipoDotacion

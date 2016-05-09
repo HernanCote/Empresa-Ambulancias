@@ -6,7 +6,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-import co.edu.javeriana.ambulancias.negocio.EmpresaAmbulancias;
+import co.edu.javeriana.ambulancias.entidades.EmpresaAmbulancias;
+import co.edu.javeriana.ambulancias.enums.TipoDireccion;
+import co.edu.javeriana.ambulancias.enums.TipoUCI;
 
 /**
  * ManejoArchivos.java
@@ -43,15 +45,28 @@ public class ManejoArchivos
 	        }
 	        while (!fileRead.matches("0"))
 	        {
+	          int numeroTipoDirecion = 0;
 	          String[] tokens = fileRead.split(",");
 	          String nombre = tokens[0].trim();
 	          String tipoAtencion = tokens[1].trim();
 	          String tipoDireccion = tokens[2].trim();
+	          
 	          int calle = Integer.parseInt(tokens[3].trim());
 	          int carrera = Integer.parseInt(tokens[4].trim());
 	          int numero = Integer.parseInt(tokens[5].trim());
 	          
-	          empresaAmbulancias.agregarIPS(nombre, tipoAtencion, tipoDireccion, calle, carrera, numero);
+	          if(tipoDireccion.equals("CARRERA"))
+	          {
+	        	  empresaAmbulancias.agregarIPS(nombre, tipoAtencion, TipoDireccion.CARRERA, calle, carrera, numero);  
+	          }
+	          else if(tipoDireccion.equals("CALLE"))
+	          {
+	        	  empresaAmbulancias.agregarIPS(nombre, tipoAtencion, TipoDireccion.CALLE, calle, carrera, numero);
+	          }
+	          else
+	          {
+	        	  System.out.println("Error al ingresar la IPS");
+	          }
 	          
 	          if (bReader.ready())
 	          {	        	  
@@ -108,7 +123,18 @@ public class ManejoArchivos
 	          String medicoEnfermero = tokens[3].trim();
 	          String tipoDotacion = tokens[4].trim();
 	          
-	          empresaAmbulancias.agregarAmbulancia(tipoAmbulancia, codigo, placa, medicoEnfermero,tipoDotacion); // New add ambulancia
+	          if(tipoDotacion.equals("CARDIOVASCULAR"))
+	          {	          
+	        	  empresaAmbulancias.agregarAmbulancia(tipoAmbulancia, codigo, placa, medicoEnfermero, TipoUCI.CARDIOVASCULAR);
+	          }
+	          else if(tipoDotacion.equals("PEDIATRICA"))
+	          {
+	        	  empresaAmbulancias.agregarAmbulancia(tipoAmbulancia, codigo, placa, medicoEnfermero, TipoUCI.PEDIATRICA);
+	          }
+	          else 
+	          {
+	        	  empresaAmbulancias.agregarAmbulancia(tipoAmbulancia, codigo, placa, medicoEnfermero, null);
+	          }
 	          
 	          if (bReader.ready())
 	          {	        	  

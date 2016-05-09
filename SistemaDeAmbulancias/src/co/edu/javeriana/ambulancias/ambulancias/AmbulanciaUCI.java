@@ -2,6 +2,7 @@ package co.edu.javeriana.ambulancias.ambulancias;
 
 import java.text.DecimalFormat;
 
+import co.edu.javeriana.ambulancias.enums.TipoUCI;
 import co.edu.javeriana.ambulancias.presentacion.Utils;
 
 /**
@@ -12,7 +13,7 @@ import co.edu.javeriana.ambulancias.presentacion.Utils;
  */
 public class AmbulanciaUCI extends AmbulanciaMedicalizada{
 
-	private String tipoUCI;
+	private TipoUCI tipoUCI;
 	
 	/**
 	 * Constructs an Ambulance with the attributes that enter in the parameters.
@@ -21,17 +22,16 @@ public class AmbulanciaUCI extends AmbulanciaMedicalizada{
 	 * @param medico
 	 * @param tipoUCI
 	 */
-	public AmbulanciaUCI(int codigo, String placa, String medico, String tipoUCI) {
+	public AmbulanciaUCI(int codigo, String placa, String medico, TipoUCI tipoUCI) {
 		super(codigo, placa, medico);
 		this.tipoUCI = tipoUCI;
-		this.tipo = "UCI";
 	}
 
 	/**
 	 * Gets the type of ICU
 	 * @return
 	 */
-	public String getTipoUCI() {
+	public TipoUCI getTipoUCI() {
 		return tipoUCI;
 	}
 	
@@ -39,7 +39,7 @@ public class AmbulanciaUCI extends AmbulanciaMedicalizada{
 	 * Sets the type of ICU with the value that enters in the parameter.
 	 * @param tipoUCI
 	 */
-	public void setTipoUCI(String tipoUCI) {
+	public void setTipoUCI(TipoUCI tipoUCI) {
 		this.tipoUCI = tipoUCI;
 	}
 
@@ -49,11 +49,11 @@ public class AmbulanciaUCI extends AmbulanciaMedicalizada{
 	@Override
 	public long calcularTarifa() {
 		long total = 0;
-		if(this.tipoUCI.equals("CARDIOVASCULAR"))
+		if(this.tipoUCI.equals(TipoUCI.CARDIOVASCULAR))
 		{
 			total = TARIFA_BASE + (long)(TARIFA_BASE * 0.5);
 		}
-		else if(this.tipoUCI.equals("PEDIATRICA"))
+		else if(this.tipoUCI.equals(TipoUCI.PEDIATRICA))
 		{
 			total = TARIFA_BASE + (long)(TARIFA_BASE * 0.6);
 		}
@@ -66,7 +66,7 @@ public class AmbulanciaUCI extends AmbulanciaMedicalizada{
 	@Override
 	public void printSelf() {
 		DecimalFormat format = new DecimalFormat("##,###.0");
-		System.out.format("%5s%20s%10s%23s%20s%11s%10s%10s%16s%n", this.tipo, codigo, this.placa,  this.medico, this.tipoUCI, Utils.formatoHora(this.horaPosicion), 
+		System.out.format("%5s%20s%10s%23s%20s%11s%10s%10s%16s%n", "UCI", codigo, this.placa,  this.medico, this.tipoUCI, Utils.formatoHora(this.horaPosicion), 
 				this.posicionCalle, this.posicionCarrera, "$" + format.format(this.calcularTarifa()));
 	}
 	

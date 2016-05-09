@@ -1,4 +1,6 @@
-package co.edu.javeriana.ambulancias.negocio;
+package co.edu.javeriana.ambulancias.entidades;
+
+import co.edu.javeriana.ambulancias.enums.TipoDireccion;
 
 /**
  * Direccion.java
@@ -12,7 +14,7 @@ package co.edu.javeriana.ambulancias.negocio;
  */
 public class Direccion 
 {
-	private String tipoDireccion;
+	private TipoDireccion tipoDireccion;
 	private int calle;
 	private int carrera;
 	private int numero;
@@ -26,7 +28,7 @@ public class Direccion
 	 * @param numero
 	 */
 	
-	public Direccion(String tipoDireccion, int calle, int carrera, int numero) 
+	public Direccion(TipoDireccion tipoDireccion, int calle, int carrera, int numero) 
 	{
 		this.tipoDireccion = tipoDireccion;
 		this.calle = calle;
@@ -38,7 +40,7 @@ public class Direccion
 	 * Gets the value of the type of address.
 	 * @return tipoDireccion
 	 */
-	public String getTipoDireccion() 
+	public TipoDireccion getTipoDireccion() 
 	{
 		return tipoDireccion;
 	}
@@ -47,7 +49,7 @@ public class Direccion
 	 * that enters as a parameter
 	 * @param tipoDireccion
 	 */
-	public void setTipoDireccion(String tipoDireccion) 
+	public void setTipoDireccion(TipoDireccion tipoDireccion) 
 	{
 		this.tipoDireccion = tipoDireccion;
 	}
@@ -109,7 +111,7 @@ public class Direccion
 	 */
 	public String toString() 
 	{
-		return (this.getTipoDireccion().equals("CARRERA")) ? 
+		return (this.getTipoDireccion().equals(TipoDireccion.CARRERA)) ? 
 				(String) ("CARRERA " + this.getCarrera() + " # " + this.getCalle() 
 						+ " - " + this.getNumero()) : "CALLE " + this.getCalle() 
 						+ " # " + this.getCarrera() + " - " + this.getNumero();

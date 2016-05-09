@@ -1,6 +1,6 @@
 package co.edu.javeriana.ambulancias.presentacion;
 
-import co.edu.javeriana.ambulancias.negocio.EmpresaAmbulancias;
+import co.edu.javeriana.ambulancias.entidades.EmpresaAmbulancias;
 
 /**
  * TestAmbulancia.java

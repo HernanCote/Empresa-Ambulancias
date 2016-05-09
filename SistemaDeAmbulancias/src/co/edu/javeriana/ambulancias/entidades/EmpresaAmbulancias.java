@@ -1,7 +1,7 @@
 /**
  * 
  */
-package co.edu.javeriana.ambulancias.negocio;
+package co.edu.javeriana.ambulancias.entidades;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,6 +17,10 @@ import co.edu.javeriana.ambulancias.ambulancias.Ambulancia;
 import co.edu.javeriana.ambulancias.ambulancias.AmbulanciaBasica;
 import co.edu.javeriana.ambulancias.ambulancias.AmbulanciaNoMedicalizada;
 import co.edu.javeriana.ambulancias.ambulancias.AmbulanciaUCI;
+import co.edu.javeriana.ambulancias.enums.EstadoServicio;
+import co.edu.javeriana.ambulancias.enums.TipoDireccion;
+import co.edu.javeriana.ambulancias.enums.TipoServicio;
+import co.edu.javeriana.ambulancias.enums.TipoUCI;
 import co.edu.javeriana.ambulancias.presentacion.Utils;
 
 /**
@@ -121,7 +125,7 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 	 * @param carrera
 	 * @param numero
 	 */
-	public void agregarIPS(String nombre, String tipoAtencion, String tipoDireccion, int calle, int carrera, int numero)
+	public void agregarIPS(String nombre, String tipoAtencion, TipoDireccion tipoDireccion, int calle, int carrera, int numero)
 	{
 		IPS ips = new IPS(nombre, tipoAtencion, tipoDireccion, calle, carrera, numero);
 		
@@ -138,7 +142,7 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 	 * @param placa
 	 * @param tipoDotacion
 	 */
-	public void agregarAmbulancia(String tipoAmbulancia, int codigo, String placa, String medicoEnfermero, String tipoUCI) // Change parameters to match new requirements
+	public void agregarAmbulancia(String tipoAmbulancia, int codigo, String placa, String medicoEnfermero, TipoUCI tipoUCI) // Change parameters to match new requirements
 	{
 		Ambulancia ambulancia = null; 
 		
@@ -238,12 +242,12 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 		for(Servicio servicio : serviciosList)
 		{
 			
-			if(servicio.getCodigo() == codigo && servicio.getEstado().equals("NO_ASIGNADO"))
+			if(servicio.getCodigo() == codigo && servicio.getEstado().equals(EstadoServicio.NO_ASIGNADO))
 			{
 				ArrayList<Ambulancia> ambulanciasDisponibles = construirAmbulanciasDisponibles(servicio);
 				if(!ambulanciasDisponibles.isEmpty())
 				{
-					if(servicio.getTipoServicio().equals("EMERGENCIA") || servicio.getTipoServicio().equals("URGENCIA"))
+					if(servicio.getTipoServicio().equals(TipoServicio.EMERGENCIA) || servicio.getTipoServicio().equals(TipoServicio.URGENCIA))
 					{	
 						Ambulancia ambulanciaMasCercana = calcularAmbulanciaMasCercana(ambulanciasDisponibles,
 																	servicio.getDireccion().getCalle(), 
@@ -252,7 +256,7 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 						
 						IPS ipsMasCercana = calcularIPSMasCercana(servicio.getDireccion().getCalle(), 
 																	servicio.getDireccion().getCarrera());
-						servicio.setEstado("ASIGNADO");
+						servicio.setEstado(EstadoServicio.ASIGNADO);
 						
 						servicio.setAmbulancia(ambulanciaMasCercana);
 						
@@ -264,14 +268,14 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 						return "Al servicio " + servicio.getCodigo() + " le fue asignada la ambulancia " + servicio.getAmbulancia().getCodigo()
 								+ " y la IPS " + servicio.getIps().getNombre();
 					}
-					else if(servicio.getTipoServicio().equals("DOMICILIO"))
+					else if(servicio.getTipoServicio().equals(TipoServicio.DOMICILIO))
 					{
 						Ambulancia ambulanciaMasCercana = calcularAmbulanciaMasCercana(ambulanciasDisponibles,
 								servicio.getDireccion().getCalle(), 
 								servicio.getDireccion().getCarrera());
 						
 						servicio.calcularValor(ambulanciaMasCercana);
-						servicio.setEstado("ASIGNADO");
+						servicio.setEstado(EstadoServicio.ASIGNADO);
 						
 						servicio.setAmbulancia(ambulanciaMasCercana);
 						
@@ -416,9 +420,9 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 		{
 			if(servicios.getCodigo() == codigo)
 			{
-				if(servicios.getEstado().equals("ASIGNADO"))
+				if(servicios.getEstado().equals(EstadoServicio.ASIGNADO))
 				{
-					servicios.setEstado("FINALIZDO");
+					servicios.setEstado(EstadoServicio.FINALIZADO);
 					servicios.getAmbulancia().setEstado(false);
 					servicios.getAmbulancia().setServicioActual(0);
 					System.out.println("Exito al finalizar el servicio con codigo " + servicios.getCodigo());

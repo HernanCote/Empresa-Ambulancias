@@ -1,11 +1,13 @@
 /**
  * 
  */
-package co.edu.javeriana.ambulancias.negocio;
+package co.edu.javeriana.ambulancias.entidades;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+
+import co.edu.javeriana.ambulancias.enums.TipoDireccion;
 
 
 
@@ -33,7 +35,7 @@ public class IPS
 	 * @param carrera
 	 * @param numero
 	 */
-	public IPS(String nombre,String tipoAtencion, String tipoDireccion, int calle, int carrera, int numero)
+	public IPS(String nombre,String tipoAtencion, TipoDireccion tipoDireccion, int calle, int carrera, int numero)
 	{
 		this.nombre = nombre;
 		this.tipoAtencion = tipoAtencion;
@@ -110,7 +112,7 @@ public class IPS
 	 * @param carrera
 	 * @param numero
 	 */
-	public void asignarDireccion(String tipoDireccion, int calle, int carrera, int numero)
+	public void asignarDireccion(TipoDireccion tipoDireccion, int calle, int carrera, int numero)
 	{
 		setDireccion(new Direccion(tipoDireccion, calle, carrera, numero));
 	}

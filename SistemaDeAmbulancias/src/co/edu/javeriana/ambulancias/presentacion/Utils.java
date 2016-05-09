@@ -12,9 +12,12 @@ import java.util.Scanner;
 
 import co.edu.javeriana.ambulancias.ambulancias.AmbulanciaMedicalizada;
 import co.edu.javeriana.ambulancias.ambulancias.AmbulanciaNoMedicalizada;
-import co.edu.javeriana.ambulancias.negocio.Direccion;
-import co.edu.javeriana.ambulancias.negocio.EmpresaAmbulancias;
-import co.edu.javeriana.ambulancias.negocio.Servicio;
+import co.edu.javeriana.ambulancias.entidades.Direccion;
+import co.edu.javeriana.ambulancias.entidades.EmpresaAmbulancias;
+import co.edu.javeriana.ambulancias.entidades.Servicio;
+import co.edu.javeriana.ambulancias.enums.EstadoServicio;
+import co.edu.javeriana.ambulancias.enums.TipoDireccion;
+import co.edu.javeriana.ambulancias.enums.TipoServicio;
 import co.edu.javeriana.ambulancias.persistencia.ManejoArchivos;
 
 /**
@@ -205,13 +208,30 @@ public class Utils  {
 			System.out.print("Nombre Paciente: ");
 			nomPaciente = br.readLine();
 			System.out.print("Tipo Servicio (URGENCIA, EMERGENCIA o DOMICILIO): ");
-			tipoServ = br.readLine().toUpperCase(); 
+			tipoServ = br.readLine().toUpperCase();
+			
+			TipoServicio tipoServicio = null;
+			
+			if(tipoServ.equals("DOMICILIO"))
+			{
+				tipoServicio = TipoServicio.DOMICILIO;
+			}
+			else if(tipoServ.equals("URGENCIA"))
+			{
+				tipoServicio = TipoServicio.URGENCIA;
+			}
+			else if(tipoServ.equals("EMERGENCIA"))
+			{
+				tipoServicio = TipoServicio.EMERGENCIA;
+			}
 			System.out.print("Telefono: ");
 			telefono = br.readLine();
 			System.out.print("Tipo Direccion CARRERA o CALLE: ");
 			tipoDireccion = br.readLine().toUpperCase();
+			TipoDireccion tipoDir;
 			if (tipoDireccion.equals("CARRERA")) 
 			{
+				tipoDir = TipoDireccion.CARRERA;
 				System.out.print("Carrera: ");
 				carrera = Integer.parseInt(br.readLine());
 				System.out.print("Calle: ");
@@ -221,6 +241,7 @@ public class Utils  {
 			}
 			else 
 			{
+				tipoDir = TipoDireccion.CALLE;
 				System.out.print("Calle: ");
 				calle = Integer.parseInt(br.readLine());
 				System.out.print("Carrera: ");
@@ -228,18 +249,20 @@ public class Utils  {
 				System.out.print("Numero: ");
 				numero = Integer.parseInt(br.readLine());
 			}
+			
+			Direccion tempDir = new Direccion (tipoDir, calle, carrera, numero);
+			Servicio tempServ = new Servicio (nomPaciente, tipoServicio, telefono, tempDir);
+			
+			empresaAmbulancias.registrarServicio(tempServ);
+			
+			System.out.println("El nuevo Servicio tiene codigo: " + tempServ.getCodigo());
 		} 
 		catch (Exception e) 
 		{
 			System.out.println("Error En La Creacion Del Servicio");
 		}
 		
-		Direccion tempDir = new Direccion (tipoDireccion, calle, carrera, numero);
-		Servicio tempServ = new Servicio (nomPaciente,tipoServ, telefono, tempDir);
 		
-		empresaAmbulancias.registrarServicio(tempServ);
-		
-		System.out.println("El nuevo Servicio tiene codigo: " + tempServ.getCodigo());
 	}
 	
 	
@@ -289,7 +312,7 @@ public class Utils  {
 			int cont = 0;
 			for(Servicio servicio : empresaAmbulancias.getServicios())
 			{
-				if(servicio.getEstado().equals("NO_ASIGNADO"))
+				if(servicio.getEstado().equals(EstadoServicio.NO_ASIGNADO))
 				{
 					servicio.printNoAsignados();
 					cont++;
@@ -330,7 +353,7 @@ public class Utils  {
 		
 		for(Servicio servicios : empresaAmbulancias.getServicios())
 		{
-			if(servicios.getEstado().equals("ASIGNADO"))
+			if(servicios.getEstado().equals(EstadoServicio.ASIGNADO))
 			{
 				servicios.printAsignados();
 				cont++;
@@ -365,6 +388,7 @@ public class Utils  {
 	 */
 	
 	public static void pacientesAtendidos (EmpresaAmbulancias emresaAmbulancias) {
+		
 		ArrayList <Servicio> listaServicios = emresaAmbulancias.getServicios();
 		Collections.sort(listaServicios, new Comparator <Servicio> () 
 		{
@@ -373,20 +397,29 @@ public class Utils  {
 				return o1.getHoraSolicitud().compareTo(o2.getHoraSolicitud());
 			}
 		});
+		
 		System.out.println(EmpresaAmbulancias.LINE_SEPARATOR);
 		System.out.format("%4s%19s%20s%15s%20s%17s%25s%n", "HoraSolicitud","Paciente","TipoServicio","Telefono","Direccion","Estado","MedicoEnfermero");
 		System.out.println(EmpresaAmbulancias.LINE_SEPARATOR);
-		for (Servicio serv : listaServicios) {
-			if (serv.getEstado().equals(Servicio.TAG_ASIGNADO)) {
+		for (Servicio serv : listaServicios) 
+		{
+			if (serv.getEstado().equals(EstadoServicio.ASIGNADO)) 
+			{
 				String medicoEnfermero = "NO_ASIGNADO";
 				if (serv.getAmbulancia() instanceof AmbulanciaMedicalizada)
+				{
 					medicoEnfermero = ((AmbulanciaMedicalizada) serv.getAmbulancia()).getMedico();
+				}
 				else
+				{
 					medicoEnfermero = ((AmbulanciaNoMedicalizada) serv.getAmbulancia()).getEnfermo();
+				}
 				System.out.format("%4s%26s%15s%20s%25s%13s%23s%n", Utils.formatoHora(serv.getHoraSolicitud()), 
 						serv.getPaciente(), serv.getTipoServicio(), serv.getTelefono(), 
 						serv.getDireccion().toString(), serv.getEstado(), medicoEnfermero);
-			} else {
+			} 
+			else 
+			{
 				String medicoEnfermero = "NA"; 
 				System.out.format("%4s%26s%15s%20s%25s%13s%23s%n", Utils.formatoHora(serv.getHoraSolicitud()), 
 						serv.getPaciente(), serv.getTipoServicio(), serv.getTelefono(), 

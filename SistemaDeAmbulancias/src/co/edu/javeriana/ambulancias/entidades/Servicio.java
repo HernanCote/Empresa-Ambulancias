@@ -1,8 +1,11 @@
-package co.edu.javeriana.ambulancias.negocio;
+package co.edu.javeriana.ambulancias.entidades;
 
 import java.util.GregorianCalendar;
 
 import co.edu.javeriana.ambulancias.ambulancias.Ambulancia;
+import co.edu.javeriana.ambulancias.enums.EstadoServicio;
+import co.edu.javeriana.ambulancias.enums.TipoDireccion;
+import co.edu.javeriana.ambulancias.enums.TipoServicio;
 import co.edu.javeriana.ambulancias.presentacion.Utils;
 
 /**
@@ -12,21 +15,20 @@ import co.edu.javeriana.ambulancias.presentacion.Utils;
  */
 public class Servicio 
 {
-	public static final String TAG_ASIGNADO = "ASIGNADO";
 	private IPS ips;
 	private Ambulancia ambulancia;
 	private static long CONSECUTIVO = 0;
 	private long codigo;
 	private GregorianCalendar horaSolicitud;
 	private String paciente;
-	private String tipoServicio;
+	private TipoServicio tipoServicio;
 	private String telefono;
-	private String estado;
+	private EstadoServicio estado;
 	private Direccion direccion;
 	private long valor;
 	
 	
-	public Servicio(String paciente,String tipoServicio, String telefono,Direccion direccion)
+	public Servicio(String paciente,TipoServicio tipoServicio, String telefono,Direccion direccion)
 	{			
 		CONSECUTIVO++;
 		this.setCodigo(CONSECUTIVO);
@@ -34,7 +36,7 @@ public class Servicio
 		this.paciente = paciente;
 		this.tipoServicio = tipoServicio;
 		this.telefono = telefono;
-		this.estado = "NO_ASIGNADO";
+		this.estado = EstadoServicio.NO_ASIGNADO;
 		this.direccion = direccion;
 		this.setIps(null);
 		this.setAmbulancia(null);
@@ -120,7 +122,7 @@ public class Servicio
 	 * Gets the type of service
 	 * @return
 	 */
-	public String getTipoServicio() 
+	public TipoServicio getTipoServicio() 
 	{
 		return tipoServicio;
 	}
@@ -128,7 +130,7 @@ public class Servicio
 	 * Sets the type of service.
 	 * @param tipoServicio
 	 */
-	public void setTipoServicio(String tipoServicio)
+	public void setTipoServicio(TipoServicio tipoServicio)
 	{
 		this.tipoServicio = tipoServicio;
 	}
@@ -152,7 +154,7 @@ public class Servicio
 	 * Gets the state of the service.
 	 * @return
 	 */
-	public String getEstado()
+	public EstadoServicio getEstado()
 	{
 		return estado;
 	}
@@ -160,7 +162,7 @@ public class Servicio
 	 * Sets the state of the service.
 	 * @param estado
 	 */
-	public void setEstado(String estado) 
+	public void setEstado(EstadoServicio estado) 
 	{
 		this.estado = estado;
 	}
@@ -195,7 +197,7 @@ public class Servicio
 	 * @param numero
 	 */
 	
-	public void asignarDireccion(String tipoDireccion, int calle, int carrera, int numero)
+	public void asignarDireccion(TipoDireccion tipoDireccion, int calle, int carrera, int numero)
 	{
 		setDireccion(new Direccion(tipoDireccion, calle, carrera, numero));
 	}

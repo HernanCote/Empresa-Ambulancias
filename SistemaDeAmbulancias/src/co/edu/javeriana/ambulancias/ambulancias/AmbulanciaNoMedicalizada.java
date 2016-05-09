@@ -13,7 +13,7 @@ import co.edu.javeriana.ambulancias.presentacion.Utils;
  */
 
 public class AmbulanciaNoMedicalizada extends Ambulancia{
-	public static final String LABEL_TIPO_AMBULANCIA = "NoMedicalizada";
+	public static final String LABEL_TIPO_AMBULANCIA = "NO MEDICALIZADA";
 	private String enfermero;
 
 	/**
