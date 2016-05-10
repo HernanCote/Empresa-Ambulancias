@@ -38,45 +38,47 @@ public class IngresarIpsYAmbulanciasController implements ActionListener
 		{
 			ingresarIpsYAmbulanciasView.getTabbedPane().setSelectedIndex(0);
 		}
-		else if(object.equals(ingresarIpsYAmbulanciasView.getBtnSeleccionarIps())) 
-		{			
-			fileChooser.setDialogTitle("Escoga un archivo para cargar las IPS");			
-			if(fileChooser.showOpenDialog(ingresarIpsYAmbulanciasView) == JFileChooser.APPROVE_OPTION)
-			{
-				String AbsolutePath = fileChooser.getSelectedFile().getAbsolutePath();
-				boolean cargaDeInfo = false;
-				cargaDeInfo = ManejoArchivos.leerIPS(AbsolutePath, empresaAmbulancias);
-				if(cargaDeInfo)
+		else {		
+			if(object.equals(ingresarIpsYAmbulanciasView.getBtnSeleccionarIps())) 
+			{			
+				fileChooser.setDialogTitle("Escoga un archivo para cargar las IPS");			
+				if(fileChooser.showOpenDialog(ingresarIpsYAmbulanciasView) == JFileChooser.APPROVE_OPTION)
 				{
-					JOptionPane.showMessageDialog(ingresarIpsYAmbulanciasView, 
-							"Se cargaron " + empresaAmbulancias.getIps().size() + " IPS al sistema");
-				}
-				else
-				{
-					JOptionPane.showMessageDialog(ingresarIpsYAmbulanciasView, "Error al cargar las IPS, "
-							+ "puede que el archivo este corrupto o no se haya encontrado el archivo");
+					String AbsolutePath = fileChooser.getSelectedFile().getAbsolutePath();
+					boolean cargaDeInfo = false;
+					cargaDeInfo = ManejoArchivos.leerIPS(AbsolutePath, empresaAmbulancias);
+					if(cargaDeInfo)
+					{
+						JOptionPane.showMessageDialog(ingresarIpsYAmbulanciasView, 
+								"Se cargaron " + empresaAmbulancias.getIps().size() + " IPS al sistema");
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(ingresarIpsYAmbulanciasView, "Error al cargar las IPS, "
+								+ "puede que el archivo este corrupto o no se haya encontrado el archivo");
+					}
 				}
 			}
-		}
-		else if(object.equals(ingresarIpsYAmbulanciasView.getBtnSeleccionarAmbulancia())) 
-		{			
-			if(fileChooser.showOpenDialog(ingresarIpsYAmbulanciasView) == JFileChooser.APPROVE_OPTION)
-			{
-				String AbsolutePath = fileChooser.getSelectedFile().getAbsolutePath();
-				boolean cargaDeInfo = false;
-				cargaDeInfo = ManejoArchivos.leerAmbulancias(AbsolutePath, empresaAmbulancias);
-				if(cargaDeInfo)
+			else if(object.equals(ingresarIpsYAmbulanciasView.getBtnSeleccionarAmbulancia())) 
+			{			
+				if(fileChooser.showOpenDialog(ingresarIpsYAmbulanciasView) == JFileChooser.APPROVE_OPTION)
 				{
-					JOptionPane.showMessageDialog(ingresarIpsYAmbulanciasView, 
-							"Se cargaron " + empresaAmbulancias.getAmbulancias().size() + " Ambulancias al sistema");
-				}
-				else
-				{
-					JOptionPane.showMessageDialog(ingresarIpsYAmbulanciasView, "Error al cargar las Ambulancias, "
-							+ "puede que el archivo este corrupto o no se haya encontrado el archivo");
-				}
-			}			
-			
+					String AbsolutePath = fileChooser.getSelectedFile().getAbsolutePath();
+					boolean cargaDeInfo = false;
+					cargaDeInfo = ManejoArchivos.leerAmbulancias(AbsolutePath, empresaAmbulancias);
+					if(cargaDeInfo)
+					{
+						JOptionPane.showMessageDialog(ingresarIpsYAmbulanciasView, 
+								"Se cargaron " + empresaAmbulancias.getAmbulancias().size() + " Ambulancias al sistema");
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(ingresarIpsYAmbulanciasView, "Error al cargar las Ambulancias, "
+								+ "puede que el archivo este corrupto o no se haya encontrado el archivo");
+					}
+				}			
+				
+			}
 		}
 	}
 }
