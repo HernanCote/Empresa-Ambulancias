@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import co.edu.javeriana.ambulancias.ambulancias.Ambulancia;
 import co.edu.javeriana.ambulancias.entidades.EmpresaAmbulancias;
 import co.edu.javeriana.ambulancias.enums.TipoDireccion;
 import co.edu.javeriana.ambulancias.enums.TipoUCI;
@@ -19,7 +20,6 @@ import co.edu.javeriana.ambulancias.enums.TipoUCI;
  */
 public class ManejoArchivos 
 {
-	private static String path = System.getProperty("user.dir") + File.separator;
 	private static BufferedReader bReader;
 	  
 	/**
@@ -31,7 +31,7 @@ public class ManejoArchivos
 	  public static boolean leerIPS(String fileName, EmpresaAmbulancias empresaAmbulancias)
 	  {	  
 		boolean archivoLeido = false;  
-	    File dir = new File(path + fileName);
+	    File dir = new File(fileName);
 	    if (dir.exists()) 
 	    {
 	      try
@@ -45,7 +45,7 @@ public class ManejoArchivos
 	        }
 	        while (!fileRead.matches("0"))
 	        {
-	          int numeroTipoDirecion = 0;
+	          
 	          String[] tokens = fileRead.split(",");
 	          String nombre = tokens[0].trim();
 	          String tipoAtencion = tokens[1].trim();
@@ -53,7 +53,8 @@ public class ManejoArchivos
 	          
 	          int calle = Integer.parseInt(tokens[3].trim());
 	          int carrera = Integer.parseInt(tokens[4].trim());
-	          int numero = Integer.parseInt(tokens[5].trim());
+	          int numero = Integer.parseInt(tokens[5].trim());	          
+	          
 	          
 	          if(tipoDireccion.equals("CARRERA"))
 	          {
@@ -100,7 +101,7 @@ public class ManejoArchivos
 	  public static boolean leerAmbulancias(String fileName, EmpresaAmbulancias empresaAmbulancias)
 	  {	  
 		boolean archivoLeido = false;  
-	    File dir = new File(path + fileName);
+	    File dir = new File(fileName);
 	    if (dir.exists()) 
 	    {
 	      try

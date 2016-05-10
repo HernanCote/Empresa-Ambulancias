@@ -6,6 +6,7 @@ import java.awt.Color;
 import javax.swing.JTabbedPane;
 
 import co.edu.javeriana.ambulancias.controllers.MenuController;
+import co.edu.javeriana.ambulancias.entidades.EmpresaAmbulancias;
 import co.edu.javeriana.ambulancias.views.*;
 
 public class PanelPrincipal extends JPanel 
@@ -21,6 +22,7 @@ public class PanelPrincipal extends JPanel
 	private ReporteServiciosAsignados tabReporteServiciosConIpsYAmbulanciasAsignados;
 	private ReporteServiciosAsociados tabReporteDeIpsConServiciosAsociados;
 	
+	private EmpresaAmbulancias empresaAmbulancias;
 	
 	
 	
@@ -34,6 +36,8 @@ public class PanelPrincipal extends JPanel
 	 */
 	public PanelPrincipal() 
 	{		
+		setEmpresaAmbulancias(new EmpresaAmbulancias("Ambulancias Peñalosa y Cote S.A."));
+		
 		setBounds(100, 100, 670, 528);
 		setBackground(Color.WHITE);
 		setLayout(null);
@@ -51,7 +55,7 @@ public class PanelPrincipal extends JPanel
 		//------------------------------------------------------------------------------		
 		
 					
-		tabIngresarIpsAmbulancias = new IngresarIpsYAmbulanciasView();		
+		tabIngresarIpsAmbulancias = new IngresarIpsYAmbulanciasView(tabbedPane, empresaAmbulancias);		
 		tabbedPane.addTab("Ingresar IPS y Ambulancias", null, tabIngresarIpsAmbulancias, null);
 		
 		//----------------------------------------------------------------------------------
@@ -84,5 +88,16 @@ public class PanelPrincipal extends JPanel
 		
 		tabReporteDeIpsConServiciosAsociados = new ReporteServiciosAsociados();		
 		tabbedPane.addTab("Reporte de IPS con servicios asociados", null, tabReporteDeIpsConServiciosAsociados, null);
+	}
+
+	
+	public EmpresaAmbulancias getEmpresaAmbulancias() 
+	{
+		return empresaAmbulancias;
+	}
+
+	public void setEmpresaAmbulancias(EmpresaAmbulancias empresaAmbulancias) 
+	{
+		this.empresaAmbulancias = empresaAmbulancias;
 	}
 }

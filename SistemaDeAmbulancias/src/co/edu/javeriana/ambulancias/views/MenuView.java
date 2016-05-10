@@ -91,8 +91,6 @@ public class MenuView extends JPanel
 		getBtnIngresarIPSAmb().setBounds(155, 408, 202, 41);
 		getBtnIngresarIPSAmb().addActionListener(menuController);
 		add(getBtnIngresarIPSAmb());
-		
-		
 	}
 	
 	
