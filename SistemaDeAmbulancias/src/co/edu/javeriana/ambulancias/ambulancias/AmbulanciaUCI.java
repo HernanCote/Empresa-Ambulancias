@@ -31,8 +31,9 @@ public class AmbulanciaUCI extends AmbulanciaMedicalizada{
 	 * Gets the type of ICU
 	 * @return
 	 */
-	public TipoUCI getTipoUCI() {
-		return tipoUCI;
+	public String getTipoUCI() {
+		if (tipoUCI.equals(TipoUCI.CARDIOVASCULAR)) return "CARDIOVASCULAR";
+		else return "PEDIATRICA";
 	}
 	
 	/**

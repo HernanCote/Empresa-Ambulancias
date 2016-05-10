@@ -15,6 +15,7 @@ import java.util.TreeSet;
 
 import co.edu.javeriana.ambulancias.ambulancias.Ambulancia;
 import co.edu.javeriana.ambulancias.ambulancias.AmbulanciaBasica;
+import co.edu.javeriana.ambulancias.ambulancias.AmbulanciaMedicalizada;
 import co.edu.javeriana.ambulancias.ambulancias.AmbulanciaNoMedicalizada;
 import co.edu.javeriana.ambulancias.ambulancias.AmbulanciaUCI;
 import co.edu.javeriana.ambulancias.enums.EstadoServicio;
@@ -34,6 +35,13 @@ import co.edu.javeriana.ambulancias.presentacion.Utils;
  */
 public class EmpresaAmbulancias implements IServiciosAmbulancias
 {
+	
+	// Only Instance
+	private static EmpresaAmbulancias instance = null;
+	//
+	
+	
+	
 	public static final String LINE_SEPARATOR = "-----------------------------------------------------------------------------------------------------------------------------";
 	
 	public static final String TAG_AMBULANCIA_BASICA = "BASICA";
@@ -44,13 +52,27 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 	private HashMap <Integer, Ambulancia> ambulanciasList;
 	private String nombre;
 
-	public EmpresaAmbulancias(String nombre)
+	private EmpresaAmbulancias(String nombre)
 	{
 		this.nombre = nombre;
 		this.ipsList = new HashMap<String, IPS>();
 		this.serviciosList = new ArrayList<Servicio>();
 		this.ambulanciasList = new HashMap<Integer, Ambulancia>();
 	}
+	
+	/**
+	 * Gets instance of EmpresaAmbulancia
+	 * @return empresaAmbulancia
+	 */
+	
+	public static EmpresaAmbulancias getInstance() {
+	      if(instance == null) {
+	         instance = new EmpresaAmbulancias("Ambulancias Pe�alosa y Cote S.A.");
+	      }
+	      return instance;
+	   } 
+	
+	
 	/**
 	 * Gets the name of the company.
 	 * @return
@@ -622,6 +644,50 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 			System.out.println("No hay ambulancias registradas en el sistema");
 			System.out.println("--------------------------------------------");
 		}
+	}
+	
+	public String [][] getTableAmbulancias () {
+		ArrayList < ArrayList <String> > tableAmbulancias = new ArrayList< ArrayList <String> >();
+		
+		// {"Codigo","Tipo","Placa","Tipo UCI","Hora Posicion", "Calle", "Carrera"};
+		
+		for (Integer key : ambulanciasList.keySet()) {
+			Ambulancia ambu = ambulanciasList.get(key);
+			ArrayList <String> tempArray = new ArrayList<String>();
+			tempArray.add(String.valueOf(key));
+			if (ambu instanceof AmbulanciaUCI) {
+				tempArray.add("UCI");
+			}
+			if (ambu instanceof AmbulanciaBasica) {
+				tempArray.add("Basica");
+			}
+			if (ambu instanceof AmbulanciaNoMedicalizada) {
+				tempArray.add("NoMedicalizada");
+			}
+			if (ambu instanceof AmbulanciaMedicalizada) {
+				tempArray.add("Medicalizada");
+			}
+			
+			tempArray.add(ambu.getPlaca());
+			if (ambu instanceof AmbulanciaUCI) {
+				tempArray.add( ((AmbulanciaUCI) ambu).getTipo() );
+			} else {
+				tempArray.add("     ");
+			}
+			tempArray.add(Utils.formatoHora(ambu.getHoraPosicion()));
+			tempArray.add( String.valueOf(ambu.getPosicionCalle()) );
+			tempArray.add(String.valueOf(ambu.getPosicionCarrera()));
+			
+			tableAmbulancias.add(tempArray);
+			
+		}
+		String[][] table = new String[tableAmbulancias.size()][];
+		for (int i = 0; i < tableAmbulancias.size(); i++) {
+		    ArrayList<String> row = tableAmbulancias.get(i);
+		    table[i] = row.toArray(new String[row.size()]);
+		} 
+		
+		return table;
 	}
 	
 }

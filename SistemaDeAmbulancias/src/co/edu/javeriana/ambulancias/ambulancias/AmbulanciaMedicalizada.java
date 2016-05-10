@@ -30,7 +30,7 @@ public abstract class AmbulanciaMedicalizada extends Ambulancia
 	
 	/**
 	 * Gets the type of ambulance
-	 * @return type of amnulance
+	 * @return type of ambulance
 	 */
 	public String getTipo()
 	{
