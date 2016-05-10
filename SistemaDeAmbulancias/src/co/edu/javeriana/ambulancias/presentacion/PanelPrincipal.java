@@ -36,7 +36,7 @@ public class PanelPrincipal extends JPanel
 	 */
 	public PanelPrincipal() 
 	{		
-		setEmpresaAmbulancias(new EmpresaAmbulancias("Ambulancias Peñalosa y Cote S.A."));
+		setEmpresaAmbulancias(EmpresaAmbulancias.getInstance());
 		
 		setBounds(100, 100, 670, 528);
 		setBackground(Color.WHITE);
