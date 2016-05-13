@@ -37,7 +37,7 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 {
 	
 	// Only Instance
-	private static EmpresaAmbulancias instance = null;
+	private static IServiciosAmbulancias instance = null;
 	//
 	
 	
@@ -65,7 +65,7 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 	 * @return empresaAmbulancia
 	 */
 	
-	public static EmpresaAmbulancias getInstance() {
+	public static IServiciosAmbulancias getInstance() {
 	      if(instance == null) {
 	         instance = new EmpresaAmbulancias("Ambulancias Pe�alosa y Cote S.A.");
 	      }
@@ -664,16 +664,24 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 			if (ambu instanceof AmbulanciaNoMedicalizada) {
 				tempArray.add("NoMedicalizada");
 			}
+			
+			
+			
+			if (ambu instanceof AmbulanciaUCI) {
+				tempArray.add( ((AmbulanciaUCI) ambu).getTipoUCI() );
+			} else {
+				tempArray.add("NA");
+			}
+			tempArray.add(ambu.getPlaca());
+			
 			if (ambu instanceof AmbulanciaMedicalizada) {
-				tempArray.add("Medicalizada");
+				tempArray.add(((AmbulanciaMedicalizada) ambu).getMedico());
 			}
 			
-			tempArray.add(ambu.getPlaca());
-			if (ambu instanceof AmbulanciaUCI) {
-				tempArray.add( ((AmbulanciaUCI) ambu).getTipo() );
-			} else {
-				tempArray.add("     ");
+			if (ambu instanceof AmbulanciaNoMedicalizada) {
+				tempArray.add(((AmbulanciaNoMedicalizada) ambu).getEnfermo());
 			}
+			
 			tempArray.add(Utils.formatoHora(ambu.getHoraPosicion()));
 			tempArray.add( String.valueOf(ambu.getPosicionCalle()) );
 			tempArray.add(String.valueOf(ambu.getPosicionCarrera()));

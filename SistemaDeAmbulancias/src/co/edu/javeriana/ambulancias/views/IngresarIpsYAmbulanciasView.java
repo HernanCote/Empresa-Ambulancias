@@ -1,19 +1,23 @@
 package co.edu.javeriana.ambulancias.views;
 
 import java.awt.Color;
+import java.awt.Font;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import co.edu.javeriana.ambulancias.controllers.IngresarIpsYAmbulanciasController;
 import co.edu.javeriana.ambulancias.entidades.EmpresaAmbulancias;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import java.awt.Font;
-
 public class IngresarIpsYAmbulanciasView extends JPanel 
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private IngresarIpsYAmbulanciasController ingresarIpsYAmbulanciasController;
 	
 	private JTabbedPane tabbedPane;
