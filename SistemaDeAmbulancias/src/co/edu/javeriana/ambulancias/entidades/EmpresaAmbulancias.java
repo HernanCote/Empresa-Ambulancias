@@ -649,9 +649,13 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 	public String [][] getTableAmbulancias () {
 		ArrayList < ArrayList <String> > tableAmbulancias = new ArrayList< ArrayList <String> >();
 		
+		
+		TreeSet<Integer> keys = new TreeSet<Integer>(ambulanciasList.keySet());
+		
+		
 		// {"Codigo","Tipo","Placa","Tipo UCI","Hora Posicion", "Calle", "Carrera"};
 		
-		for (Integer key : ambulanciasList.keySet()) {
+		for (Integer key : keys) {
 			Ambulancia ambu = ambulanciasList.get(key);
 			ArrayList <String> tempArray = new ArrayList<String>();
 			tempArray.add(String.valueOf(key));
@@ -690,9 +694,10 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 			
 		}
 		String[][] table = new String[tableAmbulancias.size()][];
-		for (int i = 0; i < tableAmbulancias.size(); i++) {
+		int cont = 0;
+		for (int i = tableAmbulancias.size() - 1; i >= 0; i--) {
 		    ArrayList<String> row = tableAmbulancias.get(i);
-		    table[i] = row.toArray(new String[row.size()]);
+		    table[cont++] = row.toArray(new String[row.size()]);
 		} 
 		
 		return table;
