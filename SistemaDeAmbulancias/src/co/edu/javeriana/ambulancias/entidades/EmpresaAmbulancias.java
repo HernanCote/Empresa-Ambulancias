@@ -36,9 +36,7 @@ import co.edu.javeriana.ambulancias.presentacion.Utils;
 public class EmpresaAmbulancias implements IServiciosAmbulancias
 {
 	
-	// Only Instance
-	private static IServiciosAmbulancias instance = null;
-	//
+	
 	
 	
 	
@@ -52,7 +50,7 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 	private HashMap <Integer, Ambulancia> ambulanciasList;
 	private String nombre;
 
-	private EmpresaAmbulancias(String nombre)
+	public EmpresaAmbulancias(String nombre)
 	{
 		this.nombre = nombre;
 		this.ipsList = new HashMap<String, IPS>();
@@ -65,12 +63,7 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 	 * @return empresaAmbulancia
 	 */
 	
-	public static IServiciosAmbulancias getInstance() {
-	      if(instance == null) {
-	         instance = new EmpresaAmbulancias("Ambulancias Pe�alosa y Cote S.A.");
-	      }
-	      return instance;
-	   } 
+	
 	
 	
 	/**

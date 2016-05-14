@@ -7,48 +7,54 @@ import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 
 import co.edu.javeriana.ambulancias.entidades.EmpresaAmbulancias;
+import co.edu.javeriana.ambulancias.presentacion.VentanaPrincipal;
 import co.edu.javeriana.ambulancias.views.RegistrarPosicionAmbulanciaView;
 
 public class RegistrarPosicionAmbulanciaController implements ActionListener {
 	
-	private RegistrarPosicionAmbulanciaView viewRegistrarPosicionAmbulancia; 
+	private VentanaPrincipal ventanaPrincipal; 
 	
 	
 
-	public RegistrarPosicionAmbulanciaController(RegistrarPosicionAmbulanciaView viewRegistrarPosicionAmbulancia) {
-		this.viewRegistrarPosicionAmbulancia = viewRegistrarPosicionAmbulancia;
+	public RegistrarPosicionAmbulanciaController(VentanaPrincipal ventanaPrincipal) {
+		this.ventanaPrincipal = ventanaPrincipal;
 	}
 
 
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource().equals(viewRegistrarPosicionAmbulancia.getBtnActualizar())) {
-			String [][] temp = ((EmpresaAmbulancias)EmpresaAmbulancias.getInstance()).getTableAmbulancias();
-			viewRegistrarPosicionAmbulancia.addRowToTable(temp);
-			
+		if (e.getSource().equals(ventanaPrincipal.getPanelPrincipal().getTabRegistrarPosicionAmbulancia().getBtnActualizar())) {
+			actualizarPosicion();			
 		}
 		
-		if (e.getSource().equals(viewRegistrarPosicionAmbulancia.getBtnRegistrar())) {
+		if (e.getSource().equals(ventanaPrincipal.getPanelPrincipal().getTabRegistrarPosicionAmbulancia().getBtnRegistrar())) {
 			int calle = 0;
 			int carrera = 0;
 			try {
-				calle = Integer.parseInt(viewRegistrarPosicionAmbulancia.getTextFieldCalle().getText());
-			    carrera = Integer.parseInt(viewRegistrarPosicionAmbulancia.getTextFieldCarrera().getText());
+				calle = Integer.parseInt(ventanaPrincipal.getPanelPrincipal().getTabRegistrarPosicionAmbulancia().getTextFieldCalle().getText());
+			    carrera = Integer.parseInt(ventanaPrincipal.getPanelPrincipal().getTabRegistrarPosicionAmbulancia().getTextFieldCarrera().getText());
 			} catch (Exception exp) {
-				JOptionPane.showMessageDialog(viewRegistrarPosicionAmbulancia, "Error En Valores Ingresados.", "ERROR",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(ventanaPrincipal, "Error En Valores Ingresados.", "ERROR",JOptionPane.ERROR_MESSAGE);
 			}
 			GregorianCalendar date = new GregorianCalendar();
-			int codigo = viewRegistrarPosicionAmbulancia.getSelectedRowCode();
-			((EmpresaAmbulancias)EmpresaAmbulancias.getInstance()).registrarPosicionAmbulancia(codigo, date, calle, carrera);
+			int codigo = ventanaPrincipal.getPanelPrincipal().getTabRegistrarPosicionAmbulancia().getSelectedRowCode();
+			ventanaPrincipal.getEmpresaAmbulancias().registrarPosicionAmbulancia(codigo, date, calle, carrera);
+			actualizarPosicion();
 			
 		}
 		
-		if(e.getSource().equals(viewRegistrarPosicionAmbulancia.getBtnRegresar()))
+		if(e.getSource().equals(ventanaPrincipal.getPanelPrincipal().getTabRegistrarPosicionAmbulancia().getBtnRegresar()))
 		{
-			viewRegistrarPosicionAmbulancia.getTabbedPane().setSelectedIndex(0);
+			ventanaPrincipal.getPanelPrincipal().getTabbedPane().setSelectedIndex(0);
 		}
 
+	}
+	
+	public void actualizarPosicion()
+	{
+		String [][] temp = ventanaPrincipal.getEmpresaAmbulancias().getTableAmbulancias();
+		ventanaPrincipal.getPanelPrincipal().getTabRegistrarPosicionAmbulancia().addRowToTable(temp);
 	}
 
 }

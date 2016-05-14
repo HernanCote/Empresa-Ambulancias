@@ -16,12 +16,17 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import co.edu.javeriana.ambulancias.controllers.RegistrarPosicionAmbulanciaController;
+import co.edu.javeriana.ambulancias.entidades.EmpresaAmbulancias;
+import co.edu.javeriana.ambulancias.entidades.IServiciosAmbulancias;
+import co.edu.javeriana.ambulancias.presentacion.VentanaPrincipal;
 
 public class RegistrarPosicionAmbulanciaView extends JPanel 
 {
 
 	private static final long serialVersionUID = 1L;
 	private JTabbedPane tabbedPane;
+	
+	private VentanaPrincipal ventanaPrincipal;
 	
 	private JButton btnActualizar, btnRegistrar;
 	private JPanel panelSouth;
@@ -32,33 +37,33 @@ public class RegistrarPosicionAmbulanciaView extends JPanel
 	private JPanel panelNorth;
 	private JLabel lblNewLabel;
 	private JTable tableAmbulancias;
-<<<<<<< HEAD
-	private String [] tableLabels = {"Codigo","Tipo","Placa","Tipo UCI","Hora Posicion", "Calle", "Carrera"};
-	private String [][] tableCont = {{"Codigo","Tipo","Placa","Tipo UCI","Hora Posicion", "Calle", "Carrera"}};
-=======
+
+	
+
 	private TableModel modelAmbulancias;
 	private String [] tableLabels = {"Codigo","Tipo","Tipo UCI","Placa", "Medico / Enfermero","Hora Posicion", "Calle", "Carrera"};
 	private String [][] tableCont = {};
 	private JButton btnRegresar;
 
-	public RegistrarPosicionAmbulanciaView(JTabbedPane tabbedPane ) 
+	public RegistrarPosicionAmbulanciaView(VentanaPrincipal ventanaPrincipal) 
 	{
+		this.ventanaPrincipal = ventanaPrincipal;
 		setTabbedPane(tabbedPane);
 		setBackground(Color.WHITE);
 		setLayout(new BorderLayout(0, 0));
 		
 		panelSouth = new JPanel();
 		btnActualizar = new JButton("Actualizar");
-		btnActualizar.addActionListener(new RegistrarPosicionAmbulanciaController(this));
+		btnActualizar.addActionListener(ventanaPrincipal.getController().getRegistrarPosicionAmbulanciaController());
 		btnRegistrar = new JButton("Registrar");
 		btnRegistrar.setEnabled(false);
-		btnRegistrar.addActionListener(new RegistrarPosicionAmbulanciaController(this));
+		btnRegistrar.addActionListener(ventanaPrincipal.getController().getRegistrarPosicionAmbulanciaController());
 		
 		btnRegresar = new JButton("Regresar");
 		panelSouth.add(btnRegresar);
 		panelSouth.add(btnActualizar);
 		panelSouth.add(btnRegistrar);
-		btnRegresar.addActionListener(new RegistrarPosicionAmbulanciaController(this));
+		btnRegresar.addActionListener(ventanaPrincipal.getController().getRegistrarPosicionAmbulanciaController());
 		add(panelSouth, BorderLayout.SOUTH);
 		
 		setLabels ();
@@ -87,7 +92,7 @@ public class RegistrarPosicionAmbulanciaView extends JPanel
 		int code = Integer.parseInt(tempCode);
 		return code;
 	}
->>>>>>> fb6d023fdc964ff12dc3d17f3b8388e7df96360a
+
 	
 	public void enableButons () {
 		btnRegistrar.setEnabled(true);
@@ -240,6 +245,7 @@ public class RegistrarPosicionAmbulanciaView extends JPanel
 	public void setTabbedPane(JTabbedPane tabbedPane) {
 		this.tabbedPane = tabbedPane;
 	}
+
 	
 	
 	

@@ -6,10 +6,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-
-import co.edu.javeriana.ambulancias.controllers.IngresarIpsYAmbulanciasController;
-import co.edu.javeriana.ambulancias.entidades.EmpresaAmbulancias;
+import co.edu.javeriana.ambulancias.presentacion.VentanaPrincipal;
 
 public class IngresarIpsYAmbulanciasView extends JPanel 
 {
@@ -18,9 +15,8 @@ public class IngresarIpsYAmbulanciasView extends JPanel
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private IngresarIpsYAmbulanciasController ingresarIpsYAmbulanciasController;
+	private VentanaPrincipal ventanaPrincipal;	
 	
-	private JTabbedPane tabbedPane;
 	
 	private JButton btnRegresar;
 	private JButton btnSeleccionarIps;
@@ -29,11 +25,10 @@ public class IngresarIpsYAmbulanciasView extends JPanel
 	/**
 	 * Create the panel.
 	 */
-	public IngresarIpsYAmbulanciasView(JTabbedPane tabbedPane, EmpresaAmbulancias empresaAmbulancias) 
+	public IngresarIpsYAmbulanciasView(VentanaPrincipal ventanaPrincipal) 
 	{
 		
-		setTabbedPane(tabbedPane);
-		ingresarIpsYAmbulanciasController = new IngresarIpsYAmbulanciasController(this, empresaAmbulancias);
+		this.setVentanaPrincipal(ventanaPrincipal);
 		setBackground(Color.WHITE);
 		setLayout(null);
 		
@@ -48,35 +43,26 @@ public class IngresarIpsYAmbulanciasView extends JPanel
 		getBtnRegresar().setBackground(new Color(178, 34, 34));
 		getBtnRegresar().setFont(new Font("Segoe UI", Font.PLAIN, 13));
 		getBtnRegresar().setBounds(583, 444, 104, 41);
-		getBtnRegresar().addActionListener(ingresarIpsYAmbulanciasController);
+		getBtnRegresar().addActionListener(ventanaPrincipal.getController().getIngresarIpsYAmbulanciasController());
 		add(getBtnRegresar());
 		
 		setBtnSeleccionarIps(new JButton("Seleccionar archivo de IPS"));
 		getBtnSeleccionarIps().setBackground(new Color(245, 245, 245));
 		getBtnSeleccionarIps().setFont(new Font("Segoe UI", Font.PLAIN, 14));
 		getBtnSeleccionarIps().setBounds(186, 154, 400, 46);
-		getBtnSeleccionarIps().addActionListener(ingresarIpsYAmbulanciasController);
+		getBtnSeleccionarIps().addActionListener(ventanaPrincipal.getController().getIngresarIpsYAmbulanciasController());
 		add(getBtnSeleccionarIps());
 		
 		setBtnSeleccionarAmbulancia(new JButton("Seleccionar archivo de ambulancias"));
 		getBtnSeleccionarAmbulancia().setBackground(new Color(245, 245, 245));
 		getBtnSeleccionarAmbulancia().setFont(new Font("Segoe UI", Font.PLAIN, 14));
 		getBtnSeleccionarAmbulancia().setBounds(186, 265, 400, 46);
-		getBtnSeleccionarAmbulancia().addActionListener(ingresarIpsYAmbulanciasController);
+		getBtnSeleccionarAmbulancia().addActionListener(ventanaPrincipal.getController().getIngresarIpsYAmbulanciasController());
 		add(getBtnSeleccionarAmbulancia());
 	}
 	
 	
-	public JTabbedPane getTabbedPane() 
-	{
-		return tabbedPane;
-	}
 	
-	public void setTabbedPane(JTabbedPane tabbedPane) 
-	{
-		this.tabbedPane = tabbedPane;
-	}
-
 	
 
 	public JButton getBtnRegresar() {
@@ -106,5 +92,21 @@ public class IngresarIpsYAmbulanciasView extends JPanel
 
 	public void setBtnSeleccionarAmbulancia(JButton btnSeleccionarAmbulancia) {
 		this.btnSeleccionarAmbulancia = btnSeleccionarAmbulancia;
+	}
+
+
+
+
+
+	public VentanaPrincipal getVentanaPrincipal() {
+		return ventanaPrincipal;
+	}
+
+
+
+
+
+	public void setVentanaPrincipal(VentanaPrincipal ventanaPrincipal) {
+		this.ventanaPrincipal = ventanaPrincipal;
 	}
 }

@@ -5,7 +5,6 @@ import java.awt.Color;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-import co.edu.javeriana.ambulancias.entidades.EmpresaAmbulancias;
 import co.edu.javeriana.ambulancias.views.AsignarServicioView;
 import co.edu.javeriana.ambulancias.views.FinalizarServicioView;
 import co.edu.javeriana.ambulancias.views.IngresarIpsYAmbulanciasView;
@@ -15,9 +14,13 @@ import co.edu.javeriana.ambulancias.views.RegistrarUnServicioView;
 import co.edu.javeriana.ambulancias.views.ReporteServiciosAsignados;
 import co.edu.javeriana.ambulancias.views.ReporteServiciosAsociados;
 
+@SuppressWarnings("serial")
 public class PanelPrincipal extends JPanel 
 {
 
+	@SuppressWarnings("unused")
+	private VentanaPrincipal ventanaPrincipal;
+	
 	private JTabbedPane tabbedPane;
 	private MenuView tabMenuServicios;
 	private IngresarIpsYAmbulanciasView tabIngresarIpsAmbulancias;
@@ -28,82 +31,99 @@ public class PanelPrincipal extends JPanel
 	private ReporteServiciosAsignados tabReporteServiciosConIpsYAmbulanciasAsignados;
 	private ReporteServiciosAsociados tabReporteDeIpsConServiciosAsociados;
 	
-	private EmpresaAmbulancias empresaAmbulancias;
 	
 	
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	
 
 	/**
 	 * Create the panel.
 	 */
-	public PanelPrincipal() 
+	public PanelPrincipal(VentanaPrincipal ventanaPrincipal) 
 	{		
-		setEmpresaAmbulancias((EmpresaAmbulancias)EmpresaAmbulancias.getInstance());
+		this.ventanaPrincipal = ventanaPrincipal;
 		
 		setBounds(100, 100, 670, 528);
 		setBackground(Color.WHITE);
 		setLayout(null);
 		
-		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(10, 11, 740, 578);
-		add(tabbedPane);
+		setTabbedPane(new JTabbedPane(JTabbedPane.TOP));
+		getTabbedPane().setBounds(10, 11, 740, 578);
+		add(getTabbedPane());
 		
 		//----------------------------------------------------
 		//----------------------------------------------------
 		
-		tabMenuServicios = new MenuView(tabbedPane);		
-		tabbedPane.addTab("Menu de Servicios", null, tabMenuServicios, null);
+		setTabMenuServicios(new MenuView(ventanaPrincipal));		
+		getTabbedPane().addTab("Menu de Servicios", null, getTabMenuServicios(), null);
 		
 		//------------------------------------------------------------------------------		
 		
 					
-		tabIngresarIpsAmbulancias = new IngresarIpsYAmbulanciasView(tabbedPane, empresaAmbulancias);		
-		tabbedPane.addTab("Ingresar IPS y Ambulancias", null, tabIngresarIpsAmbulancias, null);
+		setTabIngresarIpsAmbulancias(new IngresarIpsYAmbulanciasView(ventanaPrincipal));		
+		getTabbedPane().addTab("Ingresar IPS y Ambulancias", null, getTabIngresarIpsAmbulancias(), null);
 		
 		//----------------------------------------------------------------------------------
 		
-		tabRegistrarPosicionAmbulancia = new RegistrarPosicionAmbulanciaView(tabbedPane);		
-		tabbedPane.addTab("Registrar posicion de ambulancias", null, tabRegistrarPosicionAmbulancia, null);
+		setTabRegistrarPosicionAmbulancia(new RegistrarPosicionAmbulanciaView(ventanaPrincipal));		
+		getTabbedPane().addTab("Registrar posicion de ambulancias", null, getTabRegistrarPosicionAmbulancia(), null);
 		
 		
 		//---------------------------------------------------------------------------------
 		
 		tabRegistrarUnServicio = new RegistrarUnServicioView();		
-		tabbedPane.addTab("Registrar un servicio", null, tabRegistrarUnServicio, null);
+		getTabbedPane().addTab("Registrar un servicio", null, tabRegistrarUnServicio, null);
 		
 		//-------------------------------------------------------------------
 		
 		tabAsignarServicio = new AsignarServicioView();
-		tabbedPane.addTab("Asignar a servicio una ambulancias y una IPS", null, tabAsignarServicio, null);
+		getTabbedPane().addTab("Asignar a servicio una ambulancias y una IPS", null, tabAsignarServicio, null);
 		
 		//-----------------------------------------------------------------------
 		
 		tabFinalizarServicio = new FinalizarServicioView();
-		tabbedPane.addTab("Finalizar un servicio", null, tabFinalizarServicio, null);
+		getTabbedPane().addTab("Finalizar un servicio", null, tabFinalizarServicio, null);
 		
 		//-----------------------------------------------------------------------
 		
 		tabReporteServiciosConIpsYAmbulanciasAsignados = new ReporteServiciosAsignados();
-		tabbedPane.addTab("Reporte servicios con IPS y ambulancias asignados", null, tabReporteServiciosConIpsYAmbulanciasAsignados, null);
+		getTabbedPane().addTab("Reporte servicios con IPS y ambulancias asignados", null, tabReporteServiciosConIpsYAmbulanciasAsignados, null);
 		
 		//-----------------------------------------------------------------------
 		
 		tabReporteDeIpsConServiciosAsociados = new ReporteServiciosAsociados();		
-		tabbedPane.addTab("Reporte de IPS con servicios asociados", null, tabReporteDeIpsConServiciosAsociados, null);
+		getTabbedPane().addTab("Reporte de IPS con servicios asociados", null, tabReporteDeIpsConServiciosAsociados, null);
 	}
 
-	
-	public EmpresaAmbulancias getEmpresaAmbulancias() 
-	{
-		return empresaAmbulancias;
+	public JTabbedPane getTabbedPane() {
+		return tabbedPane;
 	}
 
-	public void setEmpresaAmbulancias(EmpresaAmbulancias empresaAmbulancias) 
-	{
-		this.empresaAmbulancias = empresaAmbulancias;
+	public void setTabbedPane(JTabbedPane tabbedPane) {
+		this.tabbedPane = tabbedPane;
+	}
+
+	public MenuView getTabMenuServicios() {
+		return tabMenuServicios;
+	}
+
+	public void setTabMenuServicios(MenuView tabMenuServicios) {
+		this.tabMenuServicios = tabMenuServicios;
+	}
+
+	public IngresarIpsYAmbulanciasView getTabIngresarIpsAmbulancias() {
+		return tabIngresarIpsAmbulancias;
+	}
+
+	public void setTabIngresarIpsAmbulancias(IngresarIpsYAmbulanciasView tabIngresarIpsAmbulancias) {
+		this.tabIngresarIpsAmbulancias = tabIngresarIpsAmbulancias;
+	}
+
+	public RegistrarPosicionAmbulanciaView getTabRegistrarPosicionAmbulancia() {
+		return tabRegistrarPosicionAmbulancia;
+	}
+
+	public void setTabRegistrarPosicionAmbulancia(RegistrarPosicionAmbulanciaView tabRegistrarPosicionAmbulancia) {
+		this.tabRegistrarPosicionAmbulancia = tabRegistrarPosicionAmbulancia;
 	}
 }

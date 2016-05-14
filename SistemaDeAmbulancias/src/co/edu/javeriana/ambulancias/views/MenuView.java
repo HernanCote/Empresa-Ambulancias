@@ -8,15 +8,15 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import co.edu.javeriana.ambulancias.controllers.MenuController;
+import co.edu.javeriana.ambulancias.presentacion.VentanaPrincipal;
 
 import javax.swing.JButton;
 
 public class MenuView extends JPanel 
 {
 
-	private MenuController menuController;
 	
-	private JTabbedPane tabbedPane;
+	private VentanaPrincipal ventanaPrincipal;
 	
 	private JButton btnRegistrarPosAmbulancia;
 	private JButton btnFinalizarServicio;
@@ -30,11 +30,10 @@ public class MenuView extends JPanel
 	/**
 	 * Create the panel.
 	 */
-	public MenuView(JTabbedPane tabbedPane) 
+	public MenuView(VentanaPrincipal ventanaPrincipal) 
 	{
-		this.setTabbedPane(tabbedPane);
+		this.setVentanaPrincipal(ventanaPrincipal);
 		
-		menuController = new MenuController(this);
 		
 		setBackground(Color.WHITE);
 		setLayout(null);
@@ -48,48 +47,48 @@ public class MenuView extends JPanel
 		getBtnRegistrarPosAmbulancia().setBackground(Color.WHITE);
 		getBtnRegistrarPosAmbulancia().setFont(new Font("Segoe UI", Font.PLAIN, 10));
 		getBtnRegistrarPosAmbulancia().setBounds(40, 142, 317, 49);
-		getBtnRegistrarPosAmbulancia().addActionListener(menuController);
+		getBtnRegistrarPosAmbulancia().addActionListener(this.getVentanaPrincipal().getController().getMenuController());
 		add(getBtnRegistrarPosAmbulancia());
 		
 		setBtnFinalizarServicio(new JButton("Finalizar Un Servicio"));
 		getBtnFinalizarServicio().setBackground(Color.WHITE);
 		getBtnFinalizarServicio().setFont(new Font("Segoe UI", Font.PLAIN, 10));
 		getBtnFinalizarServicio().setBounds(367, 142, 317, 49);
-		getBtnFinalizarServicio().addActionListener(menuController);
+		getBtnFinalizarServicio().addActionListener(this.getVentanaPrincipal().getController().getMenuController());
 		add(getBtnFinalizarServicio());
 		
 		setBtnRegistrarServicio(new JButton("Registrar un Servicio"));
 		getBtnRegistrarServicio().setBackground(Color.WHITE);
 		getBtnRegistrarServicio().setFont(new Font("Segoe UI", Font.PLAIN, 10));
 		getBtnRegistrarServicio().setBounds(40, 222, 317, 50);
-		getBtnRegistrarServicio().addActionListener(menuController);
+		getBtnRegistrarServicio().addActionListener(this.getVentanaPrincipal().getController().getMenuController());
 		add(getBtnRegistrarServicio());
 		
 		setBtnReporteServiciosAsignados(new JButton("Reporte de servicios con IPS y ambulancias asignados"));
 		getBtnReporteServiciosAsignados().setBackground(Color.WHITE);
 		getBtnReporteServiciosAsignados().setFont(new Font("Segoe UI", Font.PLAIN, 10));
 		getBtnReporteServiciosAsignados().setBounds(367, 222, 317, 50);
-		getBtnReporteServiciosAsignados().addActionListener(menuController);
+		getBtnReporteServiciosAsignados().addActionListener(this.getVentanaPrincipal().getController().getMenuController());
 		add(getBtnReporteServiciosAsignados());
 		
 		setBtnAsignarServicio(new JButton("Asignar a un servicio una ambulancias y una IPS"));
 		getBtnAsignarServicio().setBackground(Color.WHITE);
 		getBtnAsignarServicio().setFont(new Font("Segoe UI", Font.PLAIN, 10));
 		getBtnAsignarServicio().setBounds(40, 303, 317, 47);
-		getBtnAsignarServicio().addActionListener(menuController);
+		getBtnAsignarServicio().addActionListener(this.getVentanaPrincipal().getController().getMenuController());
 		add(getBtnAsignarServicio());
 		
 		setBtnReporteServiciosAsociados(new JButton("Reporte de las IPS con servicios asociados"));
 		getBtnReporteServiciosAsociados().setBackground(Color.WHITE);
 		getBtnReporteServiciosAsociados().setFont(new Font("Segoe UI", Font.PLAIN, 10));
 		getBtnReporteServiciosAsociados().setBounds(367, 303, 317, 47);
-		getBtnReporteServiciosAsociados().addActionListener(menuController);
+		getBtnReporteServiciosAsociados().addActionListener(this.getVentanaPrincipal().getController().getMenuController());
 		add(getBtnReporteServiciosAsociados());
 		
 		setBtnIngresarIPSAmb(new JButton("Ingresar IPS y ambulancias"));
 		getBtnIngresarIPSAmb().setBackground(new Color(64, 224, 208));
 		getBtnIngresarIPSAmb().setBounds(155, 408, 202, 41);
-		getBtnIngresarIPSAmb().addActionListener(menuController);
+		getBtnIngresarIPSAmb().addActionListener(this.getVentanaPrincipal().getController().getMenuController());
 		add(getBtnIngresarIPSAmb());
 	}
 	
@@ -191,15 +190,13 @@ public class MenuView extends JPanel
 
 
 
-	public JTabbedPane getTabbedPane() 
-	{
-		return tabbedPane;
+	public VentanaPrincipal getVentanaPrincipal() {
+		return ventanaPrincipal;
 	}
 
 
 
-	public void setTabbedPane(JTabbedPane tabbedPane) 
-	{
-		this.tabbedPane = tabbedPane;
+	public void setVentanaPrincipal(VentanaPrincipal ventanaPrincipal) {
+		this.ventanaPrincipal = ventanaPrincipal;
 	}
 }

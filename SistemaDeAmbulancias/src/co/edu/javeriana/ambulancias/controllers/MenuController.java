@@ -3,15 +3,16 @@ package co.edu.javeriana.ambulancias.controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import co.edu.javeriana.ambulancias.presentacion.VentanaPrincipal;
 import co.edu.javeriana.ambulancias.views.MenuView;
 
 public class MenuController implements ActionListener
 {
-	private MenuView menuView;
+	private VentanaPrincipal ventanaPrincipal;
 	
-	public MenuController(MenuView menuView) 
+	public MenuController(VentanaPrincipal ventanaPrincipal) 
 	{
-		this.menuView = menuView;
+		this.ventanaPrincipal = ventanaPrincipal;
 	}
 
 	@Override
@@ -19,33 +20,33 @@ public class MenuController implements ActionListener
 	{
 		Object object = e.getSource();
 		
-		if(object.equals(menuView.getBtnRegistrarPosAmbulancia()))
-		{		
-			menuView.getTabbedPane().setSelectedIndex(2);
+		if(object.equals(ventanaPrincipal.getPanelPrincipal().getTabMenuServicios().getBtnRegistrarPosAmbulancia()))
+		{			
+			ventanaPrincipal.getPanelPrincipal().getTabbedPane().setSelectedIndex(2);
 		}
-		else if(object.equals(menuView.getBtnFinalizarServicio()))
+		else if(object.equals(ventanaPrincipal.getPanelPrincipal().getTabMenuServicios().getBtnFinalizarServicio()))
 		{
-			menuView.getTabbedPane().setSelectedIndex(5);
+			ventanaPrincipal.getPanelPrincipal().getTabbedPane().setSelectedIndex(5);
 		}
-		else if(object.equals(menuView.getBtnRegistrarServicio()))
+		else if(object.equals(ventanaPrincipal.getPanelPrincipal().getTabMenuServicios().getBtnRegistrarServicio()))
 		{
-			menuView.getTabbedPane().setSelectedIndex(3);
+			ventanaPrincipal.getPanelPrincipal().getTabbedPane().setSelectedIndex(3);
 		}
-		else if(object.equals(menuView.getBtnReporteServiciosAsignados()))
+		else if(object.equals(ventanaPrincipal.getPanelPrincipal().getTabMenuServicios().getBtnReporteServiciosAsignados()))
 		{
-			menuView.getTabbedPane().setSelectedIndex(6);
+			ventanaPrincipal.getPanelPrincipal().getTabbedPane().setSelectedIndex(6);
 		}
-		else if(object.equals(menuView.getBtnAsignarServicio()))
+		else if(object.equals(ventanaPrincipal.getPanelPrincipal().getTabMenuServicios().getBtnAsignarServicio()))
 		{
-			menuView.getTabbedPane().setSelectedIndex(4);
+			ventanaPrincipal.getPanelPrincipal().getTabbedPane().setSelectedIndex(4);
 		}
-		else if(object.equals(menuView.getBtnReporteServiciosAsociados()))
+		else if(object.equals(ventanaPrincipal.getPanelPrincipal().getTabMenuServicios().getBtnReporteServiciosAsociados()))
 		{
-			menuView.getTabbedPane().setSelectedIndex(7);
+			ventanaPrincipal.getPanelPrincipal().getTabbedPane().setSelectedIndex(7);
 		}
-		else if(object.equals(menuView.getBtnIngresarIPSAmb()))
+		else if(object.equals(ventanaPrincipal.getPanelPrincipal().getTabMenuServicios().getBtnIngresarIPSAmb()))
 		{
-			menuView.getTabbedPane().setSelectedIndex(1);
+			ventanaPrincipal.getPanelPrincipal().getTabbedPane().setSelectedIndex(1);
 		}
 	}
 }
