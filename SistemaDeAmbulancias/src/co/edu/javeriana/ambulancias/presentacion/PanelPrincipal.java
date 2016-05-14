@@ -1,13 +1,19 @@
 package co.edu.javeriana.ambulancias.presentacion;
 
-import javax.swing.JPanel;
-
 import java.awt.Color;
+
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-import co.edu.javeriana.ambulancias.controllers.MenuController;
 import co.edu.javeriana.ambulancias.entidades.EmpresaAmbulancias;
-import co.edu.javeriana.ambulancias.views.*;
+import co.edu.javeriana.ambulancias.views.AsignarServicioView;
+import co.edu.javeriana.ambulancias.views.FinalizarServicioView;
+import co.edu.javeriana.ambulancias.views.IngresarIpsYAmbulanciasView;
+import co.edu.javeriana.ambulancias.views.MenuView;
+import co.edu.javeriana.ambulancias.views.RegistrarPosicionAmbulanciaView;
+import co.edu.javeriana.ambulancias.views.RegistrarUnServicioView;
+import co.edu.javeriana.ambulancias.views.ReporteServiciosAsignados;
+import co.edu.javeriana.ambulancias.views.ReporteServiciosAsociados;
 
 public class PanelPrincipal extends JPanel 
 {
@@ -36,7 +42,7 @@ public class PanelPrincipal extends JPanel
 	 */
 	public PanelPrincipal() 
 	{		
-		setEmpresaAmbulancias(EmpresaAmbulancias.getInstance());
+		setEmpresaAmbulancias((EmpresaAmbulancias)EmpresaAmbulancias.getInstance());
 		
 		setBounds(100, 100, 670, 528);
 		setBackground(Color.WHITE);
@@ -60,7 +66,7 @@ public class PanelPrincipal extends JPanel
 		
 		//----------------------------------------------------------------------------------
 		
-		tabRegistrarPosicionAmbulancia = new RegistrarPosicionAmbulanciaView();		
+		tabRegistrarPosicionAmbulancia = new RegistrarPosicionAmbulanciaView(tabbedPane);		
 		tabbedPane.addTab("Registrar posicion de ambulancias", null, tabRegistrarPosicionAmbulancia, null);
 		
 		

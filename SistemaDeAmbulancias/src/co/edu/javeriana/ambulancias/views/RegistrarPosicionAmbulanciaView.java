@@ -2,23 +2,26 @@ package co.edu.javeriana.ambulancias.views;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import co.edu.javeriana.ambulancias.controllers.RegistrarPosicionAmbulanciaController;
-import co.edu.javeriana.ambulancias.entidades.EmpresaAmbulancias;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class RegistrarPosicionAmbulanciaView extends JPanel 
 {
 
 	private static final long serialVersionUID = 1L;
+	private JTabbedPane tabbedPane;
 	
 	private JButton btnActualizar, btnRegistrar;
 	private JPanel panelSouth;
@@ -29,9 +32,94 @@ public class RegistrarPosicionAmbulanciaView extends JPanel
 	private JPanel panelNorth;
 	private JLabel lblNewLabel;
 	private JTable tableAmbulancias;
+<<<<<<< HEAD
 	private String [] tableLabels = {"Codigo","Tipo","Placa","Tipo UCI","Hora Posicion", "Calle", "Carrera"};
 	private String [][] tableCont = {{"Codigo","Tipo","Placa","Tipo UCI","Hora Posicion", "Calle", "Carrera"}};
+=======
+	private TableModel modelAmbulancias;
+	private String [] tableLabels = {"Codigo","Tipo","Tipo UCI","Placa", "Medico / Enfermero","Hora Posicion", "Calle", "Carrera"};
+	private String [][] tableCont = {};
+	private JButton btnRegresar;
+
+	public RegistrarPosicionAmbulanciaView(JTabbedPane tabbedPane ) 
+	{
+		setTabbedPane(tabbedPane);
+		setBackground(Color.WHITE);
+		setLayout(new BorderLayout(0, 0));
+		
+		panelSouth = new JPanel();
+		btnActualizar = new JButton("Actualizar");
+		btnActualizar.addActionListener(new RegistrarPosicionAmbulanciaController(this));
+		btnRegistrar = new JButton("Registrar");
+		btnRegistrar.setEnabled(false);
+		btnRegistrar.addActionListener(new RegistrarPosicionAmbulanciaController(this));
+		
+		btnRegresar = new JButton("Regresar");
+		panelSouth.add(btnRegresar);
+		panelSouth.add(btnActualizar);
+		panelSouth.add(btnRegistrar);
+		btnRegresar.addActionListener(new RegistrarPosicionAmbulanciaController(this));
+		add(panelSouth, BorderLayout.SOUTH);
+		
+		setLabels ();
+		
+		modelAmbulancias = new DefaultTableModel(tableCont,tableLabels);
+		tableAmbulancias = new JTable(modelAmbulancias);
+		tableAmbulancias.setBounds(50,50,200,200);
+		tableAmbulancias.setVisible(true);
+		tableAmbulancias.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				enableButons(); 
+			}
+		});
+		
+		add(new JScrollPane(tableAmbulancias));
+	}
+
+	public void addRowToTable (Object newCont [][]) {
+		DefaultTableModel modelTemp = new DefaultTableModel(newCont,tableLabels);
+		tableAmbulancias.setModel(modelTemp);
+	}
 	
+	public int getSelectedRowCode () {
+		int numRow = tableAmbulancias.getSelectedRow();
+		String tempCode = (String) tableAmbulancias.getValueAt(numRow, 0);
+		int code = Integer.parseInt(tempCode);
+		return code;
+	}
+>>>>>>> fb6d023fdc964ff12dc3d17f3b8388e7df96360a
+	
+	public void enableButons () {
+		btnRegistrar.setEnabled(true);
+		textFieldCalle.setEnabled(true);
+		textFieldCarrera.setEnabled(true);
+	}
+	
+	public void setLabels () {
+		lblCalle = new JLabel("Calle:");
+		panelSouth.add(lblCalle);
+		
+		textFieldCalle = new JTextField();
+		textFieldCalle.setEnabled(false);
+		textFieldCalle.setToolTipText("Calle en la que está la ambulancia.\n");
+		panelSouth.add(textFieldCalle);
+		textFieldCalle.setColumns(5);
+		
+		lblCarrera = new JLabel("Carrera:");
+		panelSouth.add(lblCarrera);
+		
+		textFieldCarrera = new JTextField();
+		textFieldCarrera.setEnabled(false);
+		textFieldCarrera.setToolTipText("Carrera en la que está la ambulancia.");
+		panelSouth.add(textFieldCarrera);
+		textFieldCarrera.setColumns(5);
+		
+		panelNorth = new JPanel();
+		add(panelNorth, BorderLayout.NORTH);
+		
+		lblNewLabel = new JLabel("Ambulancias");
+		panelNorth.add(lblNewLabel);
+	}
 	
 	public String[][] getTableCont() {
 		return tableCont;
@@ -129,47 +217,30 @@ public class RegistrarPosicionAmbulanciaView extends JPanel
 		this.tableLabels = tableLabels;
 	}
 
-	public RegistrarPosicionAmbulanciaView() 
-	{
-		setBackground(Color.WHITE);
-		setLayout(new BorderLayout(0, 0));
-		
-		panelSouth = new JPanel();
-		btnActualizar = new JButton("Actualizar");
-		btnActualizar.addActionListener(new RegistrarPosicionAmbulanciaController(this));
-		btnRegistrar = new JButton("Registrar");
-		panelSouth.add(btnActualizar);
-		panelSouth.add(btnRegistrar);
-		add(panelSouth, BorderLayout.SOUTH);
-		
-		lblCalle = new JLabel("Calle:");
-		panelSouth.add(lblCalle);
-		
-		textFieldCalle = new JTextField();
-		textFieldCalle.setToolTipText("Calle en la que está la ambulancia.\n");
-		panelSouth.add(textFieldCalle);
-		textFieldCalle.setColumns(5);
-		
-		lblCarrera = new JLabel("Carrera:");
-		panelSouth.add(lblCarrera);
-		
-		textFieldCarrera = new JTextField();
-		textFieldCarrera.setToolTipText("Carrera en la que está la ambulancia.");
-		panelSouth.add(textFieldCarrera);
-		textFieldCarrera.setColumns(5);
-		
-		panelNorth = new JPanel();
-		add(panelNorth, BorderLayout.NORTH);
-		
-		lblNewLabel = new JLabel("Ambulancias");
-		panelNorth.add(lblNewLabel);
-		
-		
-		tableAmbulancias = new JTable(tableCont,tableLabels);
-		tableAmbulancias.setBounds(50,50,200,200);
-		tableAmbulancias.setVisible(true);
-		add(new JScrollPane(tableAmbulancias));
-		
-		
+	public TableModel getModelAmbulancias() {
+		return modelAmbulancias;
 	}
+
+	public void setModelAmbulancias(TableModel modelAmbulancias) {
+		this.modelAmbulancias = modelAmbulancias;
+	}
+
+	public JButton getBtnRegresar() {
+		return btnRegresar;
+	}
+
+	public void setBtnRegresar(JButton btnRegresar) {
+		this.btnRegresar = btnRegresar;
+	}
+
+	public JTabbedPane getTabbedPane() {
+		return tabbedPane;
+	}
+
+	public void setTabbedPane(JTabbedPane tabbedPane) {
+		this.tabbedPane = tabbedPane;
+	}
+	
+	
+	
 }

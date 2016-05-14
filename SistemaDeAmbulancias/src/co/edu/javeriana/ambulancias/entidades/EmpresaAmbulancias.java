@@ -37,7 +37,7 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 {
 	
 	// Only Instance
-	private static EmpresaAmbulancias instance = null;
+	private static IServiciosAmbulancias instance = null;
 	//
 	
 	
@@ -65,7 +65,7 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 	 * @return empresaAmbulancia
 	 */
 	
-	public static EmpresaAmbulancias getInstance() {
+	public static IServiciosAmbulancias getInstance() {
 	      if(instance == null) {
 	         instance = new EmpresaAmbulancias("Ambulancias Pe�alosa y Cote S.A.");
 	      }
@@ -649,9 +649,13 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 	public String [][] getTableAmbulancias () {
 		ArrayList < ArrayList <String> > tableAmbulancias = new ArrayList< ArrayList <String> >();
 		
+		
+		TreeSet<Integer> keys = new TreeSet<Integer>(ambulanciasList.keySet());
+		
+		
 		// {"Codigo","Tipo","Placa","Tipo UCI","Hora Posicion", "Calle", "Carrera"};
 		
-		for (Integer key : ambulanciasList.keySet()) {
+		for (Integer key : keys) {
 			Ambulancia ambu = ambulanciasList.get(key);
 			ArrayList <String> tempArray = new ArrayList<String>();
 			tempArray.add(String.valueOf(key));
@@ -664,16 +668,24 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 			if (ambu instanceof AmbulanciaNoMedicalizada) {
 				tempArray.add("NoMedicalizada");
 			}
+			
+			
+			
+			if (ambu instanceof AmbulanciaUCI) {
+				tempArray.add( ((AmbulanciaUCI) ambu).getTipoUCI() );
+			} else {
+				tempArray.add("NA");
+			}
+			tempArray.add(ambu.getPlaca());
+			
 			if (ambu instanceof AmbulanciaMedicalizada) {
-				tempArray.add("Medicalizada");
+				tempArray.add(((AmbulanciaMedicalizada) ambu).getMedico());
 			}
 			
-			tempArray.add(ambu.getPlaca());
-			if (ambu instanceof AmbulanciaUCI) {
-				tempArray.add( ((AmbulanciaUCI) ambu).getTipo() );
-			} else {
-				tempArray.add("     ");
+			if (ambu instanceof AmbulanciaNoMedicalizada) {
+				tempArray.add(((AmbulanciaNoMedicalizada) ambu).getEnfermo());
 			}
+			
 			tempArray.add(Utils.formatoHora(ambu.getHoraPosicion()));
 			tempArray.add( String.valueOf(ambu.getPosicionCalle()) );
 			tempArray.add(String.valueOf(ambu.getPosicionCarrera()));
@@ -682,9 +694,10 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 			
 		}
 		String[][] table = new String[tableAmbulancias.size()][];
-		for (int i = 0; i < tableAmbulancias.size(); i++) {
+		int cont = 0;
+		for (int i = tableAmbulancias.size() - 1; i >= 0; i--) {
 		    ArrayList<String> row = tableAmbulancias.get(i);
-		    table[i] = row.toArray(new String[row.size()]);
+		    table[cont++] = row.toArray(new String[row.size()]);
 		} 
 		
 		return table;
