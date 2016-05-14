@@ -30,8 +30,7 @@ public class RegistrarPosicionAmbulanciaView extends JPanel
 	private JLabel lblNewLabel;
 	private JTable tableAmbulancias;
 	private String [] tableLabels = {"Codigo","Tipo","Placa","Tipo UCI","Hora Posicion", "Calle", "Carrera"};
-	private String [][] tableCont = {{"Codigo","Tipo","Placa","Tipo UCI","Hora Posicion", "Calle", "Carrera"}
-			};
+	private String [][] tableCont = {{"Codigo","Tipo","Placa","Tipo UCI","Hora Posicion", "Calle", "Carrera"}};
 	
 	
 	public String[][] getTableCont() {
