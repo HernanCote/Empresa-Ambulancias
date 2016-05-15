@@ -4,15 +4,34 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 
+import co.edu.javeriana.ambulancias.entidades.Direccion;
+import co.edu.javeriana.ambulancias.entidades.Servicio;
+import co.edu.javeriana.ambulancias.enums.TipoDireccion;
+import co.edu.javeriana.ambulancias.enums.TipoServicio;
 import co.edu.javeriana.ambulancias.presentacion.VentanaPrincipal;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.JButton;
 
 public class RegistrarUnServicioView extends JPanel 
 {
 
 	private VentanaPrincipal ventanaPrincipal;
+	
+	private JTextField txtPaciente;
+	private JTextField txtTelefono;
+	private JTextField txtCalle;
+	private JTextField txtCarrera;
+	private JTextField txtNumero;
+	private JComboBox comboTipoServicio;
+	private JComboBox comboTipoDireccion;
+	private JButton btnRegistrar;
+	private JButton btnRegresar;
+	
 	/**
 	 * Create the panel.
 	 */
@@ -76,5 +95,125 @@ public class RegistrarUnServicioView extends JPanel
 		lblRegistreLosDatos.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		lblRegistreLosDatos.setBounds(197, 86, 337, 26);
 		add(lblRegistreLosDatos);
+		
+		txtPaciente = new JTextField();
+		txtPaciente.setBounds(343, 150, 171, 20);
+		add(txtPaciente);
+		txtPaciente.setColumns(10);
+		
+		txtTelefono = new JTextField();
+		txtTelefono.setColumns(10);
+		txtTelefono.setBounds(343, 224, 171, 20);
+		add(txtTelefono);
+		
+		txtCalle = new JTextField();
+		txtCalle.setColumns(10);
+		txtCalle.setBounds(343, 296, 171, 20);
+		add(txtCalle);
+		
+		txtCarrera = new JTextField();
+		txtCarrera.setColumns(10);
+		txtCarrera.setBounds(343, 327, 171, 20);
+		add(txtCarrera);
+		
+		txtNumero = new JTextField();
+		txtNumero.setColumns(10);
+		txtNumero.setBounds(343, 361, 171, 20);
+		add(txtNumero);
+		
+		comboTipoServicio = new JComboBox<TipoServicio>(TipoServicio.values());
+		comboTipoServicio.setBackground(Color.WHITE);
+		comboTipoServicio.setBounds(343, 187, 171, 20);
+		add(comboTipoServicio);
+		
+		comboTipoDireccion = new JComboBox<TipoDireccion>(TipoDireccion.values());
+		comboTipoDireccion.setBackground(Color.WHITE);
+		comboTipoDireccion.setBounds(343, 262, 171, 20);
+		add(comboTipoDireccion);
+		
+		setBtnRegistrar(new JButton("Registrar"));
+		getBtnRegistrar().setForeground(new Color(255, 255, 255));
+		getBtnRegistrar().setBackground(new Color(50, 205, 50));
+		getBtnRegistrar().setFont(new Font("Segoe UI", Font.PLAIN, 13));
+		getBtnRegistrar().setBounds(420, 416, 94, 30);
+		getBtnRegistrar().addActionListener(ventanaPrincipal.getController().getRegistrarUnServicioController());
+		add(getBtnRegistrar());
+		
+		setBtnRegresar(new JButton("Regresar"));
+		getBtnRegresar().setForeground(new Color(255, 255, 255));
+		getBtnRegresar().setBackground(new Color(178, 34, 34));
+		getBtnRegresar().setBounds(605, 481, 89, 23);
+		btnRegresar.addActionListener(this.ventanaPrincipal.getController().getRegistrarUnServicioController());
+		add(getBtnRegresar());
+		
+		init();
+	}
+	
+	public void init()
+	{
+		getBtnRegistrar().setEnabled(true);
+	}
+	
+	public void saveServicio()
+	{
+		try 
+		{
+			String paciente = txtPaciente.getText();
+			TipoServicio tipoServicio = (TipoServicio) comboTipoServicio.getSelectedItem();
+			String telefono = txtTelefono.getText();
+			TipoDireccion tipoDireccion = (TipoDireccion) comboTipoDireccion.getSelectedItem();
+			int calle = Integer.parseInt(txtCalle.getText());
+			int carrera = Integer.parseInt(txtCarrera.getText());
+			int numero = Integer.parseInt(txtNumero.getText());
+			
+			Direccion direccion = new Direccion(tipoDireccion, calle, carrera, numero);
+			Servicio servicio = new Servicio(paciente, tipoServicio, telefono, direccion);
+			
+			ventanaPrincipal.getEmpresaAmbulancias().registrarServicio(servicio);
+			JOptionPane.showMessageDialog(ventanaPrincipal
+					, "Servicio ingresado exitosamente al sistema!"
+					, "Éxito!"
+					, JOptionPane.INFORMATION_MESSAGE);
+		}
+		catch(NumberFormatException e)
+		{
+			JOptionPane.showMessageDialog(ventanaPrincipal
+					, "Ingrese datos válidos al sistema"
+					, "Error"
+					, JOptionPane.ERROR_MESSAGE);
+			
+		}
+		finally
+		{
+			clearFields();
+		}		
+		
+	}
+	
+	private void clearFields()
+	{
+		txtPaciente.setText(null);
+		comboTipoDireccion.setSelectedIndex(0);
+		txtPaciente.setText(null);
+		comboTipoServicio.setSelectedIndex(0);
+		txtCalle.setText(null);
+		txtCarrera.setText(null);
+		txtNumero.setText(null);
+	}
+
+	public JButton getBtnRegresar() {
+		return btnRegresar;
+	}
+
+	public void setBtnRegresar(JButton btnRegresar) {
+		this.btnRegresar = btnRegresar;
+	}
+
+	public JButton getBtnRegistrar() {
+		return btnRegistrar;
+	}
+
+	public void setBtnRegistrar(JButton btnRegistrar) {
+		this.btnRegistrar = btnRegistrar;
 	}
 }

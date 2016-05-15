@@ -14,11 +14,19 @@ public class RegistrarUnServicioController implements ActionListener {
 	{
 		this.ventanaPrincipal = ventanaPrincipal;
 	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		// TODO Auto-generated method stub
-
+		Object object = e.getSource();
+		
+		if(object.equals(ventanaPrincipal.getPanelPrincipal().getTabRegistrarUnServicio().getBtnRegresar()))
+		{
+			ventanaPrincipal.getPanelPrincipal().getTabbedPane().setSelectedIndex(0);
+		}
+		else if(object.equals(ventanaPrincipal.getPanelPrincipal().getTabRegistrarUnServicio().getBtnRegistrar()))
+		{
+			ventanaPrincipal.getPanelPrincipal().getTabRegistrarUnServicio().saveServicio();
+		}
 	}
-
 }

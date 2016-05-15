@@ -71,8 +71,8 @@ public class PanelPrincipal extends JPanel
 		
 		//---------------------------------------------------------------------------------
 		
-		tabRegistrarUnServicio = new RegistrarUnServicioView(ventanaPrincipal);		
-		getTabbedPane().addTab("Registrar un servicio", null, tabRegistrarUnServicio, null);
+		setTabRegistrarUnServicio(new RegistrarUnServicioView(ventanaPrincipal));		
+		getTabbedPane().addTab("Registrar un servicio", null, getTabRegistrarUnServicio(), null);
 		
 		//-------------------------------------------------------------------
 		
@@ -125,5 +125,13 @@ public class PanelPrincipal extends JPanel
 
 	public void setTabRegistrarPosicionAmbulancia(RegistrarPosicionAmbulanciaView tabRegistrarPosicionAmbulancia) {
 		this.tabRegistrarPosicionAmbulancia = tabRegistrarPosicionAmbulancia;
+	}
+
+	public RegistrarUnServicioView getTabRegistrarUnServicio() {
+		return tabRegistrarUnServicio;
+	}
+
+	public void setTabRegistrarUnServicio(RegistrarUnServicioView tabRegistrarUnServicio) {
+		this.tabRegistrarUnServicio = tabRegistrarUnServicio;
 	}
 }
