@@ -3,6 +3,7 @@ package co.edu.javeriana.ambulancias.ambulancias;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.Random;
 
 import co.edu.javeriana.ambulancias.entidades.Servicio;
 import co.edu.javeriana.ambulancias.presentacion.Utils;
@@ -40,14 +41,16 @@ public abstract class Ambulancia
 	 */
 	public Ambulancia(int codigo, String placa)
 	{	
+		Random random = new Random();
+		
 		this.setEstado(false);
 		this.servicios = new ArrayList<Servicio>();
 		this.codigo = codigo;
 		this.placa = placa;
 		//this.tipoDotacion = tipoDotacion;
 		this.horaPosicion = null;
-		this.posicionCalle = 1;
-		this.posicionCarrera = 1;		
+		this.posicionCalle = random.nextInt(200);
+		this.posicionCarrera = random.nextInt(100);		
 	}
 	/**
 	 * Gets the list of services.

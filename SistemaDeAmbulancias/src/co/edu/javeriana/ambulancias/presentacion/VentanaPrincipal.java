@@ -44,7 +44,7 @@ public class VentanaPrincipal extends JFrame {
 		
 		setTitle("Sistema de Ambulancias");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 770, 628);
+		setBounds(350, 50, 770, 628);
 		
 		setPanelPrincipal(new PanelPrincipal(this));
 		getPanelPrincipal().setVisible(true);

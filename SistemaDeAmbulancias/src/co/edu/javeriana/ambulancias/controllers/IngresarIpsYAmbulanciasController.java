@@ -47,12 +47,14 @@ public class IngresarIpsYAmbulanciasController implements ActionListener
 					if(cargaDeInfo)
 					{
 						JOptionPane.showMessageDialog(ventanaPrincipal, 
-								"Se cargaron " + ventanaPrincipal.getEmpresaAmbulancias().getIps() + " IPS al sistema");
+								"Se cargaron " + ventanaPrincipal.getEmpresaAmbulancias().getIps() + " IPS al sistema"
+								,"Exito!",JOptionPane.INFORMATION_MESSAGE);
 					}
 					else
 					{
 						JOptionPane.showMessageDialog(ventanaPrincipal, "Error al cargar las IPS, "
-								+ "puede que el archivo este corrupto o no se haya encontrado el archivo");
+								+ "puede que el archivo este corrupto o no se haya encontrado el archivo"
+								,"Error",JOptionPane.ERROR_MESSAGE);
 					}
 				}
 			}
@@ -66,13 +68,15 @@ public class IngresarIpsYAmbulanciasController implements ActionListener
 					if(cargaDeInfo)
 					{
 						JOptionPane.showMessageDialog(ventanaPrincipal, 
-								"Se cargaron " + ventanaPrincipal.getEmpresaAmbulancias().getAmbulancias().size() + " Ambulancias al sistema");
+								"Se cargaron " + ventanaPrincipal.getEmpresaAmbulancias().getAmbulancias().size() + " Ambulancias al sistema"
+								,"Exito!",JOptionPane.INFORMATION_MESSAGE);
 						ventanaPrincipal.getController().getRegistrarPosicionAmbulanciaController().actualizarPosicion();
 					}
 					else
 					{
 						JOptionPane.showMessageDialog(ventanaPrincipal, "Error al cargar las Ambulancias, "
-								+ "puede que el archivo este corrupto o no se haya encontrado el archivo");
+								+ "puede que el archivo este corrupto o no se haya encontrado el archivo"
+								,"Error",JOptionPane.ERROR_MESSAGE);
 					}
 				}			
 				

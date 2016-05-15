@@ -9,6 +9,7 @@ public class Controller
 	private MenuController menuController;
 	private IngresarIpsYAmbulanciasController ingresarIpsYAmbulanciasController;
 	private RegistrarPosicionAmbulanciaController registrarPosicionAmbulanciaController;
+	private RegistrarUnServicioController registrarUnServicioController;
 	
 	
 	public Controller(VentanaPrincipal ventanaPrincipal)
@@ -18,6 +19,7 @@ public class Controller
 		this.menuController = new MenuController(ventanaPrincipal);
 		this.ingresarIpsYAmbulanciasController = new IngresarIpsYAmbulanciasController(ventanaPrincipal);
 		this.registrarPosicionAmbulanciaController = new RegistrarPosicionAmbulanciaController(ventanaPrincipal);
+		this.registrarUnServicioController = new RegistrarUnServicioController(ventanaPrincipal);
 	}
 	
 	
@@ -51,6 +53,16 @@ public class Controller
 
 	public void setIngresarIpsYAmbulanciasController(IngresarIpsYAmbulanciasController ingresarIpsYAmbulanciasController) {
 		this.ingresarIpsYAmbulanciasController = ingresarIpsYAmbulanciasController;
+	}
+
+
+	public RegistrarUnServicioController getRegistrarUnServicioController() {
+		return registrarUnServicioController;
+	}
+
+
+	public void setRegistrarUnServicioController(RegistrarUnServicioController registrarUnServicioController) {
+		this.registrarUnServicioController = registrarUnServicioController;
 	}
 	
 	

@@ -71,7 +71,7 @@ public class PanelPrincipal extends JPanel
 		
 		//---------------------------------------------------------------------------------
 		
-		tabRegistrarUnServicio = new RegistrarUnServicioView();		
+		tabRegistrarUnServicio = new RegistrarUnServicioView(ventanaPrincipal);		
 		getTabbedPane().addTab("Registrar un servicio", null, tabRegistrarUnServicio, null);
 		
 		//-------------------------------------------------------------------
