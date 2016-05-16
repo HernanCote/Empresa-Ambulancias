@@ -75,5 +75,7 @@ public class VentanaPrincipal extends JFrame {
 	public void setPanelPrincipal(PanelPrincipal panelPrincipal) {
 		this.panelPrincipal = panelPrincipal;
 	}
+	
+	
 
 }

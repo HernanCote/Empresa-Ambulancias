@@ -72,6 +72,8 @@ public class IngresarIpsYAmbulanciasController implements ActionListener
 								"Se cargaron " + ventanaPrincipal.getEmpresaAmbulancias().getAmbulancias().size() + " Ambulancias al sistema"
 								,"Exito!",JOptionPane.INFORMATION_MESSAGE);
 						ventanaPrincipal.getController().getRegistrarPosicionAmbulanciaController().actualizarTabla();
+						ventanaPrincipal.getController().getAsignarServicioController().actualizarContAmbulancias();
+						ventanaPrincipal.getController().getAsignarServicioController().actualizarContIPS();
 						ventanaPrincipal.getPanelPrincipal().getTabMenuServicios().getBtnGuardarDatos().setEnabled(true);
 					}
 					else

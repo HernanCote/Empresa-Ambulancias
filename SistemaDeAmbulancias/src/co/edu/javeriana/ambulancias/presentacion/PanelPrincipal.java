@@ -76,7 +76,7 @@ public class PanelPrincipal extends JPanel
 		
 		//-------------------------------------------------------------------
 		
-		tabAsignarServicio = new AsignarServicioView();
+		tabAsignarServicio = new AsignarServicioView(ventanaPrincipal);
 		getTabbedPane().addTab("Asignar a servicio una ambulancias y una IPS", null, tabAsignarServicio, null);
 		
 		//-----------------------------------------------------------------------
@@ -134,4 +134,47 @@ public class PanelPrincipal extends JPanel
 	public void setTabRegistrarUnServicio(RegistrarUnServicioView tabRegistrarUnServicio) {
 		this.tabRegistrarUnServicio = tabRegistrarUnServicio;
 	}
+
+	public VentanaPrincipal getVentanaPrincipal() {
+		return ventanaPrincipal;
+	}
+
+	public void setVentanaPrincipal(VentanaPrincipal ventanaPrincipal) {
+		this.ventanaPrincipal = ventanaPrincipal;
+	}
+
+	public AsignarServicioView getTabAsignarServicio() {
+		return tabAsignarServicio;
+	}
+
+	public void setTabAsignarServicio(AsignarServicioView tabAsignarServicio) {
+		this.tabAsignarServicio = tabAsignarServicio;
+	}
+
+	public FinalizarServicioView getTabFinalizarServicio() {
+		return tabFinalizarServicio;
+	}
+
+	public void setTabFinalizarServicio(FinalizarServicioView tabFinalizarServicio) {
+		this.tabFinalizarServicio = tabFinalizarServicio;
+	}
+
+	public ReporteServiciosAsignados getTabReporteServiciosConIpsYAmbulanciasAsignados() {
+		return tabReporteServiciosConIpsYAmbulanciasAsignados;
+	}
+
+	public void setTabReporteServiciosConIpsYAmbulanciasAsignados(
+			ReporteServiciosAsignados tabReporteServiciosConIpsYAmbulanciasAsignados) {
+		this.tabReporteServiciosConIpsYAmbulanciasAsignados = tabReporteServiciosConIpsYAmbulanciasAsignados;
+	}
+
+	public ReporteServiciosAsociados getTabReporteDeIpsConServiciosAsociados() {
+		return tabReporteDeIpsConServiciosAsociados;
+	}
+
+	public void setTabReporteDeIpsConServiciosAsociados(ReporteServiciosAsociados tabReporteDeIpsConServiciosAsociados) {
+		this.tabReporteDeIpsConServiciosAsociados = tabReporteDeIpsConServiciosAsociados;
+	}
+	
+	
 }

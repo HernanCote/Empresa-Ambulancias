@@ -168,18 +168,21 @@ public class RegistrarUnServicioView extends JPanel
 			
 			Direccion direccion = new Direccion(tipoDireccion, calle, carrera, numero);
 			Servicio servicio = new Servicio(paciente, tipoServicio, telefono, direccion);
+			//System.out.println("ESTADO 1 : " + servicio.getStringEstado());
 			
 			ventanaPrincipal.getEmpresaAmbulancias().registrarServicio(servicio);
+			ventanaPrincipal.getController().getAsignarServicioController().actualizarContServicios();
 			ventanaPrincipal.getPanelPrincipal().getTabMenuServicios().getBtnGuardarDatos().setEnabled(true);
 			JOptionPane.showMessageDialog(ventanaPrincipal
 					, "Servicio ingresado exitosamente al sistema!"
-					, "Éxito!"
+					, "ï¿½xito!"
 					, JOptionPane.INFORMATION_MESSAGE);
+			//System.out.println("ESTADO 2 : " + servicio.getStringEstado());
 		}
 		catch(NumberFormatException e)
 		{
 			JOptionPane.showMessageDialog(ventanaPrincipal
-					, "Ingrese datos válidos al sistema"
+					, "Ingrese datos vï¿½lidos al sistema"
 					, "Error"
 					, JOptionPane.ERROR_MESSAGE);
 			
