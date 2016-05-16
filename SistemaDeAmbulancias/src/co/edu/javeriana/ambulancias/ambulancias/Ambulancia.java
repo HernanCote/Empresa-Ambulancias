@@ -1,6 +1,7 @@
 
 package co.edu.javeriana.ambulancias.ambulancias;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Random;
@@ -18,7 +19,7 @@ import co.edu.javeriana.ambulancias.presentacion.Utils;
  * @version 2.0
  */
 
-public abstract class Ambulancia 
+public abstract class Ambulancia implements Serializable
 {
 	public static final long TARIFA_BASE = 80000;
 	protected int codigo;

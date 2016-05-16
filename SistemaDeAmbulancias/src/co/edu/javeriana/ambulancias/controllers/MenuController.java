@@ -48,5 +48,13 @@ public class MenuController implements ActionListener
 		{
 			ventanaPrincipal.getPanelPrincipal().getTabbedPane().setSelectedIndex(1);
 		}
+		else if(object.equals(ventanaPrincipal.getPanelPrincipal().getTabMenuServicios().getBtnGuardarDatos()))
+		{
+			ventanaPrincipal.getPanelPrincipal().getTabMenuServicios().guardarDatos();
+		}
+		else if(object.equals(ventanaPrincipal.getPanelPrincipal().getTabMenuServicios().getBtnCargarDatos()))
+		{
+			ventanaPrincipal.getPanelPrincipal().getTabMenuServicios().cargarDatos();
+		}
 	}
 }

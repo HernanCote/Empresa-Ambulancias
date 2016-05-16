@@ -43,12 +43,13 @@ public class IngresarIpsYAmbulanciasController implements ActionListener
 				{
 					String AbsolutePath = fileChooser.getSelectedFile().getAbsolutePath();
 					boolean cargaDeInfo = false;
-					cargaDeInfo = ManejoArchivos.leerIPS(AbsolutePath,(EmpresaAmbulancias)ventanaPrincipal.getEmpresaAmbulancias());
+					cargaDeInfo = ManejoArchivos.leerIPS(AbsolutePath,ventanaPrincipal.getEmpresaAmbulancias());
 					if(cargaDeInfo)
 					{
 						JOptionPane.showMessageDialog(ventanaPrincipal, 
-								"Se cargaron " + ventanaPrincipal.getEmpresaAmbulancias().getIps() + " IPS al sistema"
+								"Se cargaron " + ventanaPrincipal.getEmpresaAmbulancias().getIps().size() + " IPS al sistema"
 								,"Exito!",JOptionPane.INFORMATION_MESSAGE);
+						ventanaPrincipal.getPanelPrincipal().getTabMenuServicios().getBtnGuardarDatos().setEnabled(true);
 					}
 					else
 					{
@@ -70,7 +71,8 @@ public class IngresarIpsYAmbulanciasController implements ActionListener
 						JOptionPane.showMessageDialog(ventanaPrincipal, 
 								"Se cargaron " + ventanaPrincipal.getEmpresaAmbulancias().getAmbulancias().size() + " Ambulancias al sistema"
 								,"Exito!",JOptionPane.INFORMATION_MESSAGE);
-						ventanaPrincipal.getController().getRegistrarPosicionAmbulanciaController().actualizarPosicion();
+						ventanaPrincipal.getController().getRegistrarPosicionAmbulanciaController().actualizarTabla();
+						ventanaPrincipal.getPanelPrincipal().getTabMenuServicios().getBtnGuardarDatos().setEnabled(true);
 					}
 					else
 					{

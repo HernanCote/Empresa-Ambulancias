@@ -142,7 +142,7 @@ public class RegistrarUnServicioView extends JPanel
 		setBtnRegresar(new JButton("Regresar"));
 		getBtnRegresar().setForeground(new Color(255, 255, 255));
 		getBtnRegresar().setBackground(new Color(178, 34, 34));
-		getBtnRegresar().setBounds(605, 481, 89, 23);
+		getBtnRegresar().setBounds(316, 417, 94, 30);
 		btnRegresar.addActionListener(this.ventanaPrincipal.getController().getRegistrarUnServicioController());
 		add(getBtnRegresar());
 		
@@ -170,6 +170,7 @@ public class RegistrarUnServicioView extends JPanel
 			Servicio servicio = new Servicio(paciente, tipoServicio, telefono, direccion);
 			
 			ventanaPrincipal.getEmpresaAmbulancias().registrarServicio(servicio);
+			ventanaPrincipal.getPanelPrincipal().getTabMenuServicios().getBtnGuardarDatos().setEnabled(true);
 			JOptionPane.showMessageDialog(ventanaPrincipal
 					, "Servicio ingresado exitosamente al sistema!"
 					, "Éxito!"

@@ -3,6 +3,7 @@
  */
 package co.edu.javeriana.ambulancias.entidades;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.GregorianCalendar;
@@ -33,7 +34,7 @@ import co.edu.javeriana.ambulancias.presentacion.Utils;
  * @author Hernan Cote and Juan Pablo Penaloza
  *
  */
-public class EmpresaAmbulancias implements IServiciosAmbulancias
+public class EmpresaAmbulancias implements IServiciosAmbulancias, Serializable
 {
 	
 	
@@ -88,6 +89,11 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias
 	 */
 	public HashMap<String, IPS> getIps() {
 		return ipsList;
+	}
+	
+	public void setIpsList(HashMap<String, IPS> ipsList)
+	{
+		this.ipsList = ipsList;
 	}
 	/**
 	 * Add an IPS to the IPS list

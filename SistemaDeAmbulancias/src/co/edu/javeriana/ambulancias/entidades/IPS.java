@@ -3,6 +3,7 @@
  */
 package co.edu.javeriana.ambulancias.entidades;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -19,7 +20,7 @@ import co.edu.javeriana.ambulancias.enums.TipoDireccion;
  * @author Hernan Cote and Juan Pablo Penaloza
  *
  */
-public class IPS 
+public class IPS implements Serializable
 {
 	private String nombre;
 	private String tipoAtencion;

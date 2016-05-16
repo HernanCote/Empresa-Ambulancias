@@ -1,13 +1,26 @@
 package co.edu.javeriana.ambulancias.persistencia;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
+import com.sun.glass.ui.Window.Level;
 
 import co.edu.javeriana.ambulancias.ambulancias.Ambulancia;
 import co.edu.javeriana.ambulancias.entidades.EmpresaAmbulancias;
+import co.edu.javeriana.ambulancias.entidades.Servicio;
 import co.edu.javeriana.ambulancias.enums.TipoDireccion;
 import co.edu.javeriana.ambulancias.enums.TipoUCI;
 
@@ -160,5 +173,52 @@ public class ManejoArchivos
 	    return archivoLeido;
 	  }
 	  
-	
+	  public static boolean saveContext(String fileName, EmpresaAmbulancias empresaAmbulancias)
+	  {
+		 boolean IsCreated = false;
+		  
+		 try 
+		 {
+			ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fileName));
+			outputStream.writeObject(empresaAmbulancias);
+				
+			outputStream.flush();
+			outputStream.close();
+			IsCreated = true;
+		 } 
+		 catch (IOException e) 
+		 {				
+			 System.out.println("Error al guardar!");
+		 }	
+		
+		 return IsCreated;
+	  }
+	  
+	  public static EmpresaAmbulancias loadContext(String fileName)
+	  {		  
+		  try(InputStream file = new FileInputStream(fileName);
+			  InputStream buffer = new BufferedInputStream(file);
+			  ObjectInput input = new ObjectInputStream(buffer);) 
+		  {
+			  EmpresaAmbulancias empresaAmbulancias = (EmpresaAmbulancias)input.readObject();
+			  for(Servicio servicio : empresaAmbulancias.getServicios())
+			  {
+				  System.out.println("Servicio: " + servicio.getPaciente());
+			  }			  
+			  return empresaAmbulancias;
+		  } 
+		  catch (FileNotFoundException e) 
+		  {			
+			  System.out.println("No se puede encuntrar el archivo especificado");
+		  } 
+		  catch (IOException e1) 
+		  {			
+			  System.out.println("No se puede hacer el ingreso de datos.");
+		  } 
+		  catch (ClassNotFoundException e) 
+		  {			
+			  System.out.println("No se puede hacer el ingreso de datos. La clase no fue encontrada.");
+		  }
+		  return null;
+	  }
 }

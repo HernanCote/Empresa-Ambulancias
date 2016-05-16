@@ -1,5 +1,7 @@
 package co.edu.javeriana.ambulancias.entidades;
 
+import java.io.Serializable;
+
 import co.edu.javeriana.ambulancias.enums.TipoDireccion;
 
 /**
@@ -12,7 +14,7 @@ import co.edu.javeriana.ambulancias.enums.TipoDireccion;
  * @author Hernan Cote and Juan Pablo Penaloza
  *
  */
-public class Direccion 
+public class Direccion implements Serializable
 {
 	private TipoDireccion tipoDireccion;
 	private int calle;

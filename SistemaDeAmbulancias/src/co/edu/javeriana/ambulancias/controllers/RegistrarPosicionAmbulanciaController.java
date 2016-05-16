@@ -14,44 +14,39 @@ public class RegistrarPosicionAmbulanciaController implements ActionListener {
 	
 	private VentanaPrincipal ventanaPrincipal; 
 	
-	
 
 	public RegistrarPosicionAmbulanciaController(VentanaPrincipal ventanaPrincipal) {
 		this.ventanaPrincipal = ventanaPrincipal;
 	}
 
-
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(ventanaPrincipal.getPanelPrincipal().getTabRegistrarPosicionAmbulancia().getBtnActualizar())) {
-			actualizarPosicion();			
-		}
-		
-		if (e.getSource().equals(ventanaPrincipal.getPanelPrincipal().getTabRegistrarPosicionAmbulancia().getBtnRegistrar())) {
+			actualizarTabla();			
+		}		
+		else if (e.getSource().equals(ventanaPrincipal.getPanelPrincipal().getTabRegistrarPosicionAmbulancia().getBtnRegistrar())) {
 			int calle = 0;
 			int carrera = 0;
 			try {
 				calle = Integer.parseInt(ventanaPrincipal.getPanelPrincipal().getTabRegistrarPosicionAmbulancia().getTextFieldCalle().getText());
 			    carrera = Integer.parseInt(ventanaPrincipal.getPanelPrincipal().getTabRegistrarPosicionAmbulancia().getTextFieldCarrera().getText());
+			    
+			    GregorianCalendar date = new GregorianCalendar();
+				int codigo = ventanaPrincipal.getPanelPrincipal().getTabRegistrarPosicionAmbulancia().getSelectedRowCode();
+				ventanaPrincipal.getEmpresaAmbulancias().registrarPosicionAmbulancia(codigo, date, calle, carrera);
+				
+				actualizarTabla();
 			} catch (Exception exp) {
-				JOptionPane.showMessageDialog(ventanaPrincipal, "Error En Valores Ingresados.", "ERROR",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(ventanaPrincipal, "Ingrese valores numéricos.", "ERROR",JOptionPane.ERROR_MESSAGE);
 			}
-			GregorianCalendar date = new GregorianCalendar();
-			int codigo = ventanaPrincipal.getPanelPrincipal().getTabRegistrarPosicionAmbulancia().getSelectedRowCode();
-			ventanaPrincipal.getEmpresaAmbulancias().registrarPosicionAmbulancia(codigo, date, calle, carrera);
-			actualizarPosicion();
-			
-		}
-		
-		if(e.getSource().equals(ventanaPrincipal.getPanelPrincipal().getTabRegistrarPosicionAmbulancia().getBtnRegresar()))
+		}		
+		else if(e.getSource().equals(ventanaPrincipal.getPanelPrincipal().getTabRegistrarPosicionAmbulancia().getBtnRegresar()))
 		{
 			ventanaPrincipal.getPanelPrincipal().getTabbedPane().setSelectedIndex(0);
 		}
-
 	}
 	
-	public void actualizarPosicion()
+	public void actualizarTabla()
 	{
 		String [][] temp = ventanaPrincipal.getEmpresaAmbulancias().getTableAmbulancias();
 		ventanaPrincipal.getPanelPrincipal().getTabRegistrarPosicionAmbulancia().addRowToTable(temp);

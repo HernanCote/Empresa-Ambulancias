@@ -1,5 +1,6 @@
 package co.edu.javeriana.ambulancias.entidades;
 
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 
 import co.edu.javeriana.ambulancias.ambulancias.Ambulancia;
@@ -13,7 +14,7 @@ import co.edu.javeriana.ambulancias.presentacion.Utils;
  * @author Hern�n Cote y Juan Pablo Pe�aloza
  *
  */
-public class Servicio 
+public class Servicio implements Serializable
 {
 	private IPS ips;
 	private Ambulancia ambulancia;

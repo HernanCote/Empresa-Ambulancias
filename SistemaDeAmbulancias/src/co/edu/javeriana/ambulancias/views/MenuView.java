@@ -4,13 +4,27 @@ import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import com.sun.org.apache.xerces.internal.impl.dv.xs.BooleanDV;
+import com.sun.webkit.ThemeClient;
 
 import co.edu.javeriana.ambulancias.controllers.MenuController;
+import co.edu.javeriana.ambulancias.entidades.EmpresaAmbulancias;
+import co.edu.javeriana.ambulancias.persistencia.ManejoArchivos;
 import co.edu.javeriana.ambulancias.presentacion.VentanaPrincipal;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+
+import java.awt.SystemColor;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 public class MenuView extends JPanel 
 {
@@ -25,6 +39,8 @@ public class MenuView extends JPanel
 	private JButton btnAsignarServicio;
 	private JButton btnReporteServiciosAsociados;
 	private JButton btnIngresarIPSAmb;
+	private JButton btnGuardarDatos;
+	private JButton btnCargarDatos;
 	
 	
 	/**
@@ -90,9 +106,88 @@ public class MenuView extends JPanel
 		getBtnIngresarIPSAmb().setBounds(155, 408, 202, 41);
 		getBtnIngresarIPSAmb().addActionListener(this.getVentanaPrincipal().getController().getMenuController());
 		add(getBtnIngresarIPSAmb());
+		
+		setBtnGuardarDatos(new JButton("Guardar datos del sistema"));
+		getBtnGuardarDatos().setBackground(SystemColor.textHighlight);
+		getBtnGuardarDatos().setBounds(367, 408, 202, 41);
+		getBtnGuardarDatos().addActionListener(this.getVentanaPrincipal().getController().getMenuController());
+		add(getBtnGuardarDatos());
+	
+	
+		setBtnCargarDatos(new JButton("Cargar datos del sistema"));
+		getBtnCargarDatos().setBackground(SystemColor.textHighlight);
+		getBtnCargarDatos().setBounds(367, 460, 202, 41);
+		getBtnCargarDatos().addActionListener(this.getVentanaPrincipal().getController().getMenuController());
+		add(getBtnCargarDatos());
+		
+		btnGuardarDatos.setEnabled(false);
 	}
 	
+	public void habilitarBtnGuardar()
+	{
+		btnGuardarDatos.setEnabled(true);
+	}
 	
+	public void guardarDatos()
+	{
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setDialogTitle("Especifique como guardar el archivo");
+		fileChooser.setCurrentDirectory(new File("."));
+		
+		int userSelection = fileChooser.showSaveDialog(ventanaPrincipal);
+		if(userSelection == JFileChooser.APPROVE_OPTION)
+		{
+			boolean IsSuccess = false;
+			String fileToSave = fileChooser.getSelectedFile() + ".txt";
+			
+			IsSuccess = ManejoArchivos.saveContext(fileToSave, ventanaPrincipal.getEmpresaAmbulancias());
+			
+			if(IsSuccess)
+			{
+				JOptionPane.showMessageDialog(ventanaPrincipal, "Se ha guardado con éxito los datos!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+			}
+			else 
+			{
+				JOptionPane.showMessageDialog(ventanaPrincipal
+						, "Error al guardar los datos en el sistema :("
+						, "Error"
+						, JOptionPane.ERROR_MESSAGE);
+			}
+		}
+	}
+	
+	public void cargarDatos()
+	{
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setDialogTitle("Especifique el archivo que desea abrir");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("TXT file", "txt");
+		fileChooser.setFileFilter(filter);
+		fileChooser.setCurrentDirectory(new File("."));
+		
+		if(fileChooser.showOpenDialog(ventanaPrincipal) == JFileChooser.APPROVE_OPTION)
+		{
+			String AbsolutePath = fileChooser.getSelectedFile().getAbsolutePath();
+			EmpresaAmbulancias empresaAmbulanciasTemp = ManejoArchivos.loadContext(AbsolutePath);
+			
+			if (empresaAmbulanciasTemp != null)
+			{
+				this.ventanaPrincipal.setEmpresaAmbulancias(empresaAmbulanciasTemp);
+				JOptionPane.showMessageDialog(ventanaPrincipal
+						, "Se han cargado con éxito los datos!"
+						, "Éxito"
+						, JOptionPane.INFORMATION_MESSAGE);
+				ventanaPrincipal.getController().getRegistrarPosicionAmbulanciaController().actualizarTabla();
+				habilitarBtnGuardar();
+			}
+			else 
+			{
+				JOptionPane.showMessageDialog(ventanaPrincipal
+						, "Error al cargar los datos en el sistema :("
+						, "Error"
+						, JOptionPane.ERROR_MESSAGE);
+			}
+		}
+	}
 	
 	public JButton getBtnRegistrarPosAmbulancia()
 	{
@@ -191,12 +286,36 @@ public class MenuView extends JPanel
 
 
 	public VentanaPrincipal getVentanaPrincipal() {
-		return ventanaPrincipal;
+		return this.ventanaPrincipal;
 	}
 
 
 
 	public void setVentanaPrincipal(VentanaPrincipal ventanaPrincipal) {
 		this.ventanaPrincipal = ventanaPrincipal;
+	}
+
+
+
+	public JButton getBtnGuardarDatos() {
+		return btnGuardarDatos;
+	}
+
+
+
+	public void setBtnGuardarDatos(JButton btnGuardarDatos) {
+		this.btnGuardarDatos = btnGuardarDatos;
+	}
+
+
+
+	public JButton getBtnCargarDatos() {
+		return btnCargarDatos;
+	}
+
+
+
+	public void setBtnCargarDatos(JButton btnCargarDatos) {
+		this.btnCargarDatos = btnCargarDatos;
 	}
 }
