@@ -10,6 +10,7 @@ public class Controller
 	private IngresarIpsYAmbulanciasController ingresarIpsYAmbulanciasController;
 	private RegistrarPosicionAmbulanciaController registrarPosicionAmbulanciaController;
 	private RegistrarUnServicioController registrarUnServicioController;
+	private AsignarServicioController asignarServicioController;
 	
 	
 	private FinalizarServicioController finalizarServicioController;
@@ -23,7 +24,10 @@ public class Controller
 		this.ingresarIpsYAmbulanciasController = new IngresarIpsYAmbulanciasController(ventanaPrincipal);
 		this.registrarPosicionAmbulanciaController = new RegistrarPosicionAmbulanciaController(ventanaPrincipal);
 		this.registrarUnServicioController = new RegistrarUnServicioController(ventanaPrincipal);
+
 		this.finalizarServicioController = new FinalizarServicioController(ventanaPrincipal);
+
+		this.asignarServicioController = new AsignarServicioController(ventanaPrincipal);
 	}
 	
 	
@@ -70,6 +74,7 @@ public class Controller
 	}
 
 
+<<<<<<< HEAD
 	public FinalizarServicioController getFinalizarServicioController() {
 		return finalizarServicioController;
 	}
@@ -78,6 +83,17 @@ public class Controller
 	public void setFinalizarServicioController(FinalizarServicioController finalizarServicioController) {
 		this.finalizarServicioController = finalizarServicioController;
 	}
+=======
+	public AsignarServicioController getAsignarServicioController() {
+		return asignarServicioController;
+	}
+
+
+	public void setAsignarServicioController(AsignarServicioController asignarServicioController) {
+		this.asignarServicioController = asignarServicioController;
+	}
+	
+>>>>>>> 32c51a9abf5e531cf57ac441f244c1d50a169cd6
 	
 	
 }

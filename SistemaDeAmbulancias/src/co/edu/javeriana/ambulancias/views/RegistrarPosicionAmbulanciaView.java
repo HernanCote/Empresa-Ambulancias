@@ -39,8 +39,6 @@ public class RegistrarPosicionAmbulanciaView extends JPanel
 	private JLabel lblNewLabel;
 	private JTable tableAmbulancias;
 
-	
-
 	private TableModel modelAmbulancias;
 	private String [] tableLabels = {"Codigo","Tipo","Tipo UCI","Placa", "Medico / Enfermero","Hora Posicion", "Calle", "Carrera"};
 	private String [][] tableCont = {};

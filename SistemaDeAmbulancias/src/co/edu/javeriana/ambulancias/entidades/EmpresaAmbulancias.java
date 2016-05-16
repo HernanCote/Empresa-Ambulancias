@@ -6,6 +6,7 @@ package co.edu.javeriana.ambulancias.entidades;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -648,11 +649,7 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias, Serializable
 	public String [][] getTableAmbulancias () {
 		ArrayList < ArrayList <String> > tableAmbulancias = new ArrayList< ArrayList <String> >();
 		
-		
 		TreeSet<Integer> keys = new TreeSet<Integer>(ambulanciasList.keySet());
-		
-		
-		// {"Codigo","Tipo","Placa","Tipo UCI","Hora Posicion", "Calle", "Carrera"};
 		
 		for (Integer key : keys) {
 			Ambulancia ambu = ambulanciasList.get(key);
@@ -700,6 +697,70 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias, Serializable
 		} 
 		
 		return table;
+	}  
+	
+	public String [][] getTableIPS () {
+		ArrayList < ArrayList <String> > tableIPS = new ArrayList< ArrayList <String> >();
+				
+		TreeSet<String> keys = new TreeSet<String>(ipsList.keySet());
+		
+		for (String key : keys) {
+			IPS ipsTemp = ipsList.get(key);
+			ArrayList<String> tempRow = new ArrayList<String>();
+			tempRow.add(key);
+			tempRow.add(ipsTemp.getTipoAtencion());
+			tempRow.add(ipsTemp.getDireccion().toString());
+			tableIPS.add(tempRow);
+		}
+		
+		String[][] table = new String[tableIPS.size()][];
+		int cont = 0;
+		for (int i = tableIPS.size() - 1; i >= 0; i--) {
+		    ArrayList<String> row = tableIPS.get(i);
+		    table[cont++] = row.toArray(new String[row.size()]);
+		} 
+		
+		return table;
+		
 	}
 	
+	public String [][] getTableServicios () {
+		ArrayList < ArrayList <String> > tableServicios = new ArrayList< ArrayList <String> >();
+		
+		for (Servicio serv : serviciosList) {
+			ArrayList<String> tempRow = new ArrayList <String>();
+			tempRow.add(String.valueOf(serv.getCodigo()));
+			tempRow.add(Utils.formatoHora(serv.getHoraSolicitud()));
+			tempRow.add(serv.getPaciente());
+			tempRow.add(serv.getStringTipoServicio());
+			tempRow.add(serv.getTelefono());
+			tempRow.add(serv.getDireccion().toString());
+			tempRow.add(serv.getStringEstado());
+			if (serv.getIps() != null) tempRow.add(serv.getIps().getNombre());
+			else tempRow.add(" ");
+			if (serv.getAmbulancia() != null) tempRow.add(String.valueOf(serv.getAmbulancia().getCodigo()));
+			else tempRow.add(" ");
+			tableServicios.add(tempRow);
+		}
+		String[][] table = new String[tableServicios.size()][];
+		int cont = 0;
+		for (int i = tableServicios.size() - 1; i >= 0; i--) {
+		    ArrayList<String> row = tableServicios.get(i);
+		    table[cont++] = row.toArray(new String[row.size()]);
+		} 
+		
+		return table;
+	}
+	
+	public boolean isAsignado (int codigo) {
+		boolean flag = false;
+		for (Servicio serv : serviciosList) {
+			if (serv.getCodigo() == codigo) {
+				if (serv.getEstado() == EstadoServicio.ASIGNADO) { 
+					flag = true;
+				}
+			}
+		}
+		return flag;
+	}
 }
