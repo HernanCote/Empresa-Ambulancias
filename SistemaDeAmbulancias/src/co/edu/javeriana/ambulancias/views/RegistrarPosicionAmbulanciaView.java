@@ -19,6 +19,7 @@ import co.edu.javeriana.ambulancias.controllers.RegistrarPosicionAmbulanciaContr
 import co.edu.javeriana.ambulancias.entidades.EmpresaAmbulancias;
 import co.edu.javeriana.ambulancias.entidades.IServiciosAmbulancias;
 import co.edu.javeriana.ambulancias.presentacion.VentanaPrincipal;
+import java.awt.Font;
 
 public class RegistrarPosicionAmbulanciaView extends JPanel 
 {
@@ -53,13 +54,23 @@ public class RegistrarPosicionAmbulanciaView extends JPanel
 		setLayout(new BorderLayout(0, 0));
 		
 		panelSouth = new JPanel();
+		panelSouth.setBackground(new Color(255, 255, 255));
 		btnActualizar = new JButton("Actualizar");
+		btnActualizar.setFont(new Font("Segoe UI", Font.PLAIN, 11));
+		btnActualizar.setForeground(new Color(255, 255, 255));
+		btnActualizar.setBackground(new Color(102, 205, 170));
 		btnActualizar.addActionListener(ventanaPrincipal.getController().getRegistrarPosicionAmbulanciaController());
 		btnRegistrar = new JButton("Registrar");
+		btnRegistrar.setFont(new Font("Segoe UI", Font.PLAIN, 11));
+		btnRegistrar.setForeground(new Color(255, 255, 255));
+		btnRegistrar.setBackground(new Color(50, 205, 50));
 		btnRegistrar.setEnabled(false);
 		btnRegistrar.addActionListener(ventanaPrincipal.getController().getRegistrarPosicionAmbulanciaController());
 		
 		btnRegresar = new JButton("Regresar");
+		btnRegresar.setFont(new Font("Segoe UI", Font.PLAIN, 11));
+		btnRegresar.setForeground(new Color(255, 255, 255));
+		btnRegresar.setBackground(new Color(128, 0, 0));
 		panelSouth.add(btnRegresar);
 		panelSouth.add(btnActualizar);
 		panelSouth.add(btnRegistrar);
@@ -70,6 +81,7 @@ public class RegistrarPosicionAmbulanciaView extends JPanel
 		
 		modelAmbulancias = new DefaultTableModel(tableCont,tableLabels);
 		tableAmbulancias = new JTable(modelAmbulancias);
+		tableAmbulancias.setBackground(new Color(255, 255, 255));
 		tableAmbulancias.setBounds(50,50,200,200);
 		tableAmbulancias.setVisible(true);
 		tableAmbulancias.addMouseListener(new MouseAdapter() {
@@ -120,9 +132,12 @@ public class RegistrarPosicionAmbulanciaView extends JPanel
 		textFieldCarrera.setColumns(5);
 		
 		panelNorth = new JPanel();
+		panelNorth.setBackground(new Color(255, 255, 255));
 		add(panelNorth, BorderLayout.NORTH);
 		
-		lblNewLabel = new JLabel("Ambulancias");
+		lblNewLabel = new JLabel("Ambulancias disponibles en el sistema");
+		lblNewLabel.setForeground(Color.LIGHT_GRAY);
+		lblNewLabel.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		panelNorth.add(lblNewLabel);
 	}
 	

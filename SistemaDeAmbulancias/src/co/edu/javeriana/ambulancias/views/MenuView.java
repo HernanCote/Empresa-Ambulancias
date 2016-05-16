@@ -131,7 +131,7 @@ public class MenuView extends JPanel
 	public void guardarDatos()
 	{
 		JFileChooser fileChooser = new JFileChooser();
-		fileChooser.setDialogTitle("Especifique como guardar el archivo");
+		fileChooser.setDialogTitle("Especifique el nombre para guardar el archivo sin extensión");
 		fileChooser.setCurrentDirectory(new File("."));
 		
 		int userSelection = fileChooser.showSaveDialog(ventanaPrincipal);

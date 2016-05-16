@@ -173,6 +173,12 @@ public class ManejoArchivos
 	    return archivoLeido;
 	  }
 	  
+	  /**
+	   * 
+	   * @param fileName
+	   * @param empresaAmbulancias
+	   * @return
+	   */
 	  public static boolean saveContext(String fileName, EmpresaAmbulancias empresaAmbulancias)
 	  {
 		 boolean IsCreated = false;
@@ -194,6 +200,11 @@ public class ManejoArchivos
 		 return IsCreated;
 	  }
 	  
+	  /**
+	   * 
+	   * @param fileName
+	   * @return
+	   */
 	  public static EmpresaAmbulancias loadContext(String fileName)
 	  {		  
 		  try(InputStream file = new FileInputStream(fileName);
@@ -201,19 +212,21 @@ public class ManejoArchivos
 			  ObjectInput input = new ObjectInputStream(buffer);) 
 		  {
 			  EmpresaAmbulancias empresaAmbulancias = (EmpresaAmbulancias)input.readObject();
+			  
 			  for(Servicio servicio : empresaAmbulancias.getServicios())
 			  {
 				  System.out.println("Servicio: " + servicio.getPaciente());
-			  }			  
+			  }
+			  
 			  return empresaAmbulancias;
 		  } 
 		  catch (FileNotFoundException e) 
 		  {			
-			  System.out.println("No se puede encuntrar el archivo especificado");
+			  System.out.println("No se puede encontrar el archivo especificado");
 		  } 
 		  catch (IOException e1) 
 		  {			
-			  System.out.println("No se puede hacer el ingreso de datos.");
+			  System.out.println("No se puede hacer el ingreso de datos. Puede que los datos no sean consistentes.");
 		  } 
 		  catch (ClassNotFoundException e) 
 		  {			

@@ -12,6 +12,9 @@ public class Controller
 	private RegistrarUnServicioController registrarUnServicioController;
 	
 	
+	private FinalizarServicioController finalizarServicioController;
+	
+	
 	public Controller(VentanaPrincipal ventanaPrincipal)
 	{
 		this.setVentanaPrincipal(ventanaPrincipal);
@@ -20,6 +23,7 @@ public class Controller
 		this.ingresarIpsYAmbulanciasController = new IngresarIpsYAmbulanciasController(ventanaPrincipal);
 		this.registrarPosicionAmbulanciaController = new RegistrarPosicionAmbulanciaController(ventanaPrincipal);
 		this.registrarUnServicioController = new RegistrarUnServicioController(ventanaPrincipal);
+		this.finalizarServicioController = new FinalizarServicioController(ventanaPrincipal);
 	}
 	
 	
@@ -63,6 +67,16 @@ public class Controller
 
 	public void setRegistrarUnServicioController(RegistrarUnServicioController registrarUnServicioController) {
 		this.registrarUnServicioController = registrarUnServicioController;
+	}
+
+
+	public FinalizarServicioController getFinalizarServicioController() {
+		return finalizarServicioController;
+	}
+
+
+	public void setFinalizarServicioController(FinalizarServicioController finalizarServicioController) {
+		this.finalizarServicioController = finalizarServicioController;
 	}
 	
 	

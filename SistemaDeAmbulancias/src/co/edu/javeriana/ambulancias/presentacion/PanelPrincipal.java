@@ -81,8 +81,8 @@ public class PanelPrincipal extends JPanel
 		
 		//-----------------------------------------------------------------------
 		
-		tabFinalizarServicio = new FinalizarServicioView();
-		getTabbedPane().addTab("Finalizar un servicio", null, tabFinalizarServicio, null);
+		setTabFinalizarServicio(new FinalizarServicioView(ventanaPrincipal));
+		getTabbedPane().addTab("Finalizar un servicio", null, getTabFinalizarServicio(), null);
 		
 		//-----------------------------------------------------------------------
 		
@@ -133,5 +133,13 @@ public class PanelPrincipal extends JPanel
 
 	public void setTabRegistrarUnServicio(RegistrarUnServicioView tabRegistrarUnServicio) {
 		this.tabRegistrarUnServicio = tabRegistrarUnServicio;
+	}
+
+	public FinalizarServicioView getTabFinalizarServicio() {
+		return tabFinalizarServicio;
+	}
+
+	public void setTabFinalizarServicio(FinalizarServicioView tabFinalizarServicio) {
+		this.tabFinalizarServicio = tabFinalizarServicio;
 	}
 }

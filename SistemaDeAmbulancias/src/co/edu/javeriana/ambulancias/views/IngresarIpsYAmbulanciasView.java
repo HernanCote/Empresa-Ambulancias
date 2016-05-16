@@ -33,7 +33,7 @@ public class IngresarIpsYAmbulanciasView extends JPanel
 		setLayout(null);
 		
 		JLabel lblTitle = new JLabel("Ingresar IPS y Ambulancias");
-		lblTitle.setForeground(new Color(139, 0, 0));
+		lblTitle.setForeground(Color.LIGHT_GRAY);
 		lblTitle.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		lblTitle.setBounds(29, 22, 275, 29);
 		add(lblTitle);
