@@ -127,7 +127,7 @@ public class ReporteServiciosAsignados extends JPanel {
 		btnRegresar = new JButton("Regresar");
 		
 		btnMostrar.addActionListener(new ReporteServiciosAsignadosController (ventanaPrincipal));
-		
+		btnRegresar.addActionListener(new ReporteServiciosAsignadosController (ventanaPrincipal) );
 		southButtons.add(btnMostrar);
 		southButtons.add(btnRegresar);
 		add(southButtons);
