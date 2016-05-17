@@ -185,12 +185,12 @@ public class ManejoArchivos
 		  
 		 try 
 		 {
-			ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fileName));
-			outputStream.writeObject(empresaAmbulancias);
+			 ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fileName));
+			 outputStream.writeObject(empresaAmbulancias);
 				
-			outputStream.flush();
-			outputStream.close();
-			IsCreated = true;
+			 outputStream.flush();
+			 outputStream.close();
+			 IsCreated = true;
 		 } 
 		 catch (IOException e) 
 		 {				

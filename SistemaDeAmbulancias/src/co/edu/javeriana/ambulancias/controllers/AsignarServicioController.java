@@ -26,11 +26,12 @@ public class AsignarServicioController implements ActionListener {
 		AsignarServicioView ventanaAsigServ = ventanaPrincipal.getPanelPrincipal().getTabAsignarServicio();
 		if (e.getSource().equals(ventanaAsigServ.getBtnAssignarServicio())){
 			int codigoServ = ventanaAsigServ.getSelectedRowCodeServicio();
-			if (!ventanaPrincipal.getEmpresaAmbulancias().isAsignado(ventanaAsigServ.getSelectedRowCodeServicio())) {
+			if (!ventanaPrincipal.getEmpresaAmbulancias().isAsignado(codigoServ)) {
 				ventanaPrincipal.getEmpresaAmbulancias().asignarUnServicio(ventanaAsigServ.getSelectedRowCodeServicio());
 				actualizarContServicios();
+				ventanaPrincipal.getController().getFinalizarServicioController().actualizarContServicios();
 			} else {
-				JOptionPane.showMessageDialog(ventanaPrincipal, "El Servicio Ya Fue Asignado", "ERROR",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(ventanaPrincipal, "El Servicio Ya Fue Asignado", "ERROR", JOptionPane.ERROR_MESSAGE);
 			}		
 		}
 		

@@ -373,8 +373,7 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias, Serializable
 		int auxiliar = 2000000;
 		int z=200000;
 		for(Ambulancia ambuMasCercana : ambulancias)
-		{
-			
+		{			
 			z = calcularDistancia(ambuMasCercana.getPosicionCalle(),ambuMasCercana.getPosicionCarrera(), calle, carrera);
 			if(auxiliar > z)
 			{
@@ -725,7 +724,7 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias, Serializable
 	}
 	
 	public String [][] getTableServicios () {
-		ArrayList < ArrayList <String> > tableServicios = new ArrayList< ArrayList <String> >();
+		ArrayList <ArrayList <String>> tableServicios = new ArrayList<ArrayList<String>>();
 		
 		for (Servicio serv : serviciosList) {
 			ArrayList<String> tempRow = new ArrayList <String>();
@@ -736,10 +735,22 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias, Serializable
 			tempRow.add(serv.getTelefono());
 			tempRow.add(serv.getDireccion().toString());
 			tempRow.add(serv.getStringEstado());
-			if (serv.getIps() != null) tempRow.add(serv.getIps().getNombre());
-			else tempRow.add(" ");
-			if (serv.getAmbulancia() != null) tempRow.add(String.valueOf(serv.getAmbulancia().getCodigo()));
-			else tempRow.add(" ");
+			if (serv.getIps() != null)
+			{
+				tempRow.add(serv.getIps().getNombre());
+			}
+			else 
+			{
+				tempRow.add(" ");
+			}
+			if (serv.getAmbulancia() != null) 
+			{
+				tempRow.add(String.valueOf(serv.getAmbulancia().getCodigo()));
+			}				
+			else 
+			{
+				tempRow.add(" ");
+			}
 			tableServicios.add(tempRow);
 		}
 		String[][] table = new String[tableServicios.size()][];
@@ -762,5 +773,17 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias, Serializable
 			}
 		}
 		return flag;
+	}
+	
+	public Servicio getServicioById(int id)
+	{
+		for(Servicio servicio : serviciosList)
+		{
+			if(servicio.getCodigo() == id)
+			{
+				return servicio;
+			}
+		}
+		return null;			
 	}
 }

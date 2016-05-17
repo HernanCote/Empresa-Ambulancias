@@ -4,13 +4,23 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTable;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
+import co.edu.javeriana.ambulancias.entidades.Servicio;
+import co.edu.javeriana.ambulancias.enums.EstadoServicio;
 import co.edu.javeriana.ambulancias.presentacion.VentanaPrincipal;
 
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.SystemColor;
 
 public class FinalizarServicioView extends JPanel 
@@ -22,6 +32,11 @@ public class FinalizarServicioView extends JPanel
 	
 	private JButton btnFinalizarServicioSeleccionado;
 	private JButton btnRegresar;
+	
+	private TableModel modeloServicios;
+	
+	private String [] tableLabelsServicios = {"Codigo","Hora","Paciente", "Tipo Servicio","Telefono","Direccion","Estado","IPS","Ambulancia"};
+	private String [][] tableContServicios = {};
 	
 	/**
 	 * Create the panel.
@@ -42,9 +57,17 @@ public class FinalizarServicioView extends JPanel
 		scrollPane.setBounds(45, 66, 650, 210);
 		add(scrollPane);
 		
-		table = new JTable();
-		scrollPane.setViewportView(table);
 		
+		modeloServicios = new DefaultTableModel(tableContServicios, tableLabelsServicios);
+		setTable(new JTable(modeloServicios));
+		scrollPane.setViewportView(getTable());
+		getTable().getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {				
+				enableBtnFinalizar();
+			}
+		});
 		setBtnFinalizarServicioSeleccionado(new JButton("Finalizar servicio seleccionado"));
 		getBtnFinalizarServicioSeleccionado().setBackground(SystemColor.textHighlight);
 		getBtnFinalizarServicioSeleccionado().setFont(new Font("Segoe UI", Font.PLAIN, 14));
@@ -62,9 +85,68 @@ public class FinalizarServicioView extends JPanel
 		add(getBtnRegresar());
 	}
 
+	public void addRowToTableServicios (Object newCont [][]) 
+	{
+		DefaultTableModel modelTemp = new DefaultTableModel(newCont,tableLabelsServicios);
+		getTable().setModel(modelTemp);
+	}
+	
+	public int getSelectedRowCodeServicio () {
+		int numRow = table.getSelectedRow();
+		String tempCode = (String) table.getValueAt(numRow, 0);
+		int code = Integer.parseInt(tempCode);
+		return code;
+	}
+	
+	public void finalizarServicio(int codigo)
+	{
+		Servicio servicio = ventanaPrincipal.getEmpresaAmbulancias().getServicioById(codigo);
+		if(servicio  != null)
+		{
+			if(servicio.getEstado() == EstadoServicio.ASIGNADO)
+			{
+				servicio.setEstado(EstadoServicio.FINALIZADO);
+				JOptionPane.showMessageDialog(ventanaPrincipal
+						, "El servicio se ha finalizado exitosamente!"
+						, "Exito"
+						, JOptionPane.INFORMATION_MESSAGE);
+				
+				ventanaPrincipal.getController().getAsignarServicioController().actualizarContServicios();
+				ventanaPrincipal.getController().getFinalizarServicioController().actualizarContServicios();
+			}
+			else if(servicio.getEstado() == EstadoServicio.NO_ASIGNADO)
+			{
+				JOptionPane.showMessageDialog(ventanaPrincipal
+						, "El servicio especificado no ha sido asignado por lo que no puede ser finalizado!"
+						, "ATENCION"
+						, JOptionPane.ERROR_MESSAGE);
+			}
+			else 
+			{
+				JOptionPane.showMessageDialog(ventanaPrincipal
+						, "El servicio especificado ya ha sido finalizado"
+						, "Error"
+						, JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(ventanaPrincipal
+					, "El código del servicio no existe!"
+					, "Error"
+					, JOptionPane.ERROR_MESSAGE);
+		}
+		disableBtnFinalizar();
+	}
+	
 	public void enableBtnFinalizar()
 	{
 		this.btnFinalizarServicioSeleccionado.setEnabled(true);
+	}
+	
+	public void disableBtnFinalizar()
+	{
+		this.btnFinalizarServicioSeleccionado.setEnabled(false);
 	}
 	public JButton getBtnFinalizarServicioSeleccionado() {
 		return btnFinalizarServicioSeleccionado;
@@ -81,5 +163,13 @@ public class FinalizarServicioView extends JPanel
 	public void setBtnRegresar(JButton btnRegresar)
 	{
 		this.btnRegresar = btnRegresar;
+	}
+
+	public JTable getTable() {
+		return table;
+	}
+
+	public void setTable(JTable table) {
+		this.table = table;
 	}
 }

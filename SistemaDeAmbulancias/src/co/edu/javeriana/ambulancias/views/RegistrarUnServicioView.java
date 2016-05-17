@@ -27,8 +27,8 @@ public class RegistrarUnServicioView extends JPanel
 	private JTextField txtCalle;
 	private JTextField txtCarrera;
 	private JTextField txtNumero;
-	private JComboBox comboTipoServicio;
-	private JComboBox comboTipoDireccion;
+	private JComboBox<TipoServicio> comboTipoServicio;
+	private JComboBox<TipoDireccion> comboTipoDireccion;
 	private JButton btnRegistrar;
 	private JButton btnRegresar;
 	
@@ -168,16 +168,17 @@ public class RegistrarUnServicioView extends JPanel
 			
 			Direccion direccion = new Direccion(tipoDireccion, calle, carrera, numero);
 			Servicio servicio = new Servicio(paciente, tipoServicio, telefono, direccion);
-			//System.out.println("ESTADO 1 : " + servicio.getStringEstado());
+			
 			
 			ventanaPrincipal.getEmpresaAmbulancias().registrarServicio(servicio);
 			ventanaPrincipal.getController().getAsignarServicioController().actualizarContServicios();
+			ventanaPrincipal.getController().getFinalizarServicioController().actualizarContServicios();
 			ventanaPrincipal.getPanelPrincipal().getTabMenuServicios().getBtnGuardarDatos().setEnabled(true);
 			JOptionPane.showMessageDialog(ventanaPrincipal
 					, "Servicio ingresado exitosamente al sistema!"
 					, "�xito!"
 					, JOptionPane.INFORMATION_MESSAGE);
-			//System.out.println("ESTADO 2 : " + servicio.getStringEstado());
+			
 		}
 		catch(NumberFormatException e)
 		{
@@ -199,6 +200,7 @@ public class RegistrarUnServicioView extends JPanel
 		txtPaciente.setText(null);
 		comboTipoDireccion.setSelectedIndex(0);
 		txtPaciente.setText(null);
+		txtTelefono.setText(null);
 		comboTipoServicio.setSelectedIndex(0);
 		txtCalle.setText(null);
 		txtCarrera.setText(null);

@@ -44,19 +44,39 @@ public class Servicio implements Serializable
 		this.valor = 0;
 	}
 	
-	public String getStringTipoServicio () {
+	public String getStringTipoServicio () 
+	{
 		String returnString = "";
-		if (tipoServicio == TipoServicio.DOMICILIO) returnString = "Domicilio";
-		if (tipoServicio == TipoServicio.EMERGENCIA) returnString = "Emergencia";
-		if (tipoServicio == TipoServicio.URGENCIA) returnString = "Urgencia";
+		if (tipoServicio == TipoServicio.DOMICILIO) 
+		{
+			returnString = "Domicilio";			
+		}
+		if (tipoServicio == TipoServicio.EMERGENCIA) 
+		{
+			returnString = "Emergencia";
+		}
+		if (tipoServicio == TipoServicio.URGENCIA) 
+		{
+			returnString = "Urgencia";
+		}
 		return returnString;
 	}
 	
-	public String getStringEstado () {
+	public String getStringEstado () 
+	{
 		String toReturn = "";
-		if (estado == EstadoServicio.ASIGNADO) toReturn = "Asignado";
-		if (estado == EstadoServicio.FINALIZADO) toReturn = "Finalizado";
-		if (estado == EstadoServicio.NO_ASIGNADO) toReturn = "No Asignado";
+		if (estado == EstadoServicio.ASIGNADO) 
+		{
+			toReturn = "Asignado";
+		}
+		if (estado == EstadoServicio.FINALIZADO) 
+		{
+			toReturn = "Finalizado";
+		}
+		if (estado == EstadoServicio.NO_ASIGNADO) 
+		{
+			toReturn = "No Asignado";
+		}
 		return toReturn;
 	}
 	

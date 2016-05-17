@@ -18,5 +18,5 @@ public interface IServiciosAmbulancias {
 	public boolean finalizarUnServicio(int codigo);
 	public ArrayList<Servicio> getServicios();
 	public HashMap<Integer, Ambulancia> getAmbulancias();
-	
+	public Servicio getServicioById(int id);
 }

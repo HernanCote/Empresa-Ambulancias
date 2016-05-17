@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import co.edu.javeriana.ambulancias.presentacion.VentanaPrincipal;
+import co.edu.javeriana.ambulancias.views.FinalizarServicioView;
 
 public class FinalizarServicioController implements ActionListener 
 {
@@ -19,14 +20,21 @@ public class FinalizarServicioController implements ActionListener
 	public void actionPerformed(ActionEvent e) 
 	{		
 		Object object = e.getSource();
-		if(object.equals(ventanaPrincipal.getPanelPrincipal().getTabFinalizarServicio().getBtnRegresar()))
-		{
+		FinalizarServicioView tabFinalizarView = ventanaPrincipal.getPanelPrincipal().getTabFinalizarServicio();
+		if(object.equals(tabFinalizarView.getBtnRegresar()))
+		{			
 			ventanaPrincipal.getPanelPrincipal().getTabbedPane().setSelectedIndex(0);
 		}
-		else if(object.equals(ventanaPrincipal.getPanelPrincipal().getTabFinalizarServicio().getBtnFinalizarServicioSeleccionado()))
+		else if(object.equals(tabFinalizarView.getBtnFinalizarServicioSeleccionado()))
 		{
-			
+			int codigoServicio = tabFinalizarView.getSelectedRowCodeServicio();
+			tabFinalizarView.finalizarServicio(codigoServicio);
 		}
+	}
+	
+	public void actualizarContServicios () {
+		String [][] temp = ventanaPrincipal.getEmpresaAmbulancias().getTableServicios();
+		ventanaPrincipal.getPanelPrincipal().getTabFinalizarServicio().addRowToTableServicios(temp);
 	}
 
 }

@@ -71,19 +71,8 @@ public class Controller
 
 	public void setRegistrarUnServicioController(RegistrarUnServicioController registrarUnServicioController) {
 		this.registrarUnServicioController = registrarUnServicioController;
-	}
+	}	
 
-
-<<<<<<< HEAD
-	public FinalizarServicioController getFinalizarServicioController() {
-		return finalizarServicioController;
-	}
-
-
-	public void setFinalizarServicioController(FinalizarServicioController finalizarServicioController) {
-		this.finalizarServicioController = finalizarServicioController;
-	}
-=======
 	public AsignarServicioController getAsignarServicioController() {
 		return asignarServicioController;
 	}
@@ -93,7 +82,13 @@ public class Controller
 		this.asignarServicioController = asignarServicioController;
 	}
 	
->>>>>>> 32c51a9abf5e531cf57ac441f244c1d50a169cd6
-	
+	public FinalizarServicioController getFinalizarServicioController() {
+		return finalizarServicioController;
+	}
+
+
+	public void setFinalizarServicioController(FinalizarServicioController finalizarServicioController) {
+		this.finalizarServicioController = finalizarServicioController;
+	}
 	
 }

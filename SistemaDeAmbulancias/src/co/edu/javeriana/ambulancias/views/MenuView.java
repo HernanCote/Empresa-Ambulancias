@@ -176,7 +176,13 @@ public class MenuView extends JPanel
 						, "Se han cargado con éxito los datos!"
 						, "Éxito"
 						, JOptionPane.INFORMATION_MESSAGE);
+				
 				ventanaPrincipal.getController().getRegistrarPosicionAmbulanciaController().actualizarTabla();
+				ventanaPrincipal.getController().getAsignarServicioController().actualizarContAmbulancias();
+				ventanaPrincipal.getController().getAsignarServicioController().actualizarContIPS();
+				ventanaPrincipal.getController().getAsignarServicioController().actualizarContServicios();
+				ventanaPrincipal.getController().getFinalizarServicioController().actualizarContServicios();
+				
 				habilitarBtnGuardar();
 			}
 			else 
