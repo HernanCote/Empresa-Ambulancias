@@ -684,6 +684,7 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias, Serializable
 			tempArray.add(Utils.formatoHora(ambu.getHoraPosicion()));
 			tempArray.add( String.valueOf(ambu.getPosicionCalle()) );
 			tempArray.add(String.valueOf(ambu.getPosicionCarrera()));
+			tempArray.add(String.valueOf(ambu.calcularTarifa())); // new
 			
 			tableAmbulancias.add(tempArray);
 			
@@ -751,6 +752,8 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias, Serializable
 			{
 				tempRow.add(" ");
 			}
+			tempRow.add(String.valueOf(serv.getValor())); // New
+			System.out.println("Valor: "+ serv.getValor()); // New 
 			tableServicios.add(tempRow);
 		}
 		String[][] table = new String[tableServicios.size()][];

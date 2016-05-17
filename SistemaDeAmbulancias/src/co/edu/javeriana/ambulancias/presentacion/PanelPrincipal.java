@@ -86,7 +86,7 @@ public class PanelPrincipal extends JPanel
 		
 		//-----------------------------------------------------------------------
 		
-		tabReporteServiciosConIpsYAmbulanciasAsignados = new ReporteServiciosAsignados();
+		tabReporteServiciosConIpsYAmbulanciasAsignados = new ReporteServiciosAsignados(ventanaPrincipal);
 		getTabbedPane().addTab("Reporte servicios con IPS y ambulancias asignados", null, tabReporteServiciosConIpsYAmbulanciasAsignados, null);
 		
 		//-----------------------------------------------------------------------

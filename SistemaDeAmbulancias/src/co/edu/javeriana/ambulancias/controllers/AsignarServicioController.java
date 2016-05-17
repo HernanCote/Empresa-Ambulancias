@@ -30,6 +30,7 @@ public class AsignarServicioController implements ActionListener {
 				ventanaPrincipal.getEmpresaAmbulancias().asignarUnServicio(ventanaAsigServ.getSelectedRowCodeServicio());
 				actualizarContServicios();
 				ventanaPrincipal.getController().getFinalizarServicioController().actualizarContServicios();
+				ventanaPrincipal.getController().getReporteServiciosAsignados().actualizarContServicios();
 			} else {
 				JOptionPane.showMessageDialog(ventanaPrincipal, "El Servicio Ya Fue Asignado", "ERROR", JOptionPane.ERROR_MESSAGE);
 			}		

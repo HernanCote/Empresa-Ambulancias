@@ -173,6 +173,7 @@ public class RegistrarUnServicioView extends JPanel
 			ventanaPrincipal.getEmpresaAmbulancias().registrarServicio(servicio);
 			ventanaPrincipal.getController().getAsignarServicioController().actualizarContServicios();
 			ventanaPrincipal.getController().getFinalizarServicioController().actualizarContServicios();
+			ventanaPrincipal.getController().getReporteServiciosAsignados().actualizarContServicios();
 			ventanaPrincipal.getPanelPrincipal().getTabMenuServicios().getBtnGuardarDatos().setEnabled(true);
 			JOptionPane.showMessageDialog(ventanaPrincipal
 					, "Servicio ingresado exitosamente al sistema!"
