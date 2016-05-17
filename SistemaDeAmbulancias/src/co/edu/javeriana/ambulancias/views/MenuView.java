@@ -131,7 +131,7 @@ public class MenuView extends JPanel
 	public void guardarDatos()
 	{
 		JFileChooser fileChooser = new JFileChooser();
-		fileChooser.setDialogTitle("Especifique el nombre para guardar el archivo sin extensión");
+		fileChooser.setDialogTitle("Especifique el nombre para guardar el archivo sin extensiï¿½n");
 		fileChooser.setCurrentDirectory(new File("."));
 		
 		int userSelection = fileChooser.showSaveDialog(ventanaPrincipal);
@@ -144,7 +144,7 @@ public class MenuView extends JPanel
 			
 			if(IsSuccess)
 			{
-				JOptionPane.showMessageDialog(ventanaPrincipal, "Se ha guardado con éxito los datos!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(ventanaPrincipal, "Se ha guardado con ï¿½xito los datos!", "ï¿½xito", JOptionPane.INFORMATION_MESSAGE);
 			}
 			else 
 			{
@@ -173,8 +173,8 @@ public class MenuView extends JPanel
 			{
 				this.ventanaPrincipal.setEmpresaAmbulancias(empresaAmbulanciasTemp);
 				JOptionPane.showMessageDialog(ventanaPrincipal
-						, "Se han cargado con éxito los datos!"
-						, "Éxito"
+						, "Se han cargado con ï¿½xito los datos!"
+						, "ï¿½xito"
 						, JOptionPane.INFORMATION_MESSAGE);
 				
 				ventanaPrincipal.getController().getRegistrarPosicionAmbulanciaController().actualizarTabla();
@@ -182,7 +182,7 @@ public class MenuView extends JPanel
 				ventanaPrincipal.getController().getAsignarServicioController().actualizarContIPS();
 				ventanaPrincipal.getController().getAsignarServicioController().actualizarContServicios();
 				ventanaPrincipal.getController().getFinalizarServicioController().actualizarContServicios();
-				
+				ventanaPrincipal.getController().getReporteServiciosAsignados().actualizarContServicios();
 				habilitarBtnGuardar();
 			}
 			else 

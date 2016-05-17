@@ -3,6 +3,8 @@ package co.edu.javeriana.ambulancias.views;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 import co.edu.javeriana.ambulancias.ambulancias.Ambulancia;
 import co.edu.javeriana.ambulancias.ambulancias.AmbulanciaBasica;
 import co.edu.javeriana.ambulancias.ambulancias.AmbulanciaMedicalizada;
@@ -42,11 +44,21 @@ public class ReporteServiciosAsignadosController implements ActionListener {
 	}
 	
 	public void actualizarContIPS () {
-		int codigo = ventanaPrincipal.getPanelPrincipal().getTabReporteServiciosConIpsYAmbulanciasAsignados().getSelectedRowCodeServicio();
+		int codigo = 0;
+		
+		try {
+			codigo = ventanaPrincipal.getPanelPrincipal().getTabReporteServiciosConIpsYAmbulanciasAsignados().getSelectedRowCodeServicio();
+		} catch (Exception ex) {
+			JOptionPane.showMessageDialog(ventanaPrincipal, "Seleccione Un Servicio", "ERROR", JOptionPane.ERROR_MESSAGE);
+			actualizarContServicios();
+			return;
+		}
 		
 		System.out.println("CODIGO: " + codigo);
 		
 		Servicio servTemp = ventanaPrincipal.getEmpresaAmbulancias().getServicioById(codigo);
+			
+		
 		IPS ipsTemp = servTemp.getIps();
 		Ambulancia tempAmbu = servTemp.getAmbulancia();
 		String addIPS [][] = new String [1][3];
