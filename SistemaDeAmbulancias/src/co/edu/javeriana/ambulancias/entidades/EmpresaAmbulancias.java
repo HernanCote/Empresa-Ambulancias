@@ -724,6 +724,43 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias, Serializable
 		
 	}
 	
+	public String [][] getTableServiciosByIps(String nombreIps) {
+		
+		ArrayList < ArrayList <String> > tableServiciosIps = new ArrayList< ArrayList <String> >();
+		
+		for(String s : ipsList.keySet())
+		{
+			if(ipsList.get(s).getNombre().equals(nombreIps))
+			{				
+				for(Servicio servicio : ipsList.get(s).getServicios())
+				{
+					ArrayList<String> tempRow = new ArrayList<String>();
+					
+					tempRow.add(Long.toString(servicio.getCodigo()));
+					tempRow.add(Utils.formatoHora(servicio.getHoraSolicitud()));
+					tempRow.add(servicio.getPaciente());
+					tempRow.add(servicio.getTipoServicio().toString());
+					tempRow.add(servicio.getTelefono());
+					tempRow.add(servicio.getDireccion().toString());
+					tempRow.add(servicio.getEstado().toString());
+					tempRow.add(Integer.toString(servicio.getAmbulancia().getCodigo()));
+					tableServiciosIps.add(tempRow);
+				}
+			}
+		}
+		
+		String[][] table = new String[tableServiciosIps.size()][];
+		int cont = 0;
+		for (int i = tableServiciosIps.size() - 1; i >= 0; i--) {
+		    ArrayList<String> row = tableServiciosIps.get(i);
+		    table[cont++] = row.toArray(new String[row.size()]);
+		} 
+		
+		return table;		
+	}
+	
+	
+	
 	public String [][] getTableServicios () {
 		ArrayList <ArrayList <String>> tableServicios = new ArrayList<ArrayList<String>>();
 		

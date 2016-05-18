@@ -3,11 +3,16 @@ package co.edu.javeriana.ambulancias.controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import co.edu.javeriana.ambulancias.entidades.EmpresaAmbulancias;
+import co.edu.javeriana.ambulancias.entidades.IPS;
 import co.edu.javeriana.ambulancias.entidades.IServiciosAmbulancias;
 import co.edu.javeriana.ambulancias.persistencia.ManejoArchivos;
 import co.edu.javeriana.ambulancias.presentacion.VentanaPrincipal;
@@ -45,11 +50,29 @@ public class IngresarIpsYAmbulanciasController implements ActionListener
 					boolean cargaDeInfo = false;
 					cargaDeInfo = ManejoArchivos.leerIPS(AbsolutePath,ventanaPrincipal.getEmpresaAmbulancias());
 					if(cargaDeInfo)
-					{
+					{						
 						JOptionPane.showMessageDialog(ventanaPrincipal, 
 								"Se cargaron " + ventanaPrincipal.getEmpresaAmbulancias().getIps().size() + " IPS al sistema"
 								,"Exito!",JOptionPane.INFORMATION_MESSAGE);
+						if(!ventanaPrincipal.getEmpresaAmbulancias().getIps().isEmpty())
+						{							
+							SortedSet <String> keySet = new TreeSet <String>(); 
+							for (Map.Entry<String, IPS> entry: ventanaPrincipal.getEmpresaAmbulancias().getIps().entrySet())
+							{
+								keySet.add(entry.getKey());
+							}
+							
+							Iterator<String> ipsIterator = keySet.iterator();
+							while (ipsIterator.hasNext())
+							{	
+								String keyActual = (String) ipsIterator.next();
+								IPS ips = ventanaPrincipal.getEmpresaAmbulancias().getIps().get(keyActual);
+								ventanaPrincipal.getPanelPrincipal().getTabReporteDeIpsConServiciosAsociados().actualizarComboIps(ips.getNombre());
+							}
+						}
+						
 						ventanaPrincipal.getPanelPrincipal().getTabMenuServicios().getBtnGuardarDatos().setEnabled(true);
+						ventanaPrincipal.getController().getAsignarServicioController().actualizarContIPS();
 					}
 					else
 					{
@@ -73,7 +96,6 @@ public class IngresarIpsYAmbulanciasController implements ActionListener
 								,"Exito!",JOptionPane.INFORMATION_MESSAGE);
 						ventanaPrincipal.getController().getRegistrarPosicionAmbulanciaController().actualizarTabla();
 						ventanaPrincipal.getController().getAsignarServicioController().actualizarContAmbulancias();
-						ventanaPrincipal.getController().getAsignarServicioController().actualizarContIPS();
 						ventanaPrincipal.getPanelPrincipal().getTabMenuServicios().getBtnGuardarDatos().setEnabled(true);
 					}
 					else

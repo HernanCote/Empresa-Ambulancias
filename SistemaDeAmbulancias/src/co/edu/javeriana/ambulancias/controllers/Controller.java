@@ -1,7 +1,6 @@
 package co.edu.javeriana.ambulancias.controllers;
 
 import co.edu.javeriana.ambulancias.presentacion.VentanaPrincipal;
-import co.edu.javeriana.ambulancias.views.ReporteServiciosAsignadosController;
 
 public class Controller 
 {
@@ -13,6 +12,7 @@ public class Controller
 	private RegistrarUnServicioController registrarUnServicioController;
 	private AsignarServicioController asignarServicioController;
 	private ReporteServiciosAsignadosController reporteServiciosAsignados;
+	private ReporteServiciosAsociadosController reporteServiciosAsociadosController;
 	
 	
 	private FinalizarServicioController finalizarServicioController;
@@ -29,6 +29,7 @@ public class Controller
 		this.finalizarServicioController = new FinalizarServicioController(ventanaPrincipal);
 		this.asignarServicioController = new AsignarServicioController(ventanaPrincipal);
 		this.reporteServiciosAsignados = new ReporteServiciosAsignadosController(ventanaPrincipal);
+		this.setReporteServiciosAsociadosController(new ReporteServiciosAsociadosController(ventanaPrincipal));
 	}
 	
 	
@@ -100,6 +101,16 @@ public class Controller
 
 	public void setReporteServiciosAsignados(ReporteServiciosAsignadosController reporteServiciosAsignados) {
 		this.reporteServiciosAsignados = reporteServiciosAsignados;
+	}
+
+
+	public ReporteServiciosAsociadosController getReporteServiciosAsociadosController() {
+		return reporteServiciosAsociadosController;
+	}
+
+
+	public void setReporteServiciosAsociadosController(ReporteServiciosAsociadosController reporteServiciosAsociadosController) {
+		this.reporteServiciosAsociadosController = reporteServiciosAsociadosController;
 	}
 	
 }

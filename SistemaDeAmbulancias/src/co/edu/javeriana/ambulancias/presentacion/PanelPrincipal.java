@@ -12,7 +12,7 @@ import co.edu.javeriana.ambulancias.views.MenuView;
 import co.edu.javeriana.ambulancias.views.RegistrarPosicionAmbulanciaView;
 import co.edu.javeriana.ambulancias.views.RegistrarUnServicioView;
 import co.edu.javeriana.ambulancias.views.ReporteServiciosAsignados;
-import co.edu.javeriana.ambulancias.views.ReporteServiciosAsociados;
+import co.edu.javeriana.ambulancias.views.ReporteServiciosAsociadosView;
 
 @SuppressWarnings("serial")
 public class PanelPrincipal extends JPanel 
@@ -29,7 +29,7 @@ public class PanelPrincipal extends JPanel
 	private AsignarServicioView tabAsignarServicio;
 	private FinalizarServicioView tabFinalizarServicio;
 	private ReporteServiciosAsignados tabReporteServiciosConIpsYAmbulanciasAsignados;
-	private ReporteServiciosAsociados tabReporteDeIpsConServiciosAsociados;
+	private ReporteServiciosAsociadosView tabReporteDeIpsConServiciosAsociados;
 	
 	
 	
@@ -91,7 +91,7 @@ public class PanelPrincipal extends JPanel
 		
 		//-----------------------------------------------------------------------
 		
-		tabReporteDeIpsConServiciosAsociados = new ReporteServiciosAsociados();		
+		tabReporteDeIpsConServiciosAsociados = new ReporteServiciosAsociadosView(ventanaPrincipal);		
 		getTabbedPane().addTab("Reporte de IPS con servicios asociados", null, tabReporteDeIpsConServiciosAsociados, null);
 	}
 
@@ -170,11 +170,11 @@ public class PanelPrincipal extends JPanel
 		this.tabReporteServiciosConIpsYAmbulanciasAsignados = tabReporteServiciosConIpsYAmbulanciasAsignados;
 	}
 
-	public ReporteServiciosAsociados getTabReporteDeIpsConServiciosAsociados() {
+	public ReporteServiciosAsociadosView getTabReporteDeIpsConServiciosAsociados() {
 		return tabReporteDeIpsConServiciosAsociados;
 	}
 
-	public void setTabReporteDeIpsConServiciosAsociados(ReporteServiciosAsociados tabReporteDeIpsConServiciosAsociados) {
+	public void setTabReporteDeIpsConServiciosAsociados(ReporteServiciosAsociadosView tabReporteDeIpsConServiciosAsociados) {
 		this.tabReporteDeIpsConServiciosAsociados = tabReporteDeIpsConServiciosAsociados;
 	}
 }

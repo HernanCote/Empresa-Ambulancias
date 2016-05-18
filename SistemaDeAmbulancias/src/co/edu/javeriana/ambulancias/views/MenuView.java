@@ -14,6 +14,7 @@ import com.sun.webkit.ThemeClient;
 
 import co.edu.javeriana.ambulancias.controllers.MenuController;
 import co.edu.javeriana.ambulancias.entidades.EmpresaAmbulancias;
+import co.edu.javeriana.ambulancias.entidades.IPS;
 import co.edu.javeriana.ambulancias.persistencia.ManejoArchivos;
 import co.edu.javeriana.ambulancias.presentacion.VentanaPrincipal;
 
@@ -25,6 +26,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class MenuView extends JPanel 
 {
@@ -183,6 +188,24 @@ public class MenuView extends JPanel
 				ventanaPrincipal.getController().getAsignarServicioController().actualizarContServicios();
 				ventanaPrincipal.getController().getFinalizarServicioController().actualizarContServicios();
 				ventanaPrincipal.getController().getReporteServiciosAsignados().actualizarContServicios();
+				
+				if(!ventanaPrincipal.getEmpresaAmbulancias().getIps().isEmpty())
+				{							
+					SortedSet <String> keySet = new TreeSet <String>(); 
+					for (Map.Entry<String, IPS> entry: ventanaPrincipal.getEmpresaAmbulancias().getIps().entrySet())
+					{
+						keySet.add(entry.getKey());
+					}
+					
+					Iterator<String> ipsIterator = keySet.iterator();
+					while (ipsIterator.hasNext())
+					{	
+						String keyActual = (String) ipsIterator.next();
+						IPS ips = ventanaPrincipal.getEmpresaAmbulancias().getIps().get(keyActual);
+						ventanaPrincipal.getPanelPrincipal().getTabReporteDeIpsConServiciosAsociados().actualizarComboIps(ips.getNombre());
+					}
+				}
+				
 				habilitarBtnGuardar();
 			}
 			else 

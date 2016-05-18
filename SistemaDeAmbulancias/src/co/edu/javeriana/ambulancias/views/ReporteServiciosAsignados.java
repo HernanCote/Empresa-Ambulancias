@@ -13,6 +13,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import co.edu.javeriana.ambulancias.controllers.ReporteServiciosAsignadosController;
 import co.edu.javeriana.ambulancias.presentacion.VentanaPrincipal;
 
 public class ReporteServiciosAsignados extends JPanel {

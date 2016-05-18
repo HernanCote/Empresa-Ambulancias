@@ -51,15 +51,19 @@ public class ManejoArchivos
 	      {
 	        bReader = new BufferedReader(new FileReader(dir));
 	        String fileRead = null;
-	        if (bReader.ready())
+	        
+	        if(bReader.ready())
 	        {
-	          fileRead = bReader.readLine();
-	          fileRead = bReader.readLine();
+	        	fileRead = bReader.readLine();
+	        }
+	        while(fileRead.startsWith("#"))
+	        {
+	        	fileRead = bReader.readLine();
 	        }
 	        while (!fileRead.matches("0"))
 	        {
 	          
-	          String[] tokens = fileRead.split(",");
+	          String[] tokens = fileRead.split("\\*");
 	          String nombre = tokens[0].trim();
 	          String tipoAtencion = tokens[1].trim();
 	          String tipoDireccion = tokens[2].trim();
@@ -121,16 +125,18 @@ public class ManejoArchivos
 	      {
 	        bReader = new BufferedReader(new FileReader(dir));
 	        String fileRead = null;
-	        if (bReader.ready())
+	        if(bReader.ready())
 	        {
-	          fileRead = bReader.readLine();
-	          fileRead = bReader.readLine();
-	          fileRead = bReader.readLine();
-	          fileRead = bReader.readLine();
+	        	fileRead = bReader.readLine();
 	        }
+	        while(fileRead.startsWith("#"))
+	        {
+	        	fileRead = bReader.readLine();
+	        }
+	        
 	        while (!fileRead.matches("0"))
 	        {	        	
-	          String[] tokens = fileRead.split(",");
+	          String[] tokens = fileRead.split("\\*");
 	          String tipoAmbulancia = tokens[0].trim();
 	          int codigo = Integer.parseInt(tokens[1].trim());
 	          String placa = tokens[2].trim();

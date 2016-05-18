@@ -1,4 +1,4 @@
-package co.edu.javeriana.ambulancias.views;
+package co.edu.javeriana.ambulancias.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +15,7 @@ import co.edu.javeriana.ambulancias.entidades.Servicio;
 import co.edu.javeriana.ambulancias.enums.TipoServicio;
 import co.edu.javeriana.ambulancias.presentacion.Utils;
 import co.edu.javeriana.ambulancias.presentacion.VentanaPrincipal;
+import co.edu.javeriana.ambulancias.views.ReporteServiciosAsignados;
 
 public class ReporteServiciosAsignadosController implements ActionListener {
 	
