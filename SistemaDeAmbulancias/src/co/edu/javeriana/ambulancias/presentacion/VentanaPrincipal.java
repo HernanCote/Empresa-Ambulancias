@@ -1,8 +1,15 @@
 package co.edu.javeriana.ambulancias.presentacion;
 
 import java.awt.EventQueue;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+
+import com.apple.eawt.Application;
 
 import co.edu.javeriana.ambulancias.controllers.Controller;
 import co.edu.javeriana.ambulancias.entidades.EmpresaAmbulancias;
@@ -41,6 +48,17 @@ public class VentanaPrincipal extends JFrame {
 	{
 		this.setEmpresaAmbulancias(new EmpresaAmbulancias("Ambulancias Penalosa y Cote"));
 		this.setController(new Controller(this));
+		
+		try {
+		    this.setIconImage(ImageIO.read(new File("iconos/icon.png")));
+		    Application application = Application.getApplication();
+		    Image image = Toolkit.getDefaultToolkit().getImage("iconos/icon.png");
+		    application.setDockIconImage(image);
+		    System.out.println("YES");
+		}
+		catch (IOException exc) {
+		    exc.printStackTrace();
+		}
 		
 		setTitle("Sistema de Ambulancias");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

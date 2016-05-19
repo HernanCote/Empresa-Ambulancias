@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import co.edu.javeriana.ambulancias.presentacion.VentanaPrincipal;
+import javax.swing.ImageIcon;
 
 public class IngresarIpsYAmbulanciasView extends JPanel 
 {
@@ -82,6 +83,7 @@ public class IngresarIpsYAmbulanciasView extends JPanel
 
 	public void setBtnSeleccionarIps(JButton btnSeleccionarIps) {
 		this.btnSeleccionarIps = btnSeleccionarIps;
+		btnSeleccionarIps.setIcon(new ImageIcon("iconos/hospital-2.png"));
 	}
 
 
@@ -92,6 +94,7 @@ public class IngresarIpsYAmbulanciasView extends JPanel
 
 	public void setBtnSeleccionarAmbulancia(JButton btnSeleccionarAmbulancia) {
 		this.btnSeleccionarAmbulancia = btnSeleccionarAmbulancia;
+		btnSeleccionarAmbulancia.setIcon(new ImageIcon("iconos/ambulance.png"));
 	}
 
 

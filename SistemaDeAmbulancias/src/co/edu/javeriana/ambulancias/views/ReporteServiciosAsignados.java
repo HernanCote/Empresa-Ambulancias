@@ -15,6 +15,7 @@ import javax.swing.table.TableModel;
 
 import co.edu.javeriana.ambulancias.controllers.ReporteServiciosAsignadosController;
 import co.edu.javeriana.ambulancias.presentacion.VentanaPrincipal;
+import javax.swing.ImageIcon;
 
 public class ReporteServiciosAsignados extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -125,7 +126,9 @@ public class ReporteServiciosAsignados extends JPanel {
 		southButtons = new JPanel(new GridBagLayout());
 		southButtons.setBackground(Color.WHITE);
 		btnMostrar = new JButton("Mostrar");
+		btnMostrar.setIcon(new ImageIcon("iconos/eye.png"));
 		btnRegresar = new JButton("Regresar");
+		btnRegresar.setIcon(new ImageIcon("iconos/hospital-1.png"));
 		
 		btnMostrar.addActionListener(new ReporteServiciosAsignadosController (ventanaPrincipal));
 		btnRegresar.addActionListener(new ReporteServiciosAsignadosController (ventanaPrincipal) );

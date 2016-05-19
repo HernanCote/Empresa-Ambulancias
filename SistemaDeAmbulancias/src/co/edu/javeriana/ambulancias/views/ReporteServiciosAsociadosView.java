@@ -16,6 +16,7 @@ import javax.swing.table.TableModel;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
+import javax.swing.ImageIcon;
 
 public class ReporteServiciosAsociadosView extends JPanel {
 
@@ -26,7 +27,7 @@ public class ReporteServiciosAsociadosView extends JPanel {
 	private JTable table;
 	private JLabel lblIPS;
 	
-	private String [] tableLabelsIPS = {"Código" , "Hora Solicitud", "Paciente", "Tipo Servicio", "Teléfono", "Direccion", "Estado", "Ambulancia" };
+	private String [] tableLabelsIPS = {"Cï¿½digo" , "Hora Solicitud", "Paciente", "Tipo Servicio", "Telï¿½fono", "Direccion", "Estado", "Ambulancia" };
 	private String [][] tableContIPS = {};
 	
 	private TableModel modelTablaIPS;
@@ -45,7 +46,7 @@ public class ReporteServiciosAsociadosView extends JPanel {
 		JLabel lblNewLabel = new JLabel("Reporte de IPS con servicios asociados");
 		lblNewLabel.setForeground(Color.LIGHT_GRAY);
 		lblNewLabel.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		lblNewLabel.setBounds(35, 11, 343, 25);
+		lblNewLabel.setBounds(35, 11, 360, 25);
 		add(lblNewLabel);
 		
 		JLabel lblSeleccionIps = new JLabel("Seleccione una IPS:");
@@ -75,7 +76,7 @@ public class ReporteServiciosAsociadosView extends JPanel {
 		JLabel lblNewLabel_1 = new JLabel("Servicios Asignados a la IPS :");
 		lblNewLabel_1.setForeground(Color.LIGHT_GRAY);
 		lblNewLabel_1.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		lblNewLabel_1.setBounds(35, 189, 234, 31);
+		lblNewLabel_1.setBounds(35, 189, 309, 31);
 		add(lblNewLabel_1);
 		
 		lblIPS = new JLabel("");
@@ -86,7 +87,7 @@ public class ReporteServiciosAsociadosView extends JPanel {
 		
 		setBtnRegresar(new JButton("Regresar"));
 		getBtnRegresar().setBackground(new Color(139, 0, 0));
-		getBtnRegresar().setForeground(new Color(255, 255, 255));
+		getBtnRegresar().setForeground(Color.GRAY);
 		getBtnRegresar().setBounds(603, 452, 101, 31);
 		btnRegresar.addActionListener(ventanaPrincipal.getController().getReporteServiciosAsociadosController());
 		add(getBtnRegresar());
@@ -172,6 +173,7 @@ public class ReporteServiciosAsociadosView extends JPanel {
 
 	public void setBtnRegresar(JButton btnRegresar) {
 		this.btnRegresar = btnRegresar;
+		btnRegresar.setIcon(new ImageIcon("iconos/hospital-4.png"));
 	}
 
 

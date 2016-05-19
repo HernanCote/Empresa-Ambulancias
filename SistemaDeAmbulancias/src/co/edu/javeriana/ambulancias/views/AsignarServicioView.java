@@ -17,6 +17,7 @@ import javax.swing.table.TableModel;
 
 import co.edu.javeriana.ambulancias.controllers.AsignarServicioController;
 import co.edu.javeriana.ambulancias.presentacion.VentanaPrincipal;
+import javax.swing.ImageIcon;
 
 public class AsignarServicioView extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -120,8 +121,10 @@ public class AsignarServicioView extends JPanel {
 		southButtons = new JPanel();
 		southButtons.setBackground(Color.WHITE);
 		btnRegresar = new JButton("Regresar");
+		btnRegresar.setIcon(new ImageIcon("iconos/back.png"));
 		btnRegresar.addActionListener(new AsignarServicioController(ventaPrincipal));
 		btnAssignarServicio = new JButton("Asignar Servicio");
+		btnAssignarServicio.setIcon(new ImageIcon("iconos/hospital-2.png"));
 		btnAssignarServicio.addActionListener(new AsignarServicioController(ventaPrincipal));
 		southButtons.add(btnRegresar);
 		southButtons.add(lblNewLabel_5);

@@ -22,6 +22,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 
 import java.awt.SystemColor;
+import javax.swing.ImageIcon;
 
 public class FinalizarServicioView extends JPanel 
 {
@@ -77,7 +78,7 @@ public class FinalizarServicioView extends JPanel
 		btnFinalizarServicioSeleccionado.setEnabled(false);
 		
 		setBtnRegresar(new JButton("Regresar"));
-		getBtnRegresar().setForeground(new Color(255, 255, 255));
+		getBtnRegresar().setForeground(Color.GRAY);
 		getBtnRegresar().setFont(new Font("Segoe UI", Font.PLAIN, 14));
 		getBtnRegresar().setBackground(new Color(128, 0, 0));
 		getBtnRegresar().setBounds(578, 448, 116, 36);
@@ -132,7 +133,7 @@ public class FinalizarServicioView extends JPanel
 		else
 		{
 			JOptionPane.showMessageDialog(ventanaPrincipal
-					, "El código del servicio no existe!"
+					, "El cï¿½digo del servicio no existe!"
 					, "Error"
 					, JOptionPane.ERROR_MESSAGE);
 		}
@@ -154,6 +155,7 @@ public class FinalizarServicioView extends JPanel
 
 	public void setBtnFinalizarServicioSeleccionado(JButton btnFinalizarServicioSeleccionado) {
 		this.btnFinalizarServicioSeleccionado = btnFinalizarServicioSeleccionado;
+		btnFinalizarServicioSeleccionado.setIcon(new ImageIcon("iconos/pencil.png"));
 	}
 
 	public JButton getBtnRegresar() {
@@ -163,6 +165,7 @@ public class FinalizarServicioView extends JPanel
 	public void setBtnRegresar(JButton btnRegresar)
 	{
 		this.btnRegresar = btnRegresar;
+		btnRegresar.setIcon(new ImageIcon("iconos/hospital-1.png"));
 	}
 
 	public JTable getTable() {

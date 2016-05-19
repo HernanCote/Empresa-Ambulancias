@@ -20,6 +20,7 @@ import co.edu.javeriana.ambulancias.entidades.EmpresaAmbulancias;
 import co.edu.javeriana.ambulancias.entidades.IServiciosAmbulancias;
 import co.edu.javeriana.ambulancias.presentacion.VentanaPrincipal;
 import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class RegistrarPosicionAmbulanciaView extends JPanel 
 {
@@ -54,11 +55,13 @@ public class RegistrarPosicionAmbulanciaView extends JPanel
 		panelSouth = new JPanel();
 		panelSouth.setBackground(new Color(255, 255, 255));
 		btnActualizar = new JButton("Actualizar");
+		btnActualizar.setIcon(new ImageIcon("iconos/eye.png"));
 		btnActualizar.setFont(new Font("Segoe UI", Font.PLAIN, 11));
-		btnActualizar.setForeground(new Color(255, 255, 255));
+		btnActualizar.setForeground(Color.GRAY);
 		btnActualizar.setBackground(new Color(102, 205, 170));
 		btnActualizar.addActionListener(ventanaPrincipal.getController().getRegistrarPosicionAmbulanciaController());
 		btnRegistrar = new JButton("Registrar");
+		btnRegistrar.setIcon(new ImageIcon("iconos/ambulance.png"));
 		btnRegistrar.setFont(new Font("Segoe UI", Font.PLAIN, 11));
 		btnRegistrar.setForeground(new Color(255, 255, 255));
 		btnRegistrar.setBackground(new Color(50, 205, 50));
@@ -66,8 +69,9 @@ public class RegistrarPosicionAmbulanciaView extends JPanel
 		btnRegistrar.addActionListener(ventanaPrincipal.getController().getRegistrarPosicionAmbulanciaController());
 		
 		btnRegresar = new JButton("Regresar");
+		btnRegresar.setIcon(new ImageIcon("iconos/hospital-2.png"));
 		btnRegresar.setFont(new Font("Segoe UI", Font.PLAIN, 11));
-		btnRegresar.setForeground(new Color(255, 255, 255));
+		btnRegresar.setForeground(Color.GRAY);
 		btnRegresar.setBackground(new Color(128, 0, 0));
 		panelSouth.add(btnRegresar);
 		panelSouth.add(btnActualizar);

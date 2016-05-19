@@ -16,6 +16,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+import javax.swing.ImageIcon;
 
 public class RegistrarUnServicioView extends JPanel 
 {
@@ -56,7 +57,7 @@ public class RegistrarUnServicioView extends JPanel
 		JLabel lblNewLabel_2 = new JLabel("Tel\u00E9fono");
 		lblNewLabel_2.setFont(new Font("Segoe UI", Font.PLAIN, 11));
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_2.setBounds(253, 226, 46, 14);
+		lblNewLabel_2.setBounds(253, 226, 55, 14);
 		add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Tipo de direcci\u00F3n");
@@ -132,7 +133,7 @@ public class RegistrarUnServicioView extends JPanel
 		add(comboTipoDireccion);
 		
 		setBtnRegistrar(new JButton("Registrar"));
-		getBtnRegistrar().setForeground(new Color(255, 255, 255));
+		getBtnRegistrar().setForeground(Color.GRAY);
 		getBtnRegistrar().setBackground(new Color(50, 205, 50));
 		getBtnRegistrar().setFont(new Font("Segoe UI", Font.PLAIN, 13));
 		getBtnRegistrar().setBounds(420, 416, 94, 30);
@@ -140,7 +141,7 @@ public class RegistrarUnServicioView extends JPanel
 		add(getBtnRegistrar());
 		
 		setBtnRegresar(new JButton("Regresar"));
-		getBtnRegresar().setForeground(new Color(255, 255, 255));
+		getBtnRegresar().setForeground(Color.GRAY);
 		getBtnRegresar().setBackground(new Color(178, 34, 34));
 		getBtnRegresar().setBounds(316, 417, 94, 30);
 		btnRegresar.addActionListener(this.ventanaPrincipal.getController().getRegistrarUnServicioController());
@@ -214,6 +215,7 @@ public class RegistrarUnServicioView extends JPanel
 
 	public void setBtnRegresar(JButton btnRegresar) {
 		this.btnRegresar = btnRegresar;
+		btnRegresar.setIcon(new ImageIcon("iconos/hospital-2.png"));
 	}
 
 	public JButton getBtnRegistrar() {
@@ -222,5 +224,6 @@ public class RegistrarUnServicioView extends JPanel
 
 	public void setBtnRegistrar(JButton btnRegistrar) {
 		this.btnRegistrar = btnRegistrar;
+		btnRegistrar.setIcon(new ImageIcon("iconos/electrocardiogram.png"));
 	}
 }

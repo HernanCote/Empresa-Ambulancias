@@ -25,15 +25,25 @@ public class AsignarServicioController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		AsignarServicioView ventanaAsigServ = ventanaPrincipal.getPanelPrincipal().getTabAsignarServicio();
 		if (e.getSource().equals(ventanaAsigServ.getBtnAssignarServicio())){
-			int codigoServ = ventanaAsigServ.getSelectedRowCodeServicio();
-			if (!ventanaPrincipal.getEmpresaAmbulancias().isAsignado(codigoServ)) {
-				ventanaPrincipal.getEmpresaAmbulancias().asignarUnServicio(ventanaAsigServ.getSelectedRowCodeServicio());
-				actualizarContServicios();
-				ventanaPrincipal.getController().getFinalizarServicioController().actualizarContServicios();
-				ventanaPrincipal.getController().getReporteServiciosAsignados().actualizarContServicios();
-			} else {
-				JOptionPane.showMessageDialog(ventanaPrincipal, "El Servicio Ya Fue Asignado", "ERROR", JOptionPane.ERROR_MESSAGE);
-			}		
+			int codigoServ = 0;
+			try {
+				codigoServ = ventanaAsigServ.getSelectedRowCodeServicio();
+				if (!ventanaPrincipal.getEmpresaAmbulancias().isAsignado(codigoServ)) {
+					if (ventanaPrincipal.getEmpresaAmbulancias().asignarUnServicio(ventanaAsigServ.getSelectedRowCodeServicio()) == null) {
+						JOptionPane.showMessageDialog(ventanaPrincipal, "No Hay Ambulancias Disponibles", "ERROR", JOptionPane.ERROR_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(ventanaPrincipal, "El Servicio Fue Asignado");
+					}
+					actualizarContServicios();
+					ventanaPrincipal.getController().getFinalizarServicioController().actualizarContServicios();
+					ventanaPrincipal.getController().getReporteServiciosAsignados().actualizarContServicios();
+				} else {
+					JOptionPane.showMessageDialog(ventanaPrincipal, "El Servicio Ya Fue Asignado", "ERROR", JOptionPane.ERROR_MESSAGE);
+				}
+			} catch (Exception ex) {
+				JOptionPane.showMessageDialog(ventanaPrincipal, "No Se Ha Seleccionado Un Servicio", "ERROR", JOptionPane.ERROR_MESSAGE);
+			}
+					
 		}
 		
 		if (e.getSource().equals(ventanaAsigServ.getBtnRegresar())) {

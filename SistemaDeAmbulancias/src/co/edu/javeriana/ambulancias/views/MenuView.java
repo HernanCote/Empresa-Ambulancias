@@ -18,6 +18,7 @@ import co.edu.javeriana.ambulancias.entidades.IPS;
 import co.edu.javeriana.ambulancias.persistencia.ManejoArchivos;
 import co.edu.javeriana.ambulancias.presentacion.VentanaPrincipal;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 
@@ -61,13 +62,14 @@ public class MenuView extends JPanel
 		JLabel lblNewLabel = new JLabel("SERVICIOS DEL SISTEMA DE AMBULANCIAS");
 		lblNewLabel.setForeground(Color.GRAY);
 		lblNewLabel.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		lblNewLabel.setBounds(219, 50, 317, 14);
+		lblNewLabel.setBounds(219, 50, 400, 14);
 		add(lblNewLabel);
 		
 		setBtnRegistrarPosAmbulancia(new JButton("Registrar la posicion actual de una ambulancia"));
 		getBtnRegistrarPosAmbulancia().setBackground(Color.WHITE);
 		getBtnRegistrarPosAmbulancia().setFont(new Font("Segoe UI", Font.PLAIN, 10));
 		getBtnRegistrarPosAmbulancia().setBounds(40, 142, 317, 49);
+		getBtnRegistrarPosAmbulancia().setIcon(new ImageIcon("iconos/ambulance.png"));
 		getBtnRegistrarPosAmbulancia().addActionListener(this.getVentanaPrincipal().getController().getMenuController());
 		add(getBtnRegistrarPosAmbulancia());
 		
@@ -75,6 +77,7 @@ public class MenuView extends JPanel
 		getBtnFinalizarServicio().setBackground(Color.WHITE);
 		getBtnFinalizarServicio().setFont(new Font("Segoe UI", Font.PLAIN, 10));
 		getBtnFinalizarServicio().setBounds(367, 142, 317, 49);
+		getBtnFinalizarServicio().setIcon(new ImageIcon("iconos/icon-139293.png"));
 		getBtnFinalizarServicio().addActionListener(this.getVentanaPrincipal().getController().getMenuController());
 		add(getBtnFinalizarServicio());
 		
@@ -82,6 +85,7 @@ public class MenuView extends JPanel
 		getBtnRegistrarServicio().setBackground(Color.WHITE);
 		getBtnRegistrarServicio().setFont(new Font("Segoe UI", Font.PLAIN, 10));
 		getBtnRegistrarServicio().setBounds(40, 222, 317, 50);
+		getBtnRegistrarServicio().setIcon(new ImageIcon("iconos/medical-records.png"));
 		getBtnRegistrarServicio().addActionListener(this.getVentanaPrincipal().getController().getMenuController());
 		add(getBtnRegistrarServicio());
 		
@@ -89,6 +93,7 @@ public class MenuView extends JPanel
 		getBtnReporteServiciosAsignados().setBackground(Color.WHITE);
 		getBtnReporteServiciosAsignados().setFont(new Font("Segoe UI", Font.PLAIN, 10));
 		getBtnReporteServiciosAsignados().setBounds(367, 222, 317, 50);
+		getBtnReporteServiciosAsignados().setIcon(new ImageIcon("iconos/pencil.png"));
 		getBtnReporteServiciosAsignados().addActionListener(this.getVentanaPrincipal().getController().getMenuController());
 		add(getBtnReporteServiciosAsignados());
 		
@@ -96,6 +101,7 @@ public class MenuView extends JPanel
 		getBtnAsignarServicio().setBackground(Color.WHITE);
 		getBtnAsignarServicio().setFont(new Font("Segoe UI", Font.PLAIN, 10));
 		getBtnAsignarServicio().setBounds(40, 303, 317, 47);
+		getBtnAsignarServicio().setIcon(new ImageIcon("iconos/doctor.png"));
 		getBtnAsignarServicio().addActionListener(this.getVentanaPrincipal().getController().getMenuController());
 		add(getBtnAsignarServicio());
 		
@@ -103,18 +109,21 @@ public class MenuView extends JPanel
 		getBtnReporteServiciosAsociados().setBackground(Color.WHITE);
 		getBtnReporteServiciosAsociados().setFont(new Font("Segoe UI", Font.PLAIN, 10));
 		getBtnReporteServiciosAsociados().setBounds(367, 303, 317, 47);
+		getBtnReporteServiciosAsociados().setIcon(new ImageIcon("iconos/nurse.png"));
 		getBtnReporteServiciosAsociados().addActionListener(this.getVentanaPrincipal().getController().getMenuController());
 		add(getBtnReporteServiciosAsociados());
 		
 		setBtnIngresarIPSAmb(new JButton("Ingresar IPS y ambulancias"));
 		getBtnIngresarIPSAmb().setBackground(new Color(64, 224, 208));
 		getBtnIngresarIPSAmb().setBounds(155, 408, 202, 41);
+		getBtnIngresarIPSAmb().setIcon(new ImageIcon("iconos/report.png"));
 		getBtnIngresarIPSAmb().addActionListener(this.getVentanaPrincipal().getController().getMenuController());
 		add(getBtnIngresarIPSAmb());
 		
 		setBtnGuardarDatos(new JButton("Guardar datos del sistema"));
 		getBtnGuardarDatos().setBackground(SystemColor.textHighlight);
 		getBtnGuardarDatos().setBounds(367, 408, 202, 41);
+		getBtnGuardarDatos().setIcon(new ImageIcon("iconos/save.png"));
 		getBtnGuardarDatos().addActionListener(this.getVentanaPrincipal().getController().getMenuController());
 		add(getBtnGuardarDatos());
 	
@@ -122,6 +131,7 @@ public class MenuView extends JPanel
 		setBtnCargarDatos(new JButton("Cargar datos del sistema"));
 		getBtnCargarDatos().setBackground(SystemColor.textHighlight);
 		getBtnCargarDatos().setBounds(367, 460, 202, 41);
+		getBtnCargarDatos().setIcon(new ImageIcon("iconos/blood.png"));
 		getBtnCargarDatos().addActionListener(this.getVentanaPrincipal().getController().getMenuController());
 		add(getBtnCargarDatos());
 		
