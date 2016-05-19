@@ -50,8 +50,8 @@ public class VentanaPrincipal extends JFrame {
 		this.setController(new Controller(this));
 		
 		try {
-		    this.setIconImage(ImageIO.read(new File("iconos/icon.png")));
-		catch (IOException exc) {
+		    this.setIconImage(ImageIO.read( new File("iconos/icon.png") ) );
+		} catch (IOException exc) {
 		    exc.printStackTrace();
 		}
 		
