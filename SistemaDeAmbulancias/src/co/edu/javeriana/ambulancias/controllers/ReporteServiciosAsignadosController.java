@@ -29,9 +29,12 @@ public class ReporteServiciosAsignadosController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		ReporteServiciosAsignados ventanaAsigServ = ventanaPrincipal.getPanelPrincipal().getTabReporteServiciosConIpsYAmbulanciasAsignados();
-		
-		if (e.getSource().equals(ventanaAsigServ.getBtnMostrar())) {
-			actualizarContIPS();
+		try {
+			if (e.getSource().equals(ventanaAsigServ.getBtnMostrar())) {
+				actualizarContIPS();
+			}
+		} catch (Exception exp) {
+			JOptionPane.showMessageDialog(ventanaPrincipal, "El Servicio No Se Ha Asignado", "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
 		
 		if (e.getSource().equals(ventanaAsigServ.getBtnRegresar())) {

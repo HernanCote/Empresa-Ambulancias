@@ -28,9 +28,11 @@ public class FinalizarServicioController implements ActionListener
 		else if(object.equals(tabFinalizarView.getBtnFinalizarServicioSeleccionado()))
 		{
 			int codigoServicio = tabFinalizarView.getSelectedRowCodeServicio();
+			System.out.println(codigoServicio);
 			tabFinalizarView.finalizarServicio(codigoServicio);
 			ventanaPrincipal.getController().getReporteServiciosAsignados().actualizarContServicios();
 			ventanaPrincipal.getController().getAsignarServicioController().actualizarContServicios();
+			ventanaPrincipal.getEmpresaAmbulancias().finalizarUnServicio(codigoServicio);
 		}
 	}
 	

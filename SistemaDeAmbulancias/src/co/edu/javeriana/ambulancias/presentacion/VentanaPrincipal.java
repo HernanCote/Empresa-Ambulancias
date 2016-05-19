@@ -51,11 +51,6 @@ public class VentanaPrincipal extends JFrame {
 		
 		try {
 		    this.setIconImage(ImageIO.read(new File("iconos/icon.png")));
-		    Application application = Application.getApplication();
-		    Image image = Toolkit.getDefaultToolkit().getImage("iconos/icon.png");
-		    application.setDockIconImage(image);
-		    System.out.println("YES");
-		}
 		catch (IOException exc) {
 		    exc.printStackTrace();
 		}

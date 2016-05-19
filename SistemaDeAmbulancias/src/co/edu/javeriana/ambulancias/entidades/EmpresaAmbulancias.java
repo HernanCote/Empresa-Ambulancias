@@ -266,6 +266,7 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias, Serializable
 			
 			if(servicio.getCodigo() == codigo && servicio.getEstado().equals(EstadoServicio.NO_ASIGNADO))
 			{
+				System.out.println("EL CODIGO: " + servicio.getCodigo());
 				ArrayList<Ambulancia> ambulanciasDisponibles = construirAmbulanciasDisponibles(servicio);
 				if(!ambulanciasDisponibles.isEmpty())
 				{
@@ -279,7 +280,7 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias, Serializable
 						IPS ipsMasCercana = calcularIPSMasCercana(servicio.getDireccion().getCalle(), 
 																	servicio.getDireccion().getCarrera());
 						servicio.setEstado(EstadoServicio.ASIGNADO);
-						
+												
 						servicio.setAmbulancia(ambulanciaMasCercana);
 						
 						ambulanciaMasCercana.setServicios(servicio);
@@ -790,7 +791,6 @@ public class EmpresaAmbulancias implements IServiciosAmbulancias, Serializable
 				tempRow.add(" ");
 			}
 			tempRow.add(String.valueOf(serv.getValor())); // New
-			System.out.println("Valor: "+ serv.getValor()); // New 
 			tableServicios.add(tempRow);
 		}
 		String[][] table = new String[tableServicios.size()][];

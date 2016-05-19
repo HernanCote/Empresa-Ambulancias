@@ -31,7 +31,14 @@ public class AsignarServicioController implements ActionListener {
 				if (!ventanaPrincipal.getEmpresaAmbulancias().isAsignado(codigoServ)) {
 					if (ventanaPrincipal.getEmpresaAmbulancias().asignarUnServicio(ventanaAsigServ.getSelectedRowCodeServicio()) == null) {
 						JOptionPane.showMessageDialog(ventanaPrincipal, "No Hay Ambulancias Disponibles", "ERROR", JOptionPane.ERROR_MESSAGE);
+						
 					} else {
+						//ventanaPrincipal.getEmpresaAmbulancias().asignarUnServicio(codigoServ);
+						
+						if (ventanaPrincipal.getEmpresaAmbulancias().isAsignado(codigoServ)) {
+							System.out.println("Es Asignado");
+						}
+						
 						JOptionPane.showMessageDialog(ventanaPrincipal, "El Servicio Fue Asignado");
 					}
 					actualizarContServicios();

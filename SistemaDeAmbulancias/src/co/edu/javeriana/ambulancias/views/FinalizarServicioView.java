@@ -106,7 +106,7 @@ public class FinalizarServicioView extends JPanel
 		{
 			if(servicio.getEstado() == EstadoServicio.ASIGNADO)
 			{
-				servicio.setEstado(EstadoServicio.FINALIZADO);
+				//servicio.setEstado(EstadoServicio.FINALIZADO);
 				JOptionPane.showMessageDialog(ventanaPrincipal
 						, "El servicio se ha finalizado exitosamente!"
 						, "Exito"
@@ -114,6 +114,7 @@ public class FinalizarServicioView extends JPanel
 				
 				ventanaPrincipal.getController().getAsignarServicioController().actualizarContServicios();
 				ventanaPrincipal.getController().getFinalizarServicioController().actualizarContServicios();
+				ventanaPrincipal.getEmpresaAmbulancias().finalizarUnServicio(codigo); // NEW
 			}
 			else if(servicio.getEstado() == EstadoServicio.NO_ASIGNADO)
 			{
